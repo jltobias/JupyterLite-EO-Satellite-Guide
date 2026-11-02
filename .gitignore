@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.venv/
+_site/
+_build/
+book/_build/
+book/notebooks/
+book/references.md
+notebooks/support/
+notebooks/data/
+notebooks/eo_guide.py
+tmp/
+_bmad.setup-*/
+.ipynb_checkpoints/
+.pytest_cache/
+playwright-report/
+.jupyterlite.doit.db*

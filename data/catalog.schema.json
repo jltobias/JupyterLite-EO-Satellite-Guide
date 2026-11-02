@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EO Satellite Guide catalog",
+  "type": "object",
+  "required": ["version", "verified", "sources", "satellites", "applications"],
+  "properties": {
+    "version": {"type": "string"},
+    "verified": {"type": "string", "format": "date"},
+    "sources": {"type": "object", "additionalProperties": {"type": "object", "required": ["title", "publisher", "url", "accessed"], "properties": {"url": {"type": "string", "format": "uri"}, "accessed": {"type": "string", "format": "date"}}}},
+    "satellites": {"type": "array", "minItems": 3, "items": {
+      "type": "object", "required": ["id", "name", "agency", "region", "status", "status_note", "verified", "orbit", "type", "purpose", "sensors", "sources", "evidence", "display"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+        "status": {"enum": ["operational", "retired", "planned", "unverified"]},
+        "type": {"enum": ["multispectral", "radar", "hyperspectral", "weather", "ocean"]},
+        "verified": {"type": "string", "format": "date"},
+        "orbit": {"type": "object", "required": ["class", "altitude_km", "repeat_days", "temporal_note"], "properties": {
+          "class": {"enum": ["Sun-synchronous LEO", "Geostationary", "Inclined LEO"]},
+          "altitude_km": {"type": ["number", "null"], "minimum": 0},
+          "repeat_days": {"type": ["number", "null"], "minimum": 0}
+        }},
+        "sensors": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["id", "name", "method", "observes", "spatial", "spectral", "coverage", "products", "sources"], "properties": {
+          "products": {"type": "array", "minItems": 1, "items": {"type": "object", "required": ["name", "level", "access", "note", "sources"], "properties": {"access": {"type": "string", "format": "uri"}}}}
+        }}}
+      }
+    }},
+    "applications": {"type": "array", "items": {"type": "object", "required": ["id", "name", "evidence_type", "satellites", "chain", "sources", "limitations"]}}
+  }
+}

@@ -1,0 +1,868 @@
+{
+  "@context": {
+    "sosa": "http://www.w3.org/ns/sosa/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "label": "rdfs:label"
+  },
+  "@graph": [
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8",
+      "@type": "sosa:Platform",
+      "label": "Landsat 8",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/oli"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/tirs"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-8"
+        },
+        {
+          "@id": "https://pubs.usgs.gov/fs/2013/3060/pdf/fs2013-3060.pdf"
+        },
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/oli",
+      "@type": "sosa:Sensor",
+      "label": "OLI",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-reflectance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-8"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/oli/product/0",
+      "@type": "dcat:Dataset",
+      "label": "Collection 2 Surface Reflectance",
+      "dcat:landingPage": {
+        "@id": "https://earthexplorer.usgs.gov/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/oli"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/tirs",
+      "@type": "sosa:Sensor",
+      "label": "TIRS",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/thermal-radiance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/land-surface-temperature"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-8"
+        },
+        {
+          "@id": "https://pubs.usgs.gov/fs/2013/3060/pdf/fs2013-3060.pdf"
+        },
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/tirs/product/0",
+      "@type": "dcat:Dataset",
+      "label": "Collection 2 Surface Temperature",
+      "dcat:landingPage": {
+        "@id": "https://earthexplorer.usgs.gov/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-8/tirs"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-9",
+      "@type": "sosa:Platform",
+      "label": "Landsat 9",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-9/oli2"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-9"
+        },
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-9/oli2",
+      "@type": "sosa:Sensor",
+      "label": "OLI-2 + TIRS-2",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-reflectance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/land-surface-temperature"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-9"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-9/oli2/product/0",
+      "@type": "dcat:Dataset",
+      "label": "Collection 2 SR / ST",
+      "dcat:landingPage": {
+        "@id": "https://earthexplorer.usgs.gov/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/landsat-9/oli2"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.usgs.gov/landsat-missions/landsat-collection-2-level-2-science-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2b",
+      "@type": "sosa:Platform",
+      "label": "Sentinel-2B",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2b/msi-b"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-mission"
+        },
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2b/msi-b",
+      "@type": "sosa:Sensor",
+      "label": "MSI",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-reflectance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-mission"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2b/msi-b/product/0",
+      "@type": "dcat:Dataset",
+      "label": "MSI Surface Reflectance",
+      "dcat:landingPage": {
+        "@id": "https://dataspace.copernicus.eu/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2b/msi-b"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2c",
+      "@type": "sosa:Platform",
+      "label": "Sentinel-2C",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2c/msi-c"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-mission"
+        },
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2c/msi-c",
+      "@type": "sosa:Sensor",
+      "label": "MSI",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-reflectance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-mission"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2c/msi-c/product/0",
+      "@type": "dcat:Dataset",
+      "label": "MSI Surface Reflectance",
+      "dcat:landingPage": {
+        "@id": "https://dataspace.copernicus.eu/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-2c/msi-c"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s2-products"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-1c",
+      "@type": "sosa:Platform",
+      "label": "Sentinel-1C",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-1c/c-sar"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s1-mission"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-1c/c-sar",
+      "@type": "sosa:Sensor",
+      "label": "C-SAR",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/radar-backscatter"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-deformation"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s1-mission"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-1c/c-sar/product/0",
+      "@type": "dcat:Dataset",
+      "label": "IW SLC / GRD",
+      "dcat:landingPage": {
+        "@id": "https://dataspace.copernicus.eu/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/sentinel-1c/c-sar"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://sentiwiki.copernicus.eu/web/s1-mission"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/alos-2",
+      "@type": "sosa:Platform",
+      "label": "ALOS-2",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/alos-2/palsar2"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.satnavi.jaxa.jp/ja/project/alos-2/"
+        },
+        {
+          "@id": "https://www.eorc.jaxa.jp/ALOS/en/alos-2/a2_observation_e.htm"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/alos-2/palsar2",
+      "@type": "sosa:Sensor",
+      "label": "PALSAR-2",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/radar-backscatter"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/forest-structure"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.satnavi.jaxa.jp/ja/project/alos-2/"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/alos-2/palsar2/product/0",
+      "@type": "dcat:Dataset",
+      "label": "PALSAR-2 observation archive",
+      "dcat:landingPage": {
+        "@id": "https://auig4.jaxa.jp/app/en/home"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/alos-2/palsar2"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.eorc.jaxa.jp/ALOS/en/alos-2/a2_observation_e.htm"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/enmap",
+      "@type": "sosa:Platform",
+      "label": "EnMAP",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/enmap/hsi"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.dlr.de/en/eoc/research-transfer/topics/missions/enmap"
+        },
+        {
+          "@id": "https://www.enmap.org/mission/"
+        },
+        {
+          "@id": "https://www.enmap.org/data_access/"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/enmap/hsi",
+      "@type": "sosa:Sensor",
+      "label": "EnMAP imaging spectrometers",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-reflectance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/mineralogy"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.dlr.de/en/eoc/research-transfer/topics/missions/enmap"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/enmap/hsi/product/0",
+      "@type": "dcat:Dataset",
+      "label": "EnMAP surface reflectance",
+      "dcat:landingPage": {
+        "@id": "https://www.enmap.org/data_access/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/enmap/hsi"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.enmap.org/data_access/"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eo-1",
+      "@type": "sosa:Platform",
+      "label": "EO-1 / Hyperion",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eo-1/hyperion"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://data.nasa.gov/dataset/eo-1-hyperion"
+        },
+        {
+          "@id": "https://www.nasa.gov/technology/nasa-says-goodbye-to-a-pathfinder-earth-satellite-after-17-years/"
+        },
+        {
+          "@id": "https://appliedsciences.nasa.gov/sites/default/files/2021-01/Hyperspectral_Part2_Final.pdf"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eo-1/hyperion",
+      "@type": "sosa:Sensor",
+      "label": "Hyperion",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/spectral-radiance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/mineralogy"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://data.nasa.gov/dataset/eo-1-hyperion"
+        },
+        {
+          "@id": "https://appliedsciences.nasa.gov/sites/default/files/2021-01/Hyperspectral_Part2_Final.pdf"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eo-1/hyperion/product/0",
+      "@type": "dcat:Dataset",
+      "label": "Hyperion L1 radiance archive",
+      "dcat:landingPage": {
+        "@id": "https://earthexplorer.usgs.gov/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eo-1/hyperion"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://appliedsciences.nasa.gov/sites/default/files/2021-01/Hyperspectral_Part2_Final.pdf"
+        },
+        {
+          "@id": "https://data.nasa.gov/dataset/eo-1-hyperion"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/fy-3d",
+      "@type": "sosa:Platform",
+      "label": "Fengyun-3D",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/fy-3d/mersi2"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.nsmc.org.cn/subject/en/satellite/FY3D.html"
+        },
+        {
+          "@id": "https://www.nsmc.org.cn/nsmc/en/operation/status.html"
+        },
+        {
+          "@id": "https://nsmc.org.cn/nsmc/en/instrument/MERSI-2.html"
+        },
+        {
+          "@id": "https://data.nsmc.org.cn/DataPortal/cn/data/structure.html?InstrumentTypeCode=MERSI&SatelliteCode=FY3D&SeriesCode=FY3X"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/fy-3d/mersi2",
+      "@type": "sosa:Sensor",
+      "label": "MERSI-II (selected payload)",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/spectral-radiance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/clouds"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://nsmc.org.cn/nsmc/en/instrument/MERSI-2.html"
+        },
+        {
+          "@id": "https://www.nsmc.org.cn/subject/en/satellite/FY3D.html"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/fy-3d/mersi2/product/0",
+      "@type": "dcat:Dataset",
+      "label": "FY-3D MERSI L1",
+      "dcat:landingPage": {
+        "@id": "https://data.nsmc.org.cn/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/fy-3d/mersi2"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://data.nsmc.org.cn/DataPortal/cn/data/structure.html?InstrumentTypeCode=MERSI&SatelliteCode=FY3D&SeriesCode=FY3X"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eos-06",
+      "@type": "sosa:Platform",
+      "label": "EOS-06 / Oceansat-3",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eos-06/ocm3"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.isro.gov.in/EOS_06.html"
+        },
+        {
+          "@id": "https://bhoonidhi.nrsc.gov.in/bhoonidhi/htmls/FAQ2.html"
+        },
+        {
+          "@id": "https://www.nrsc.gov.in/nrscnew/assets/pdf/newsletters/P2P_Jan_2024.pdf"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eos-06/ocm3",
+      "@type": "sosa:Sensor",
+      "label": "OCM-3 (selected payload)",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/ocean-colour"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.isro.gov.in/EOS_06.html"
+        },
+        {
+          "@id": "https://bhoonidhi.nrsc.gov.in/bhoonidhi/htmls/FAQ2.html"
+        },
+        {
+          "@id": "https://www.nrsc.gov.in/nrscnew/assets/pdf/newsletters/P2P_Jan_2024.pdf"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eos-06/ocm3/product/0",
+      "@type": "dcat:Dataset",
+      "label": "EOS-06 OCM archive",
+      "dcat:landingPage": {
+        "@id": "https://bhoonidhi.nrsc.gov.in/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/eos-06/ocm3"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://bhoonidhi.nrsc.gov.in/bhoonidhi/htmls/FAQ2.html"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/goes-19",
+      "@type": "sosa:Platform",
+      "label": "GOES-19",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/goes-19/abi"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.noaa.gov/news-release/noaas-goes-19-satellite-now-operational-providing-critical-new-data-to-forecasters"
+        },
+        {
+          "@id": "https://www.goes-r.gov/downloads/resources/documents/Beginners_Guide_to_GOES-R_Series_Data.pdf"
+        },
+        {
+          "@id": "https://www.ncei.noaa.gov/products/goes-terrestrial-weather-abi-glm"
+        },
+        {
+          "@id": "https://space.oscar.wmo.int/satellites/view/meteosat_12"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/goes-19/abi",
+      "@type": "sosa:Sensor",
+      "label": "ABI (selected payload)",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/clouds"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/thermal-radiance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/fire"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.goes-r.gov/downloads/resources/documents/Beginners_Guide_to_GOES-R_Series_Data.pdf"
+        },
+        {
+          "@id": "https://www.noaa.gov/news-release/noaas-goes-19-satellite-now-operational-providing-critical-new-data-to-forecasters"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/goes-19/abi/product/0",
+      "@type": "dcat:Dataset",
+      "label": "ABI L1b radiance / L2+ products",
+      "dcat:landingPage": {
+        "@id": "https://www.ncei.noaa.gov/products/goes-terrestrial-weather-abi-glm"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/goes-19/abi"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.ncei.noaa.gov/products/goes-terrestrial-weather-abi-glm"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/meteosat-12",
+      "@type": "sosa:Platform",
+      "label": "Meteosat-12",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/meteosat-12/fci"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.eumetsat.int/meteosat-third-generation"
+        },
+        {
+          "@id": "https://space.oscar.wmo.int/satellites/view/meteosat_12"
+        },
+        {
+          "@id": "https://www.esa.int/Applications/Observing_the_Earth/Meteorological_missions/meteosat_third_generation/Flexible_Combined_Imager"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/meteosat-12/fci",
+      "@type": "sosa:Sensor",
+      "label": "FCI (selected payload)",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/clouds"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/thermal-radiance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/weather"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.esa.int/Applications/Observing_the_Earth/Meteorological_missions/meteosat_third_generation/Flexible_Combined_Imager"
+        },
+        {
+          "@id": "https://space.oscar.wmo.int/satellites/view/meteosat_12"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/meteosat-12/fci/product/0",
+      "@type": "dcat:Dataset",
+      "label": "FCI L1c imagery",
+      "dcat:landingPage": {
+        "@id": "https://data.eumetsat.int/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/meteosat-12/fci"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://space.oscar.wmo.int/satellites/view/meteosat_12"
+        },
+        {
+          "@id": "https://www.esa.int/Applications/Observing_the_Earth/Meteorological_missions/meteosat_third_generation/Flexible_Combined_Imager"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/himawari-9",
+      "@type": "sosa:Platform",
+      "label": "Himawari-9",
+      "sosa:hosts": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/himawari-9/ahi"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.jma.go.jp/jma/jma-eng/satellite/"
+        },
+        {
+          "@id": "https://www.data.jma.go.jp/mscweb/en/himawari89/space_segment/spsg_ahi.html"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/himawari-9/ahi",
+      "@type": "sosa:Sensor",
+      "label": "AHI",
+      "sosa:observes": [
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/clouds"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/thermal-radiance"
+        },
+        {
+          "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/weather"
+        }
+      ],
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.data.jma.go.jp/mscweb/en/himawari89/space_segment/spsg_ahi.html"
+        },
+        {
+          "@id": "https://www.jma.go.jp/jma/jma-eng/satellite/"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/himawari-9/ahi/product/0",
+      "@type": "dcat:Dataset",
+      "label": "Himawari Standard Data",
+      "dcat:landingPage": {
+        "@id": "https://www.data.jma.go.jp/mscweb/en/himawari89/"
+      },
+      "dcterms:relation": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/himawari-9/ahi"
+      },
+      "prov:wasDerivedFrom": [
+        {
+          "@id": "https://www.jma.go.jp/jma/jma-eng/satellite/"
+        },
+        {
+          "@id": "https://www.data.jma.go.jp/mscweb/en/himawari89/space_segment/spsg_ahi.html"
+        }
+      ]
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/clouds",
+      "@type": "sosa:ObservableProperty",
+      "label": "clouds"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/fire",
+      "@type": "sosa:ObservableProperty",
+      "label": "fire"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/forest-structure",
+      "@type": "sosa:ObservableProperty",
+      "label": "forest structure"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/land-surface-temperature",
+      "@type": "sosa:ObservableProperty",
+      "label": "land surface temperature"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/mineralogy",
+      "@type": "sosa:ObservableProperty",
+      "label": "mineralogy"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/ocean-colour",
+      "@type": "sosa:ObservableProperty",
+      "label": "ocean colour"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/radar-backscatter",
+      "@type": "sosa:ObservableProperty",
+      "label": "radar backscatter"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/spectral-radiance",
+      "@type": "sosa:ObservableProperty",
+      "label": "spectral radiance"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-deformation",
+      "@type": "sosa:ObservableProperty",
+      "label": "surface deformation"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/surface-reflectance",
+      "@type": "sosa:ObservableProperty",
+      "label": "surface reflectance"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/thermal-radiance",
+      "@type": "sosa:ObservableProperty",
+      "label": "thermal radiance"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/vegetation",
+      "@type": "sosa:ObservableProperty",
+      "label": "vegetation"
+    },
+    {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/property/weather",
+      "@type": "sosa:ObservableProperty",
+      "label": "weather"
+    }
+  ]
+}

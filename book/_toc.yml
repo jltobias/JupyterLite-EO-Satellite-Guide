@@ -1,0 +1,19 @@
+format: jb-book
+root: intro
+parts:
+  - caption: Explore and investigate
+    chapters:
+      - file: poster
+      - file: notebooks/01_constellation_poster
+      - file: notebooks/02_sensor_comparison
+      - file: notebooks/03_hyperspectral_land
+      - file: notebooks/04_orbits_and_resolution
+      - file: notebooks/05_observation_to_public_health
+      - file: notebooks/06_knowledge_graph_and_curation
+  - caption: Evidence and stewardship
+    chapters:
+      - file: data-model
+      - file: implementation
+      - file: offline
+      - file: references
+      - file: attributions

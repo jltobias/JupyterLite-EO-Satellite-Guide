@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Explore a curated global Earth observation satellite constellation, compare sensors and follow the evidence. An offline-capable educational poster.">
+  <title>Global EO | Satellite constellation explorer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#catalog">Skip to satellite table</a>
+<header class="masthead">
+  <a class="brand" href="#"><span class="brand-mark" aria-hidden="true">◎</span> GLOBAL <b>EO</b><span class="brand-divider">/</span><span class="brand-sub">THE SATELLITE GUIDE</span></a>
+  <nav aria-label="Project"><a aria-current="page" href="#atlas">Explorer</a><a href="../book/intro.html">Field guide ↗</a><a href="../lab/index.html?path=01_constellation_poster.ipynb">JupyterLite Lab ↗</a></nav>
+</header>
+<main id="poster">
+  <section class="intro" aria-labelledby="title">
+    <div><p class="eyebrow">AN ATLAS OF OUR OBSERVING PLANET <span class="rule"></span> 01 / EXPLORE</p>
+    <h1 id="title">A world of <em>perspectives.</em></h1>
+    <p class="lede">One planet. Many ways to see it. Explore the satellites, sensors and measurements that help us understand Earth.</p></div>
+    <div class="snapshot"><span class="live-dot" aria-hidden="true"></span> CURATED SNAPSHOT<br><strong>02 NOV 2026</strong><small>13 platforms · 5 sensing families<br>Representative catalog · no live tracking</small></div>
+  </section>
+  <section class="toolbar" aria-label="Filter constellation">
+    <label class="search-label"><span>Find a satellite or capability</span><input id="search" type="search" placeholder="Search missions, sensors, products…" autocomplete="off"></label>
+    <label>Agency<select id="agency"><option value="">All agencies</option></select></label>
+    <label>Sensing family<select id="type"><option value="">All families</option></select></label>
+    <label>Orbit<select id="orbit"><option value="">All orbits</option></select></label>
+    <label>Status<select id="status"><option value="">All statuses</option></select></label>
+    <label>Observed property<select id="property"><option value="">All properties</option></select></label>
+    <label>Application<select id="application"><option value="">All pathways</option></select></label>
+    <button id="reset" class="quiet">Reset filters</button>
+  </section>
+  <section class="atlas-section" id="atlas" aria-labelledby="atlas-heading">
+    <div class="section-bar"><h2 id="atlas-heading"><span>01</span> The constellation</h2><div class="atlas-actions"><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="overview">Overview</button><button id="print">Print poster</button></div></div>
+    <div class="canvas-grid">
+      <div class="atlas-wrap">
+        <div class="atlas-key"><span>SCHEMATIC ORBIT ATLAS</span><span id="count" role="status" aria-live="polite"></span></div>
+        <svg id="constellation" viewBox="0 0 1200 650" role="group" aria-labelledby="svg-title svg-desc">
+          <title id="svg-title">Global Earth observation satellite constellation</title>
+          <desc id="svg-desc">Selectable schematic satellite slots around a world map. Slots and orbit rings are illustrative, not geographic spacecraft positions or scaled altitudes. Use Tab and Enter to select a platform.</desc>
+          <defs><radialGradient id="ocean"><stop stop-color="#133d51"/><stop offset="1" stop-color="#0a2236"/></radialGradient><pattern id="stars" width="89" height="71" patternUnits="userSpaceOnUse"><circle cx="13" cy="17" r="0.7" fill="#7299b3" opacity=".45"/><circle cx="67" cy="52" r=".6" fill="#7299b3" opacity=".25"/></pattern><clipPath id="map-clip"><rect x="180" y="180" width="840" height="310" rx="155"/></clipPath></defs>
+          <rect width="1200" height="650" fill="url(#stars)"/>
+          <g id="world" clip-path="url(#map-clip)"><rect x="180" y="180" width="840" height="310" fill="url(#ocean)"/><g id="graticule"></g><path id="land" fill="#276174" stroke="#4c8a96" stroke-width=".6" opacity=".75"/><path id="equator" d="M180 335H1020" stroke="#7aafba" stroke-dasharray="5 7" opacity=".4"/></g>
+          <ellipse cx="600" cy="300" rx="490" ry="225" fill="none" stroke="#51d9c2" stroke-width="1" opacity=".3"/>
+          <ellipse cx="600" cy="335" rx="557" ry="258" fill="none" stroke="#f6c478" stroke-dasharray="6 7" opacity=".5"/>
+          <ellipse cx="600" cy="315" rx="150" ry="230" fill="none" stroke="#6289ad" opacity=".18" transform="rotate(25 600 315)"/>
+          <text x="580" y="300" class="map-label">EARTH</text><text x="580" y="322" class="map-sub">OUR SHARED OBSERVATORY</text>
+          <text x="33" y="640" class="orbit-label">— LOW EARTH ORBIT · ILLUSTRATIVE</text><text x="740" y="640" class="orbit-label geo-label">- - GEOSTATIONARY · ~35,786 km NOMINAL</text>
+          <g id="satellites"></g>
+        </svg>
+        <p class="map-note">Satellite slots, rings and relative distances are illustrative. Geographic positions are not ephemerides. Map: Natural Earth.</p>
+        <div id="legend" class="legend" aria-label="Sensing family legend"></div>
+      </div>
+      <aside id="inspector" aria-label="Satellite details"><div class="empty-details"><span class="eyebrow">START WITH A QUESTION</span><h3>What do you<br>want to observe?</h3><p>Select any satellite to unfold its instruments, products and evidence.</p><div class="starter"><span>01</span> Click a satellite or table row</div><div class="starter"><span>02</span> Open a sensor to go deeper</div><div class="starter"><span>03</span> Pin missions to compare</div><button id="start" class="primary">Explore Landsat 8 →</button><p class="small">Keyboard: Tab to a satellite, Enter to open, Escape to return.</p></div></aside>
+    </div>
+  </section>
+  <section class="catalog-section" id="catalog" aria-labelledby="catalog-heading">
+    <div class="section-bar"><h2 id="catalog-heading"><span>02</span> Mission index</h2><div><button id="export">Export filtered CSV</button></div></div>
+    <p class="section-note">Hover or focus a row to highlight its satellite. Select a name to expand it. Pin two or more to build a comparison.</p>
+    <div class="table-scroll"><table id="mission-table"><caption class="sr-only">Filtered satellite attributes with linked selection and comparison controls</caption><thead><tr><th scope="col">Compare</th><th scope="col"><button id="sort-name">Satellite ↕</button></th><th scope="col">Operator / region</th><th scope="col">Sensing family</th><th scope="col">Orbit / altitude</th><th scope="col">Spatial detail</th><th scope="col">Temporal context</th><th scope="col">Status / evidence</th></tr></thead><tbody id="rows"></tbody></table></div>
+    <p id="no-results" hidden>No missions match these filters. Reset filters to restore the constellation.</p>
+  </section>
+  <section id="comparison" aria-labelledby="comparison-heading"><div class="section-bar"><h2 id="comparison-heading"><span>03</span> Compare perspectives <small id="pin-count">0 pinned</small></h2><button id="clear-pins">Clear pins</button></div><div id="comparison-content"><p class="section-note">Pin at least two missions using the index or a satellite detail panel. Pins remain when filters change.</p></div></section>
+  <section class="learning-strip" aria-label="How to interpret measurements"><article><span class="eyebrow">SPATIAL</span><h3>A pixel is not a promise.</h3><p>Band, mode, processing and viewing angle determine what a resolution number means. A finer output grid does not create finer observations.</p></article><article><span class="eyebrow">TEMPORAL</span><h3>Repeat ≠ usable revisit.</h3><p>Orbit repeat, constellation coverage, scan cadence, cloud-free observations and product latency answer different questions.</p></article><article><span class="eyebrow">EVIDENCE</span><h3>Follow the whole chain.</h3><p>Platform → sensor → measured property → product → analysis → application. An observation alone does not establish an outcome.</p></article></section>
+  <details class="sources-section"><summary>Sources, scope and attribution</summary><p id="scope"></p><p>Unknown values are intentional. Status labels describe cited source snapshots, not current service availability. Payload lists are selective. The original reference poster is not reproduced: its authorship and reuse terms were not established. All satellite symbols are original schematic vectors.</p><div id="sources"></div></details>
+  <footer><div class="brand">GLOBAL <b>EO</b> <span class="brand-sub">LEARN TO SEE THE DIFFERENCE.</span></div><p>Original code and graphics: MIT · Made with Natural Earth (public domain) · Source-backed teaching catalog, 2026<br>NASA ARSET concepts adapted with attribution; third-party source material retains its own terms.</p></footer>
+</main>
+<div class="sr-only" role="status" aria-live="polite" id="announcement"></div>
+<noscript>This explorer requires JavaScript. The Jupyter Book and catalog JSON provide readable alternatives.</noscript>
+<script src="catalog.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
