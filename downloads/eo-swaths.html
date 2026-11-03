@@ -221,7 +221,7 @@ window.EOGeometry=(()=>{
   state.request?.abort();state.request=null;state.items=[];state.query=null;state.active=null;
   $("observed-footprints").innerHTML="";$("footprint-rows").innerHTML="";$("save-footprints").disabled=true;$("fetch-footprints").disabled=!$("route").value;$("archive-status").textContent=message;
  }
- function setView(view){state.view=view;$("study-map").setAttribute("viewBox",view.join(" "));}
+ function setView(view){state.view=view;$("study-map").setAttribute("viewBox",view.join(" "));renderInstant();}
  function zoomBox(){const [w,s,e,n]=state.bbox,a=xy({lon:w,lat:n}),b=xy({lon:e,lat:s});let width=Math.max(80,(b[0]-a[0])*1.8),height=Math.max(60,(b[1]-a[1])*1.8);if(width/height>2)height=width/2;else width=height*2;width=Math.min(1200,width);height=Math.min(600,height);setView([Math.max(0,Math.min(1200-width,(a[0]+b[0]-width)/2)),Math.max(0,Math.min(600-height,(a[1]+b[1]-height)/2)),width,height]);}
  function renderCandidates(){const ids=$("lab-question").value.trim()?[...state.research.platforms]:presets.map(p=>p.id);
   $("candidate-rows").innerHTML=ids.filter(id=>satellite(id)).map(id=>{const s=satellite(id),p=forResearch(preset(id));return `<tr data-candidate="${esc(id)}" class="${id===state.p.id?"active":""}"><td><b>${esc(s.name)}</b><small>${esc(p?.label||s.sensors.map(i=>i.name).join(" / "))}</small></td><td style="--orbit-color:${O.color(s)}"><i class="orbit-dot" aria-hidden="true"></i>${esc(s.orbit.class)}</td><td>${esc(p?.sampling||"Nominal geometry / sampling not curated for this lab")}</td><td>${esc(p?.temporal||s.orbit.temporal_note)}</td><td><button data-use="${esc(id)}" ${p?"":"disabled"}>${p?"Use geometry":"Geometry uncurated"}</button></td></tr>`;}).join("");
@@ -262,7 +262,7 @@ window.EOGeometry=(()=>{
   $("geometry-sources").innerHTML=sourceLinks(p.sources);$("model-assumptions").textContent=config.model;
   renderPixels();renderTimeline();renderCandidates();renderInstant();
  }
- function renderInstant(){const p=state.p,q=G.point(p,state.time,state.phase),[x,y]=xy(q);$("model-satellite").setAttribute("transform",`translate(${x},${y})`);
+ function renderInstant(){const p=state.p,q=G.point(p,state.time,state.phase),[x,y]=xy(q);$("model-satellite").setAttribute("transform",`translate(${x},${y}) scale(${state.view[2]/1200})`);
   $("model-satellite").querySelector("text").textContent=p.kind==="geo"?"GEO SUBPOINT · MODEL":"MODEL SUBPOINT";
   $("current-swath").setAttribute("d",polygon(G.strip(p,state.time,state.phase)));$("time-label").value=clock(state.time);$("model-time").value=String(state.time);
   const cursor=20+state.time/(state.hours*3600)*560;$("time-cursor")?.setAttribute("d",`M${cursor} 12V58`);

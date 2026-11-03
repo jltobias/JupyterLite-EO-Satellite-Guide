@@ -99,6 +99,8 @@ def check_lab(page,base):
     expect(page.locator('#box-error')).to_contain_text('west < east')
     for key,value in zip(('west','south','east','north'),('-76','39','-74','41')):page.locator('#'+key).fill(value)
     page.locator('#apply-bbox').click();page.locator('[data-use="sentinel-5p"]').click();page.locator('#align-pass').click();page.locator('#zoom-box').click()
+    assert page.locator('#model-satellite circle').bounding_box()['width']<20,'Zoom must keep the model marker small enough to see the study box'
+    assert page.locator('#model-satellite text').bounding_box()['width']<180,'Zoom must preserve readable label size'
     page.screenshot(path=str(QA/'swaths-aligned-study-area.png'),full_page=True)
     page.locator('#lab-fullscreen').click();page.wait_for_function("document.fullscreenElement===document.documentElement")
     expect(page.locator('#mission')).to_have_value('sentinel-5p');page.keyboard.press('Escape');page.wait_for_function('document.fullscreenElement===null')
