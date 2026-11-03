@@ -25,3 +25,8 @@ The export uses [SOSA/SSN](https://www.w3.org/TR/vocab-ssn/) `sosa:Platform`, `s
 Prefer the operator, instrument handbook and product specification over a secondary poster. Record citations for mission, orbit, sensors and products; sensor/product entries carry their own evidence. Cite a study for a claimed application, or mark it as potential. Refresh service/status facts each teaching term and retain the old snapshot in Git history. Log ambiguities and resolve them explicitly instead of silently choosing a number. The ARSET Hyperion acquisition-end date and NASA spacecraft shutdown date, for example, describe different events.
 
 Run `python scripts/validate.py` and rebuild after changing data. Browser tests verify the coupled views and offline artifact; they do not establish scientific validity, complete accessibility conformance, or learning effectiveness.
+
+
+## Research discovery profile
+
+`data/research-topics.json` supplies eight curated concepts, aliases, qualified candidate-platform relations and nine exact provider routes. `data/research-ontology.ttl` defines the original schema; the generated JSON-LD includes SKOS concepts, SOSA observables, qualified platform links, orbit types, DCAT collections/endpoints and PROV source evidence. Generic imported instrument arrays do not assert that each instrument is hosted on every platform. Mission groups use a separate class. There are no equivalence assertions to FieldWork, fabricated observations or acquisition receipts. See [research discovery](research-discovery.md) for competency questions, matching limits, sharing and the downstream workflow.

@@ -10,9 +10,12 @@ parts:
       - file: notebooks/04_orbits_and_resolution
       - file: notebooks/05_observation_to_public_health
       - file: notebooks/06_knowledge_graph_and_curation
+      - file: notebooks/07_research_to_stac
+      - file: research-discovery
   - caption: Evidence and stewardship
     chapters:
       - file: data-model
+      - file: stac-coverage
       - file: implementation
       - file: offline
       - file: references

@@ -16,7 +16,15 @@ The lower poster provides a linked mission index and a comparison matrix. Pin mu
 
 Choose **Full screen** for a viewport-filling workspace with the constellation and compact mission table side by side. Larger satellite labels and synchronized highlights make linked brushing visible without scrolling the page. Filters, metadata and comparisons remain available from the workspace controls; Escape returns to the page. On smaller screens only the table pane scrolls while the constellation stays visible.
 
-The initial catalog contains **13 representative platforms**: Landsat 8/9, Sentinel-2B/2C, Sentinel-1C, ALOS-2, EnMAP, EO-1/Hyperion, Fengyun-3D, EOS-06/Oceansat-3, GOES-19, Meteosat-12 and Himawari-9. It is a teaching snapshot verified **2026-11-02**, not an exhaustive constellation or live operations feed. Payload lists are selective; missing values stay explicit. Positions, orbit rings and relative distances are illustrative, not ephemerides or a scale model.
+The catalog now contains **344 spacecraft and constellation records**, expanding the original 13 teaching examples through a bounded audit of **153 STAC Index listings**, dated **2026-11-03**. These include archives and mission groups, so the count is not a count of unique, operating satellites. The [coverage report](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/stac-coverage.html) records checked, partial, inaccessible and skipped catalogs and unresolved identifiers. It cannot establish that every EO satellite is represented. New discovery records keep unverified specifications explicit. Positions and orbit rings are schematic; SSO, GEO, inclined LEO and unknown orbit labels appear in both linked views.
+
+## Start with a research question
+
+Try **[air quality and NO₂ measures](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/?q=air+quality+and+NO2+measures)**. The local vocabulary highlights potential platforms in both views, explains the measurement chain and qualifications, and provides exact STAC collection links. A specific pollutant takes precedence over broad air quality. Eight starting concepts include NO₂, aerosols, heat, vegetation, floods, coastal water and snow. Map/table pages move together, with up to 13 records per view; the full filtered set exports to CSV.
+
+Share a question URL, save a research brief, or download a runnable notebook carrying its exact STAC route into this Guide's Lab. In the [JupyterLite STAC Browser](https://jltobias.github.io/JupyterLite-STAC-Browser/explorer/), paste a copied collection URL into **Custom HTTPS URL** to continue inspecting Items, assets and provenance. That separate Explorer currently has no URL query importer. [FieldWork](https://digital-twin-ph.github.io/fieldwork/?example=snow-isochrone) is linked for downstream workflows; direct STAC acquisition and automatic research-brief import remain unimplemented there. Its John Snow example concerns cholera/travel time. See the [research discovery guide](book/research-discovery.md) for the working handoff and limits.
+
+The original [ontology profile](data/research-ontology.ttl), [curated concepts/routes](data/research-topics.json) and [generated JSON-LD](data/catalog.jsonld) use SKOS, SOSA/SSN, DCAT and PROV. Matches indicate potential relevance. NO₂ columns are not ground-level concentrations or personal exposure; access, units, quality, spatial/temporal coverage and validation still require review.
 
 ## Learn in the browser
 
@@ -28,6 +36,7 @@ The initial catalog contains **13 representative platforms**: Landsat 8/9, Senti
 | [04 · Orbits and resolution](notebooks/04_orbits_and_resolution.ipynb) | Interactive generic orbit geometry; period, repeat, scan cadence and resampling |
 | [05 · Observation to public health](notebooks/05_observation_to_public_health.ipynb) | Trace Philadelphia heat evidence; interpret HELIX, Jackson and contextual OSM examples |
 | [06 · Knowledge graph and curation](notebooks/06_knowledge_graph_and_curation.ipynb) | Validate sources and export a small SOSA/DCAT/PROV application profile |
+| [07 · Research to STAC](notebooks/07_research_to_stac.ipynb) | Resolve research topics, highlight platforms, share a brief and optionally query exact STAC collection metadata |
 
 JupyterLite runs Python locally in the browser; no account, API key or server kernel is needed. **First launch downloads Pyodide.** The standalone explorer needs no remote assets and works offline; the first-load Python runtime is not bundled. See [offline and publishing instructions](book/offline.md). Notebook simulations use synthetic data and do not imply validated remote-sensing or health results.
 
@@ -53,6 +62,8 @@ python scripts/test_browser.py
 ```
 
 The browser test starts its own local server, checks map/table brushing, details, filters, pins, CSV export, keyboard interactions, mobile layout and offline first load, and saves screenshots under `tmp/qa/`.
+
+Maintainers explicitly refresh evidence with `python scripts/audit_stac.py --refresh` and `python scripts/audit_nasa.py --refresh`, review the bounds/failures, then run `python scripts/curate_stac.py`. `data/stac-audit.json` preserves results and `data/stac-coverage.json` preserves the platform/constellation identifier crosswalk, including non-satellite/unresolved values. Builds use the checked-in snapshot and never crawl providers. `python scripts/curate_research.py` regenerates the reviewed route definitions. Run `python -m unittest discover -s tests -v` for the matching, identity and metadata-access contracts. Live notebook requests are opt-in and fetch metadata only.
 
 ## Publish the Book and Lab
 

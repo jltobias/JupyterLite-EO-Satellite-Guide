@@ -7,6 +7,7 @@
   <title>Global EO | Satellite constellation explorer</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="workspace.css">
+  <link rel="stylesheet" href="discovery.css">
 </head>
 <body>
 <a class="skip" href="#catalog">Skip to satellite table</a>
@@ -18,13 +19,22 @@
   <div class="workspace-bar" aria-label="Full-screen workspace controls">
     <div class="workspace-brand">GLOBAL <b>EO</b><span>LINKED WORKSPACE</span></div>
     <p id="brush-readout" role="status" aria-live="polite">Hover or focus a satellite or row to link the views.</p>
-    <div class="workspace-actions"><button id="workspace-filters" aria-expanded="false" aria-controls="filters">Filters</button><button id="workspace-details" aria-expanded="false" aria-controls="inspector">Details</button><button id="workspace-compare" aria-expanded="false" aria-controls="comparison">Compare <span id="workspace-pin-count">(0)</span></button><button id="exit-workspace">Exit full screen</button></div>
+    <div class="workspace-actions"><button id="workspace-research" aria-expanded="false" aria-controls="research">Research</button><button id="workspace-filters" aria-expanded="false" aria-controls="filters">Filters</button><button id="workspace-details" aria-expanded="false" aria-controls="inspector">Details</button><button id="workspace-compare" aria-expanded="false" aria-controls="comparison">Compare <span id="workspace-pin-count">(0)</span></button><button id="exit-workspace">Exit full screen</button></div>
   </div>
   <section class="intro" aria-labelledby="title">
     <div><p class="eyebrow">AN ATLAS OF OUR OBSERVING PLANET <span class="rule"></span> 01 / EXPLORE</p>
     <h1 id="title">A world of <em>perspectives.</em></h1>
     <p class="lede">One planet. Many ways to see it. Explore the satellites, sensors and measurements that help us understand Earth.</p></div>
-    <div class="snapshot"><span class="live-dot" aria-hidden="true"></span> CURATED SNAPSHOT<br><strong>02 NOV 2026</strong><small>13 platforms · 5 sensing families<br>Representative catalog · no live tracking</small></div>
+    <div class="snapshot"><span class="live-dot" aria-hidden="true"></span> CURATED + STAC DISCOVERY<br><strong>03 NOV 2026</strong><small id="snapshot-count">Loading catalog…</small><br><a href="../book/stac-coverage.html">Coverage audit ↗</a></div>
+  </section>
+  <section id="research" class="research-panel" aria-labelledby="research-heading">
+    <div class="section-bar"><h2 id="research-heading">Start with a research question</h2><button id="clear-research">Clear question</button></div>
+    <form id="research-form"><label for="question">Research topic or measurement</label><div class="question-row"><input id="question" type="search" maxlength="500" placeholder="How can I study air quality and NO₂?" autocomplete="off"><button class="primary" type="submit">Find data pathways</button></div></form>
+    <div id="topic-examples" class="topic-examples" aria-label="Example research topics"></div>
+    <div id="research-results" role="status" aria-live="polite"><p>Try NO₂, aerosols, surface heat, vegetation, floods or coastal water. Matching missions light up in both views.</p></div>
+    <div class="research-actions"><label><input id="research-only" type="checkbox" checked> Show matching missions only</label><button id="share-question">Copy research link</button><button id="export-question">Save research brief (.json)</button><button id="research-notebook">Save runnable STAC notebook</button></div>
+    <p id="handoff-status" class="small" role="status"></p>
+    <details><summary>Data access and FieldWork handoff</summary><p>Open a collection below to inspect its metadata. In <a href="https://jltobias.github.io/JupyterLite-STAC-Browser/explorer/" target="_blank" rel="noopener">JupyterLite STAC Browser ↗</a>, choose Custom HTTPS URL, paste the catalog URL, connect, select the named collection and set your area and dates. Its current Explorer has no URL query importer. The runnable notebook below carries the exact collection into this Guide's Lab; upload it and run its cells to request metadata.</p><p>Use the STAC Browser to inspect assets, licenses and access, then export a FieldWork selection or a compatible cropped raster and sidecar. <a href="https://digital-twin-ph.github.io/fieldwork/?example=snow-isochrone" target="_blank" rel="noopener">Open FieldWork ↗</a>. Direct STAC acquisition and automatic research-brief import are not implemented there. The John Snow isochrone example is a travel-time/cholera workflow.</p></details>
   </section>
   <section class="toolbar" id="filters" aria-label="Filter constellation">
     <label class="search-label"><span>Find a satellite or capability</span><input id="search" type="search" placeholder="Search missions, sensors, products…" autocomplete="off"></label>
@@ -56,12 +66,14 @@
         </svg>
         <p class="map-note">Satellite slots, rings and relative distances are illustrative. Geographic positions are not ephemerides. Map: Natural Earth.</p>
         <div id="legend" class="legend" aria-label="Sensing family legend"></div>
+        <div id="orbit-key" class="orbit-key" aria-label="Orbit type legend"></div><p id="orbit-explanation" class="map-note" role="status">SSO: similar local solar time. GEO: fixed Earth view. Inclined LEO: changing local time. L1: Lissajous near a Sun-Earth libration point. Unknown: not curated. Click a type to filter both views; slots are schematic, including L1.</p>
       </div>
       <aside id="inspector" aria-label="Satellite details"><div class="empty-details"><span class="eyebrow">START WITH A QUESTION</span><h3>What do you<br>want to observe?</h3><p>Select any satellite to unfold its instruments, products and evidence.</p><div class="starter"><span>01</span> Click a satellite or table row</div><div class="starter"><span>02</span> Open a sensor to go deeper</div><div class="starter"><span>03</span> Pin missions to compare</div><button id="start" class="primary">Explore Landsat 8 →</button><p class="small">Keyboard: Tab to a satellite, Enter to open, Escape to return.</p></div></aside>
     </div>
   </section>
   <section class="catalog-section" id="catalog" aria-labelledby="catalog-heading">
     <div class="section-bar"><h2 id="catalog-heading"><span>02</span> Mission index</h2><div><button id="export">Export filtered CSV</button></div></div>
+    <div class="page-controls"><button id="page-prev" aria-label="Previous constellation page">← Previous</button><span id="page-status" role="status" aria-live="polite"></span><button id="page-next" aria-label="Next constellation page">Next →</button></div>
     <p class="section-note">Hover or focus a row to highlight its satellite. Select a name to expand it. Pin two or more to build a comparison.</p>
     <div class="table-scroll"><table id="mission-table"><caption class="sr-only">Filtered satellite attributes with linked selection and comparison controls</caption><thead><tr><th scope="col">Compare</th><th scope="col"><button id="sort-name">Satellite ↕</button></th><th scope="col">Operator / region</th><th scope="col">Sensing family</th><th scope="col">Orbit / altitude</th><th scope="col">Spatial detail</th><th scope="col">Temporal context</th><th scope="col">Status / evidence</th></tr></thead><tbody id="rows"></tbody></table></div>
     <p id="no-results" hidden>No missions match these filters. Reset filters to restore the constellation.</p>
@@ -74,6 +86,7 @@
 <div class="sr-only" role="status" aria-live="polite" id="announcement"></div>
 <noscript>This explorer requires JavaScript. The Jupyter Book and catalog JSON provide readable alternatives.</noscript>
 <script src="catalog.js"></script>
+<script src="research.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -101,11 +101,11 @@ def check_workspace(page,base):
     # without moving the constellation or the surrounding document.
     page.set_viewport_size({'width':1280,'height':480})
     page.locator('#fullscreen').click()
-    page.locator('#node-sentinel-2c').hover()
-    expect(page.locator('#row-sentinel-2c')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
+    page.locator('#node-himawari-9').hover()
+    expect(page.locator('#row-himawari-9')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
     short=page.evaluate('''() => {
       const pane=document.querySelector('#catalog .table-scroll'),
-            row=document.getElementById('row-sentinel-2c').getBoundingClientRect(),
+            row=document.getElementById('row-himawari-9').getBoundingClientRect(),
             bounds=pane.getBoundingClientRect();
       return {scrollY,tableScroll:pane.scrollTop,rowBottom:row.bottom,paneBottom:bounds.bottom};
     }''')
@@ -113,6 +113,75 @@ def check_workspace(page,base):
     page.locator('#exit-workspace').click()
     page.set_viewport_size({'width':1600,'height':1100})
     (QA/'workspace-layouts.json').write_text(json.dumps(dimensions,indent=2),encoding='utf-8')
+
+
+def check_discovery(page,base):
+    """Coverage, concept specificity, linked paging and reproducible handoffs."""
+    import ast
+    import nbformat
+    page.goto(base+'/explorer/')
+    count=len(json.loads((ROOT/'data/catalog.json').read_text(encoding='utf-8'))['satellites'])
+    seen=set()
+    while True:
+        rows=page.locator('#rows tr').evaluate_all('(rows)=>rows.map(r=>r.dataset.id)')
+        nodes=page.locator('.sat-node:not(.filtered)').evaluate_all('(nodes)=>nodes.map(n=>n.dataset.id)')
+        assert set(rows)==set(nodes) and len(rows)<=13
+        assert not seen.intersection(rows),'Duplicate records across pages'
+        seen.update(rows)
+        if page.locator('#page-next').is_disabled():break
+        page.locator('#page-next').click()
+    assert len(seen)==count,(len(seen),count)
+    page.goto(base+'/explorer/?q=air+quality+and+NO2+measures')
+    expected={'sentinel-5p','aura','intelsat-40e'}
+    assert set(page.locator('#rows tr').evaluate_all('(rows)=>rows.map(r=>r.dataset.id)'))==expected
+    expect(page.locator('.sat-node.research-match')).to_have_count(3)
+    expect(page.locator('.mission-row.research-match')).to_have_count(3)
+    expect(page.locator('#research-results')).to_contain_text('not ground-level concentrations')
+    expect(page.locator('#research-results .data-route')).to_have_count(3)
+    page.locator('#node-sentinel-5p').hover()
+    expect(page.locator('#row-sentinel-5p')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
+    page.locator('#row-intelsat-40e .row-select').click()
+    expect(page.locator('#node-intelsat-40e')).to_have_class(re.compile(r'.*\bis-selected\b.*'))
+    expect(page.locator('#inspector')).to_contain_text('TEMPO')
+    with page.expect_download() as download:
+        page.locator('#export-question').click()
+    brief=json.loads(Path(download.value.path()).read_text(encoding='utf-8'))
+    assert brief['concepts']==['no2'] and set(brief['platforms'])==expected
+    assert brief['profile']=='eo-research-brief/1' and len(brief['routes'])==3
+    with page.expect_download() as download:
+        page.locator('#research-notebook').click()
+    notebook=nbformat.read(download.value.path(),as_version=4);nbformat.validate(notebook)
+    for cell in notebook.cells:
+        if cell.cell_type=='code':ast.parse(cell.source)
+    assert 'sentinel-5p-l2-no2-offl' in notebook.cells[1].source
+    page.locator('#fullscreen').click()
+    page.wait_for_function("document.fullscreenElement?.id==='poster'")
+    page.locator('#row-sentinel-5p .row-select').hover()
+    expect(page.locator('#brush-readout')).to_contain_text('SSO')
+    page.locator('#workspace-research').click()
+    expect(page.locator('#research')).to_be_visible()
+    page.screenshot(path=str(QA/'research-fullscreen.png'),full_page=True)
+    page.locator('#workspace-research').click()
+    page.locator('[data-orbit="Geostationary"]').click()
+    expect(page.locator('#rows tr')).to_have_count(1)
+    expect(page.locator('#rows')).to_contain_text('Intelsat 40e')
+    page.locator('#exit-workspace').click()
+    page.locator('#reset').click()
+    page.locator('#question').fill('NO20 dinosaur observations')
+    expect(page.locator('#rows tr')).to_have_count(0)
+    expect(page.locator('#research-results')).to_contain_text('No curated measurement pathway')
+    page.locator('#question').fill('aerosol and PM2.5')
+    expect(page.locator('#research-results')).to_contain_text('not PM₂.₅')
+    assert page.evaluate("EOResearch.resolve(document.getElementById('question').value).concepts.map(t=>t.id)")==['aerosol']
+    page.locator('#clear-research').click()
+    expect(page.locator('#rows tr')).to_have_count(13)
+    page.locator('#orbit').select_option('Unknown / not curated')
+    expect(page.locator('#rows')).to_contain_text('Unknown / not curated')
+    page.goto(base+'/book/stac-coverage.html')
+    expect(page.locator('h1').last).to_contain_text('STAC coverage audit')
+    page.goto(base+'/book/notebooks/07_research_to_stac.html')
+    expect(page.locator('h1').last).to_contain_text('Research question')
+    expect(page.frame_locator('iframe[title="Interactive EO constellation poster"]').locator('#rows tr')).to_have_count(3)
 
 
 def main():
@@ -223,6 +292,10 @@ def main():
             expect(op.locator('#rows tr')).to_have_count(1)
             op.locator('#exit-workspace').click()
             op.wait_for_function('document.fullscreenElement === null')
+            op.locator('#reset').click()
+            op.locator('#question').fill('air quality and NO2 measures')
+            expect(op.locator('#rows tr')).to_have_count(3)
+            expect(op.locator('#research-results .data-route')).to_have_count(3)
             assert not [u for u in requests if u.startswith(("https:","http:"))],requests
             offline.close()
             results.append("Fresh offline file load, search, drill-down, comparison, citations and keyboard access passed; zero HTTP(S) asset requests.")
@@ -231,7 +304,7 @@ def main():
             response=context.request.get(base+"/lab/index.html");assert response.status==200
             lite_config=context.request.get(base+"/jupyter-lite.json").json()
             assert any(x['name']=='@jupyterlite/pyodide-kernel-extension' for x in lite_config['jupyter-config-data']['federated_extensions'])
-            for name in ["01_constellation_poster.ipynb","06_knowledge_graph_and_curation.ipynb","data/catalog.json","support/eo-explorer.html","eo_guide.py"]:
+            for name in ["01_constellation_poster.ipynb","06_knowledge_graph_and_curation.ipynb","07_research_to_stac.ipynb","data/catalog.json","data/research-topics.json","data/research-ontology.ttl","support/eo-explorer.html","eo_guide.py"]:
                 response=context.request.get(base+"/files/"+name)
                 assert response.status==200,(name,response.status)
             page.goto(base+"/book/poster.html")
@@ -246,6 +319,8 @@ def main():
             results.append("Book iframe, Lab entry point and bundled notebook/data/support paths passed.")
             check_workspace(page,base)
             results.append('Native fullscreen fits both views and all 13 rows at 1280x720, 1366x768 and 1920x1080; bidirectional brushing, panels, state preservation, Escape and window-fit fallback passed.')
+            check_discovery(page,base)
+            results.append('All catalog records reachable in synchronized pages; NO2 specificity, research highlights, orbit filtering, brief/notebook exports, fullscreen research controls, unknown wording and Book audit/lesson passed.')
             if args.lite:
                 lab=context.new_page();lab.goto(base+"/lab/index.html?path=01_constellation_poster.ipynb")
                 lab.screenshot(path=str(QA / "jupyterlite-launch.png"),full_page=True)
@@ -275,6 +350,15 @@ def main():
                     raise
                 lab.screenshot(path=str(QA / "jupyterlite-executed.png"),full_page=True)
                 results.append("Real Pyodide browser kernel executed notebook 01 and rendered its interactive poster.")
+                lab.goto(base+"/lab/index.html?path=07_research_to_stac.ipynb")
+                lab.get_by_role('tab',name='07_research_to_stac.ipynb').wait_for(timeout=60000)
+                lab.get_by_role('menuitem',name='Run',exact=True).click()
+                lab.get_by_role('menuitem',name='Run All Cells',exact=True).click()
+                expect(lab.locator('.jp-OutputArea-output').filter(has_text='Potential platforms:')).to_be_visible(timeout=180000)
+                expect(lab.frame_locator('iframe[title="Interactive EO constellation poster"]').locator('#rows tr')).to_have_count(3,timeout=60000)
+                expect(lab.locator('.jp-OutputArea-output').filter(has_text='No provider request.')).to_be_visible(timeout=60000)
+                lab.screenshot(path=str(QA/'jupyterlite-research-executed.png'),full_page=True)
+                results.append('Real Pyodide kernel executed notebook 07, resolved NO2, rendered three linked mission rows and preserved opt-in live metadata requests.')
             assert not errors,errors
             browser.close()
         (QA / "results.json").write_text(json.dumps({"passed":results,"console_errors":errors},indent=2),encoding="utf-8")

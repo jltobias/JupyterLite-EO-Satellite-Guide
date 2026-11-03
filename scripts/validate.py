@@ -50,7 +50,7 @@ def main():
     for app in catalog["applications"]:
         assert set(app["satellites"])<=set(ids),"Application refers to unknown platform"
     notebook_paths=sorted((ROOT / "notebooks").glob("*.ipynb"))
-    assert len(notebook_paths)==6,"Expected six guided lessons"
+    assert len(notebook_paths)==7,"Expected seven guided lessons"
     for path in notebook_paths:
         notebook=nbformat.read(path,as_version=4)
         nbformat.validate(notebook)
@@ -58,7 +58,30 @@ def main():
             if cell.cell_type=="code":
                 ast.parse(cell.source,filename=str(path))
     sys.path.insert(0,str(ROOT / "src"))
-    from eo_guide import orbital_period_minutes, synthetic_reflectance
+    from eo_guide import orbital_period_minutes, synthetic_reflectance, research_matches
+    discovery=json.loads((ROOT / "data/research-topics.json").read_text(encoding="utf-8"))
+    topic_ids={t["id"] for t in discovery["topics"]}
+    route_ids={r["id"] for r in discovery["routes"]}
+    assert len(topic_ids)==len(discovery["topics"]) and len(route_ids)==len(discovery["routes"])
+    for t in discovery["topics"]:
+        assert set(t["platforms"])<=set(ids) and set(t["routes"])<=route_ids
+        assert t["caution"] and t["chain"] and set(t["sources"])<=set(sources)
+        if t.get("broader"):
+            assert t["broader"] in topic_ids
+    for r in discovery["routes"]:
+        assert set(r["platforms"])<=set(ids) and set(r["sources"])<=set(sources)
+        assert r["collection_url"]==r["endpoint"]+"/collections/"+r["collection"]
+        assert r["access_note"] and r["format"] and r["verified"]
+    no2=research_matches("air quality and NO₂ measures",discovery)
+    assert no2["concepts"]==["no2"] and set(no2["platforms"])=={"sentinel-5p","aura","intelsat-40e"}
+    assert not research_matches("NO20 dinosaur observations",discovery)["concepts"]
+    assert "no2" not in research_matches("aerosol and PM2.5",discovery)["concepts"]
+    coverage=json.loads((ROOT / "data/stac-coverage.json").read_text(encoding="utf-8"))
+    assert set(coverage["mapped_platform_ids"])<=set(ids)
+    audit=json.loads((ROOT / "data/stac-audit.json").read_text(encoding="utf-8"))
+    assert len(audit["catalogs"])==coverage["catalog_count"]
+    assert all(c["documents_checked"]<=audit["limits"]["documents_per_catalog"] for c in audit["catalogs"])
+    assert all(a["documents_checked"]<=a["page_limit"] for a in audit.get("supplemental_audits",[]))
     assert abs(orbital_period_minutes(705)-98.73)<.5
     assert 1435<orbital_period_minutes(35786)<1440
     assert all(0<synthetic_reflectance(w)<1 for w in range(400,2401))

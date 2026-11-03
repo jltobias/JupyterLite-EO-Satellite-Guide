@@ -4,6 +4,10 @@ from __future__ import annotations
 import html
 import json
 import math
+import asyncio
+import re
+import unicodedata
+from urllib.parse import urlencode, urlsplit
 from pathlib import Path
 
 
@@ -20,6 +24,70 @@ def load_catalog():
     return json.loads(data_path().read_text(encoding="utf-8"))
 
 
+def research_matches(question, profile=None):
+    """Resolve curated aliases; no language model, inference or network request."""
+    profile = profile or json.loads(data_path("research-topics.json").read_text(encoding="utf-8"))
+    def normalize(text):
+        return re.sub(r"[^a-z0-9.]+", " ", unicodedata.normalize("NFKD", text).lower()).strip()
+    q = " " + normalize(question) + " "
+    topics = [t for t in profile["topics"] if any(" "+normalize(a)+" " in q for a in t["aliases"])]
+    topics = [t for t in topics if not any(c.get("broader") == t["id"] for c in topics)]
+    route_ids = {r for t in topics for r in t["routes"]}
+    return {"question": question, "concepts": [t["id"] for t in topics],
+            "platforms": sorted({p for t in topics for p in t["platforms"]}),
+            "routes": [r for r in profile["routes"] if r["id"] in route_ids],
+            "qualifications": [t["caution"] for t in topics]}
+
+
+async def search_stac(route, *, bbox, start, end, limit=3):
+    """Bounded, public STAC collection Item metadata GET. Never downloads assets.
+
+    JupyterLite uses browser CORS through pyfetch. CPython uses urllib with TLS.
+    The caller must choose dates/area and explicitly run this function.
+    """
+    import datetime as dt
+    if not isinstance(limit, int) or not 1 <= limit <= 10:
+        raise ValueError("Choose 1–10 metadata Items")
+    if (len(bbox) != 4 or any(not isinstance(n, (int, float)) or isinstance(n, bool) or not math.isfinite(n) for n in bbox)
+            or not -180 <= bbox[0] < bbox[2] <= 180 or not -90 <= bbox[1] < bbox[3] <= 90):
+        raise ValueError("Use a valid west,south,east,north CRS84 bbox; split antimeridian areas")
+    begin, finish = dt.date.fromisoformat(start), dt.date.fromisoformat(end)
+    if finish < begin:
+        raise ValueError("End date precedes start date")
+    def safe_url(value):
+        parts = urlsplit(value)
+        if (parts.scheme != "https" or not parts.hostname or parts.username or parts.password or parts.query or parts.fragment):
+            raise ValueError("Use a public HTTPS metadata URL without credentials or query parameters")
+        return value
+    collection_url = safe_url(route["collection_url"])
+
+    async def fetch(url):
+        try:
+            from pyodide.http import pyfetch
+        except ImportError:
+            from urllib.request import Request, urlopen
+            def blocking():
+                with urlopen(Request(url, headers={"Accept":"application/json"}), timeout=20) as response:
+                    raw = response.read(6_000_001)
+                    if len(raw) > 6_000_000:
+                        raise ValueError("Metadata response exceeds 6 MB bound")
+                    return json.loads(raw)
+            return await asyncio.to_thread(blocking)
+        response = await asyncio.wait_for(pyfetch(url, credentials="omit"), timeout=20)
+        if not response.ok:
+            raise RuntimeError(f"STAC HTTP {response.status}; check provider availability/access")
+        text = await asyncio.wait_for(response.string(), timeout=20)
+        if len(text.encode("utf-8")) > 6_000_000:
+            raise ValueError("Metadata response exceeds 6 MB bound")
+        return json.loads(text)
+    params = {"bbox": ",".join(map(str, bbox)), "datetime": f"{start}T00:00:00Z/{end}T23:59:59Z", "limit": limit}
+    result = await fetch(collection_url.rstrip("/") + "/items?" + urlencode(params))
+    if result.get("type") != "FeatureCollection" or not isinstance(result.get("features"), list):
+        raise ValueError("Provider did not return a STAC ItemCollection")
+    result["features"] = result["features"][:limit]
+    return result
+
+
 def iframe_document(document, title, height=780):
     """Isolate each interactive HTML output; allow local scripts and user exports."""
     from IPython.display import HTML
@@ -33,11 +101,14 @@ def iframe_document(document, title, height=780):
     )
 
 
-def poster(height=1100):
+def poster(height=1100, question=""):
     for root in (Path.cwd(), Path(__file__).resolve().parent):
         path = root / "support" / "eo-explorer.html"
         if path.exists():
-            return iframe_document(path.read_text(encoding="utf-8"), "Interactive EO constellation poster", height)
+            document=path.read_text(encoding="utf-8")
+            initial=json.dumps(str(question)[:500]).replace("<", "\\u003c")
+            document=document.replace("<head>","<head><script>window.EO_INITIAL_QUESTION="+initial+";</script>",1)
+            return iframe_document(document, "Interactive EO constellation poster", height)
     raise FileNotFoundError("support/eo-explorer.html missing. Run scripts/build.py --prepare.")
 
 

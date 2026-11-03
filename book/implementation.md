@@ -1,6 +1,6 @@
 # From the supplied plan to this implementation
 
-The user's request governs the repository work. The supplied `earth-observation-explorer-plan.md` is a design reference. Its first implementation slice requested three contrasting platforms; this starter expands to thirteen while retaining explicit evidence and unknown values.
+The user's request governs the repository work. The supplied `earth-observation-explorer-plan.md` is a design reference. Its first implementation slice requested three contrasting platforms; the initial 13 teaching records are now extended by a bounded STAC audit, while retaining explicit evidence and unknown values.
 
 | Plan requirement | Implemented location |
 |---|---|
@@ -15,9 +15,11 @@ The user's request governs the repository work. The supplied `earth-observation-
 | HELIX, Jackson and OSM contextual examples | Notebook 05, with evidence and attribution boundaries |
 | Offline package | Standalone HTML and build-generated ZIP; zero required remote assets for explorer |
 | Sources and verification dates | Field groups, nested sources, complete source registry |
-| Knowledge model | JSON Schema and generated SOSA/DCAT/PROV JSON-LD |
+| Knowledge model | JSON Schema, research vocabulary, and generated SKOS/SOSA/DCAT/PROV JSON-LD |
+| Research discovery and sharing | Local topic matcher, linked highlights, exact collection cards, shared URL, research brief and runnable notebook |
+| STAC coverage | Directory-wide bounded audit and reviewed identifier crosswalk; unknowns/failures retained |
 | Keyboard access | Native controls, SVG keyboard selection, table access, focus highlights, Escape |
-| Browser learning environment | Six Python notebooks with shared local support files, packaged into JupyterLite and Jupyter Book |
+| Browser learning environment | Seven Python notebooks with shared local support files, packaged into JupyterLite and Jupyter Book |
 
 ## Explicit extension work
 

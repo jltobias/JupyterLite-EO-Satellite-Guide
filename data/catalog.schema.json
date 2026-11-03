@@ -12,10 +12,10 @@
       "properties": {
         "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
         "status": {"enum": ["operational", "retired", "planned", "unverified"]},
-        "type": {"enum": ["multispectral", "radar", "hyperspectral", "weather", "ocean"]},
+        "type": {"enum": ["multispectral", "radar", "hyperspectral", "weather", "ocean", "atmosphere", "other"]},
         "verified": {"type": "string", "format": "date"},
         "orbit": {"type": "object", "required": ["class", "altitude_km", "repeat_days", "temporal_note"], "properties": {
-          "class": {"enum": ["Sun-synchronous LEO", "Geostationary", "Inclined LEO"]},
+          "class": {"enum": ["Sun-synchronous LEO", "Geostationary", "Inclined LEO", "Polar LEO", "LEO", "Sun-Earth L1 Lissajous", "Unknown / not curated"]},
           "altitude_km": {"type": ["number", "null"], "minimum": 0},
           "repeat_days": {"type": ["number", "null"], "minimum": 0}
         }},

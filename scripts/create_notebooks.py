@@ -1,4 +1,4 @@
-"""Recreate starter lessons. Maintainers: this overwrites the six source notebooks."""
+"""Recreate starter lessons. Maintainers: this overwrites the seven source notebooks."""
 from pathlib import Path
 import nbformat as nbf
 
@@ -24,7 +24,7 @@ def main():
 
 **Goal:** move between a planet-scale overview, a mission record, its sensors and data products, and a contextual comparison.
 
-This curated snapshot contains 13 representative platforms, not every EO satellite. Satellite positions and orbit rings are illustrative, not to scale, not orbital predictions, and not a live feed. Metadata was curated on **2026-11-02**.
+This catalog contains 344 curated and STAC-discovered spacecraft / constellation records, including archives and mission groups. The map and table page together in groups of up to 13. It is not every EO satellite. Positions and orbit rings are illustrative, not to scale or live. The metadata and bounded coverage audit are dated **2026-11-03**. Use the Research panel for topic-based discovery.
 
 Run the cells in order with **Run → Run All Cells**. JupyterLite runs Python in your browser. Its first kernel launch needs internet access to download Pyodide; the standalone poster itself works offline. No account, API key, live API, or pip installation is needed for these lessons.
 
@@ -183,7 +183,7 @@ The local JSON is the editorial source. `data/catalog.jsonld` in the repository 
 4. Validate `data/catalog.json` against `data/catalog.schema.json` using `python scripts/validate.py`, then run `python scripts/build.py --execute` and browser checks.
 5. Audit the source terms before copying an image or dataset. Linking a source and redistributing its content have different requirements.
 
-Refresh changing status and access records at least each teaching term, and record what changed. The current snapshot is intentionally finite. Expand toward NOAA/JPSS, Metop, Sentinel-3/5P, CBERS, KOMPSAT, SAOCOM and additional national/commercial missions only after curation.
+Refresh changing status and access records each teaching term. The STAC audit now adds reviewed platform identifiers, including NOAA, Metop, Sentinel-3/5P, CBERS and national/commercial missions. Imported specifications remain explicitly uncurated. Notebook 07 adds the research-topic application profile; the coverage report records missing and bounded catalogs.
 
 ## Exercise
 
@@ -191,5 +191,42 @@ Explain the difference between a sensor's capability, an observation, a dataset 
     ])
 
 
+def research_notebook():
+    save("07_research_to_stac.ipynb",[
+        ("md", """# 07 · Research question → measurement → STAC
+
+**Goal:** share a question, identify qualified measurement pathways, highlight candidate platforms and find exact provider collections.
+
+This lesson uses the bundled, original SKOS/SOSA/DCAT/PROV application profile. It matches curated phrases locally; it is not unrestricted language understanding or a scientific suitability assessment. Start with **air quality and NO₂ measures**. A specific pollutant overrides its broad parent, so NO₂ does not return every possible air-quality sensor.
+
+[TROPOMI NO₂](https://www.tropomi.eu/data-products/nitrogen-dioxide) and [TEMPO products](https://tempo.si.edu/data_for_scientists.html) are atmospheric column retrievals. Columns are not automatically near-surface concentrations or personal exposure. Check units, retrieval versions, QA, clouds, averaging kernels, sampling and validation.
+
+All cells run offline by default. The optional live cell requests Item metadata only, never asset bytes. The [coverage audit](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/stac-coverage.html) records missing, protected and bounded catalogs."""),
+        ("code", "from eo_guide import research_matches, load_catalog, poster, search_stac\nquestion = 'air quality and NO₂ measures'\nbrief = research_matches(question)\nprint('Concepts:', brief['concepts'])\nprint('Potential platforms:', brief['platforms'])\nfor caution in brief['qualifications']:\n    print(caution)\nfor route in brief['routes']:\n    print(route['label'], route['collection_url'], route['access_note'])"),
+        ("code", "poster(height=1100, question=question)"),
+        ("md", """## Keep the research and retrieval context
+
+The map uses gold research highlights, with a separate mint hover/focus state. Pages contain at most 13 records in both views. The orbit code on each spacecraft also appears in the table and brushing readout: SSO, GEO, inclined LEO or explicitly unknown. Fullscreen keeps the linked views together; use Research for the question panel.
+
+Edit the question to try aerosols, heat, vegetation, flooding or coastal water. Unknown wording gives no match. Missing matches do not prove that data do not exist.
+
+The live example below chooses the first matched route: Sentinel-5P NO₂ OFFL. Set your own region and dates. These settings illustrate an area around Philadelphia, July 1–7, 2025; they do not assert that any returned granule passes QA. Public metadata does not imply public asset access. Provider outages or browser CORS can prevent a request."""),
+        ("code", "RUN_LIVE = False  # Set True only when ready to request public metadata.\nroute = brief['routes'][0]\nif RUN_LIVE:\n    items = await search_stac(route, bbox=[-76, 39, -74, 41], start='2025-07-01', end='2025-07-07', limit=3)\n    print('Items:', len(items['features']))\n    print([(item['id'], item.get('properties', {}).get('datetime')) for item in items['features']])\nelse:\n    print('No provider request. Set RUN_LIVE = True to request at most 3 Item metadata records.')"),
+        ("code", "import json\nfrom pathlib import Path\nresearch_brief = dict(brief, profile='eo-research-brief/1', catalog_snapshot=load_catalog()['verified'])\nPath('my-research-brief.json').write_text(json.dumps(research_brief, ensure_ascii=False, indent=2), encoding='utf-8')\nprint('Saved planning metadata; no satellite asset or FieldWork workflow was acquired.')"),
+        ("md", """## Continue in the STAC Browser and FieldWork
+
+Open [JupyterLite STAC Browser](https://jltobias.github.io/JupyterLite-STAC-Browser/explorer/), choose **Custom HTTPS URL**, paste the collection URL printed above, connect, then choose area/dates and search. Its current Explorer does not import query parameters from URLs. Its [third notebook](https://jltobias.github.io/JupyterLite-STAC-Browser/lite/lab/index.html?path=03_other_catalogs_and_export.ipynb) provides discovery and export helpers.
+
+Review the Item, assets, formats, licenses and authentication. The STAC Browser can export a FieldWork selection; compatible cropped GeoTIFFs may offer a raster sidecar. A NO₂ NetCDF file requires justified extraction/QA/aggregation/conversion before a compatible raster input exists.
+
+[FieldWork](https://digital-twin-ph.github.io/fieldwork/?example=snow-isochrone) supports typed geospatial/public-health workflows. Its John Snow example is cholera/travel time, not snow cover. Direct STAC acquisition and automatic research-brief import are not implemented there. This brief is a research plan, not a FieldWork import contract or an analysis result.
+
+## Exercise
+
+Compare the temporal and geographic scope of Sentinel-5P and TEMPO for your question. Identify the observable, units, appropriate QA, possible validation data, access requirements, and processing needed before FieldWork. Explain why a satellite column alone cannot establish individual exposure or a causal health effect."""),
+    ])
+
+
 if __name__=="__main__":
     main()
+    research_notebook()

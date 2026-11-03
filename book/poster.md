@@ -8,7 +8,7 @@
 
 ## Interaction guide
 
-Use **Full screen** in the explorer's top navigation to open a linked workspace. On desktop screens the constellation and a compact mission table sit side by side, with all 13 mission rows visible at common laptop and monitor sizes. Hovering or focusing either view highlights the matching platform in both views. The atlas stays at the overview when selecting a row, and larger satellite labels make the matching platform easier to find.
+Use **Full screen** in the explorer's top navigation to open a linked workspace. On desktop screens the constellation and a compact mission table sit side by side, with up to 13 records per synchronized map/table page visible at common laptop and monitor sizes. Hovering or focusing either view highlights the matching platform in both views. The atlas stays at the overview when selecting a row, and larger satellite labels make the matching platform easier to find.
 
 The workspace's **Filters**, **Details** and **Compare** controls expose the full filters, selected mission metadata and pinned comparison. Hover over a shortened table cell for its complete text. **Exit full screen** or **Escape** returns to the page while preserving filters and pins. If browser fullscreen is unavailable, the same workspace fits the current window. Narrow or short screens keep scrolling within the table pane so the constellation remains visible.
 
@@ -23,3 +23,6 @@ All platforms are accessible through search, standard buttons and the table. Cen
 The Print poster control restores the atlas overview and uses an A1 landscape stylesheet. The print view includes the constellation, mission index and comparison. In the browser print dialog choose A1 landscape, enable backgrounds and check the preview. A large comparison can require additional pages. Export filtered CSV includes full spatial/temporal qualifiers, verification dates and source URLs.
 
 Satellite markers are **schematic slots**, not points projected from orbital elements. The top map uses bundled Natural Earth land geometry. Rings distinguish LEO and GEO conceptually and do not encode scaled orbital radii or exact inclinations. Notebook 04 explores generic orbit geometry separately.
+
+
+Use **Research** to enter a question such as air quality and NO₂. Gold highlights mark potential matches, while hover/focus uses mint. The orbit label on each symbol also appears in the table and live brushing readout. **Previous / Next** pages the larger catalog in both views; see [research discovery](research-discovery.md) and the [coverage audit](stac-coverage.md).
