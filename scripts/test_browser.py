@@ -34,9 +34,13 @@ def check_workspace(page,base):
     for width,height in [(1280,720),(1366,768),(1920,1080)]:
         page.set_viewport_size({'width':width,'height':height})
         page.goto(base+'/explorer/')
-        page.get_by_role('button',name='Full screen',exact=False).click()
+        trigger='#fullscreen' if width==1366 else '#atlas-fullscreen'
+        page.locator(trigger).click()
         page.wait_for_function("document.fullscreenElement?.id === 'poster'")
         expect(page.locator('#exit-workspace')).to_have_text('Exit full screen')
+        expect(page.locator('#fullscreen')).to_have_attribute('aria-pressed','true')
+        expect(page.locator('#atlas-fullscreen')).to_have_attribute('aria-pressed','true')
+        expect(page.locator('#atlas-fullscreen')).not_to_be_visible()
         geometry=page.evaluate('''() => {
           const pane=document.querySelector('#catalog .table-scroll'),
                 map=document.getElementById('constellation').getBoundingClientRect(),
@@ -62,7 +66,9 @@ def check_workspace(page,base):
         page.locator('#exit-workspace').click()
         page.wait_for_function('document.fullscreenElement === null')
         expect(page.locator('body')).not_to_have_class(re.compile(r'.*\bworkspace-mode\b.*'))
-        expect(page.locator('#fullscreen')).to_be_focused()
+        expect(page.locator(trigger)).to_be_focused()
+        expect(page.locator('#fullscreen')).to_have_attribute('aria-pressed','false')
+        expect(page.locator('#atlas-fullscreen')).to_have_attribute('aria-pressed','false')
     page.set_viewport_size({'width':1366,'height':768})
     page.goto(base+'/explorer/')
     page.locator('#row-enmap [data-pin]').click()
@@ -90,7 +96,7 @@ def check_workspace(page,base):
     # Iframes and browsers can deny the native API; the viewport layout still works.
     page.goto(base+'/explorer/')
     page.evaluate("Object.defineProperty(document,'fullscreenEnabled',{value:false,configurable:true})")
-    page.locator('#fullscreen').click()
+    page.locator('#atlas-fullscreen').click()
     expect(page.locator('#exit-workspace')).to_have_text('Exit workspace')
     assert page.evaluate('document.fullscreenElement === null')
     page.locator('#node-himawari-9').hover()

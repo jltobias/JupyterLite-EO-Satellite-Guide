@@ -39,6 +39,7 @@ Third-party material retains its original terms. See ATTRIBUTIONS.md.
 .orbit-short{display:none}
 .masthead nav{align-items:center}
 .masthead nav #fullscreen{font-size:12px;white-space:nowrap}
+.atlas-actions #atlas-fullscreen{white-space:nowrap;align-self:center}
 @media screen{
   body.workspace-mode{overflow:hidden}
   .workspace-mode .masthead{display:none}
@@ -74,6 +75,7 @@ Third-party material retains its original terms. See ATTRIBUTIONS.md.
   .workspace-mode h2{font-size:14px}
   .workspace-mode .section-bar button{font-size:10px;padding:5px 8px}
   .workspace-mode #print{display:none}
+  .workspace-mode #atlas-fullscreen{display:none}
   .workspace-mode .canvas-grid{flex:1;min-height:0;display:block;position:relative}
   .workspace-mode .atlas-wrap{height:100%;min-height:0}
   .workspace-mode .atlas-key{flex:none;padding:12px 12px 0;font-size:8px}
@@ -212,7 +214,7 @@ body[data-color-mode=orbit] .family-dot{display:none}.row-select:before{content:
     <button id="reset" class="quiet">Reset filters</button>
   </section>
   <section class="atlas-section" id="atlas" aria-labelledby="atlas-heading">
-    <div class="section-bar"><h2 id="atlas-heading"><span>01</span> The constellation</h2><div class="atlas-actions"><label class="color-control">Color by <select id="color-mode"><option value="orbit">Orbit type</option><option value="sensor">Sensing family</option></select></label><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="overview">Overview</button><button id="print">Print poster</button></div></div>
+    <div class="section-bar"><h2 id="atlas-heading"><span>01</span> The constellation</h2><div class="atlas-actions"><button id="atlas-fullscreen" class="primary" aria-pressed="false" aria-controls="poster">⛶ Full screen</button><label class="color-control">Color by <select id="color-mode"><option value="orbit">Orbit type</option><option value="sensor">Sensing family</option></select></label><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="overview">Overview</button><button id="print">Print poster</button></div></div>
     <div class="canvas-grid">
       <div class="atlas-wrap">
         <div class="atlas-key"><span>SCHEMATIC ORBIT ATLAS</span><span id="count" role="status" aria-live="polite"></span></div>
@@ -306,6 +308,7 @@ window.EOOrbits=(()=>{
   const orbitCode=s=>orbitModel.code(s);
   const pageList=()=>visible().slice(state.page*pageSize,(state.page+1)*pageSize);
   const workspace = {active:false,native:false,scrollY:0,focus:null};
+  const fullscreenButtons = [$("fullscreen"),$("atlas-fullscreen")];
   const filters = ["search","agency","type","orbit","status","property","application"];
   const svgNS = "http://www.w3.org/2000/svg";
   const byId = id => catalog.satellites.find(s => s.id === id);
@@ -385,7 +388,7 @@ window.EOOrbits=(()=>{
     workspace.active=false;workspace.native=false;
     document.body.classList.remove("workspace-mode","workspace-filters-open","workspace-details-open","workspace-compare-open","workspace-research-open");
     ["filters","details","compare","research"].forEach(name=>$(`workspace-${name}`).setAttribute("aria-expanded","false"));
-    $("fullscreen").setAttribute("aria-pressed","false");
+    fullscreenButtons.forEach(button=>button.setAttribute("aria-pressed","false"));
     workspace.focus?.focus({preventScroll:true});
     window.scrollTo(0,workspace.scrollY);
   }
@@ -395,11 +398,11 @@ window.EOOrbits=(()=>{
     }
     endWorkspace();
   }
-  $("fullscreen").addEventListener("click",async()=>{
+  async function enterWorkspace(){
     if(workspace.active)return;
     workspace.scrollY=window.scrollY;workspace.focus=document.activeElement;workspace.active=true;
     document.body.classList.add("workspace-mode");
-    $("fullscreen").setAttribute("aria-pressed","true");
+    fullscreenButtons.forEach(button=>button.setAttribute("aria-pressed","true"));
     $("exit-workspace").textContent="Exit workspace";
     setView([0,0,1200,650]);
     if(document.fullscreenEnabled&&$("poster").requestFullscreen){
@@ -409,7 +412,8 @@ window.EOOrbits=(()=>{
       $("exit-workspace").focus({preventScroll:true});
       $("announcement").textContent="Linked workspace open. The constellation and mission table share this view. Escape exits.";
     }
-  });
+  }
+  fullscreenButtons.forEach(button=>button.addEventListener("click",enterWorkspace));
   $("exit-workspace").addEventListener("click",exitWorkspace);
   document.addEventListener("fullscreenchange",()=>{
     if(document.fullscreenElement===$("poster")){

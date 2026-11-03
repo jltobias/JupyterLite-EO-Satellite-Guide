@@ -13,6 +13,7 @@
   const orbitCode=s=>orbitModel.code(s);
   const pageList=()=>visible().slice(state.page*pageSize,(state.page+1)*pageSize);
   const workspace = {active:false,native:false,scrollY:0,focus:null};
+  const fullscreenButtons = [$("fullscreen"),$("atlas-fullscreen")];
   const filters = ["search","agency","type","orbit","status","property","application"];
   const svgNS = "http://www.w3.org/2000/svg";
   const byId = id => catalog.satellites.find(s => s.id === id);
@@ -92,7 +93,7 @@
     workspace.active=false;workspace.native=false;
     document.body.classList.remove("workspace-mode","workspace-filters-open","workspace-details-open","workspace-compare-open","workspace-research-open");
     ["filters","details","compare","research"].forEach(name=>$(`workspace-${name}`).setAttribute("aria-expanded","false"));
-    $("fullscreen").setAttribute("aria-pressed","false");
+    fullscreenButtons.forEach(button=>button.setAttribute("aria-pressed","false"));
     workspace.focus?.focus({preventScroll:true});
     window.scrollTo(0,workspace.scrollY);
   }
@@ -102,11 +103,11 @@
     }
     endWorkspace();
   }
-  $("fullscreen").addEventListener("click",async()=>{
+  async function enterWorkspace(){
     if(workspace.active)return;
     workspace.scrollY=window.scrollY;workspace.focus=document.activeElement;workspace.active=true;
     document.body.classList.add("workspace-mode");
-    $("fullscreen").setAttribute("aria-pressed","true");
+    fullscreenButtons.forEach(button=>button.setAttribute("aria-pressed","true"));
     $("exit-workspace").textContent="Exit workspace";
     setView([0,0,1200,650]);
     if(document.fullscreenEnabled&&$("poster").requestFullscreen){
@@ -116,7 +117,8 @@
       $("exit-workspace").focus({preventScroll:true});
       $("announcement").textContent="Linked workspace open. The constellation and mission table share this view. Escape exits.";
     }
-  });
+  }
+  fullscreenButtons.forEach(button=>button.addEventListener("click",enterWorkspace));
   $("exit-workspace").addEventListener("click",exitWorkspace);
   document.addEventListener("fullscreenchange",()=>{
     if(document.fullscreenElement===$("poster")){
