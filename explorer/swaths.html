@@ -3,7 +3,7 @@
 <title>Global EO | Research area, swaths and orbits</title><meta name="description" content="Connect a research question to nominal satellite swaths, study-area geometry, spatial sampling and observed STAC metadata footprints.">
 <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="coverage.css"></head>
 <body class="coverage-page"><a class="skip" href="#study-map">Skip to study map</a>
-<header class="masthead"><a class="brand" href="index.html">GLOBAL <b>EO</b> / STUDY AREA LAB</a><nav aria-label="Project"><a href="index.html">Constellation</a><a aria-current="page" href="swaths.html">Swaths & orbits</a><a href="../book/swaths.html">Field guide ↗</a><button id="lab-fullscreen">Full screen</button></nav></header>
+<header class="masthead"><a class="brand" href="index.html">GLOBAL <b>EO</b> / STUDY AREA LAB</a><nav aria-label="Project"><a href="index.html">Constellation</a><a aria-current="page" href="swaths.html">Swaths & orbits</a><a href="../book/swaths.html">Field guide ↗</a><button id="lab-fullscreen" aria-pressed="false">Full screen</button></nav></header>
 <main class="coverage-main">
  <section class="lab-intro"><p class="eyebrow">RESEARCH QUESTION → MEASUREMENT → GEOMETRY → DATA</p><h1>What can observe <em>your study area?</em></h1><p>Explore how a candidate sensor’s swath and sampling relate to a study box. The moving satellite is a teaching model with an arbitrary phase, <strong>not a real pass prediction</strong>. Observed STAC footprints are a separate, optional layer.</p></section>
  <div class="coverage-layout">
@@ -22,7 +22,7 @@
    <div class="field-row"><button id="share-study">Copy study link</button><button id="save-study">Save study brief</button><button id="copy-bbox">Copy bbox</button></div><p id="lab-status" role="status" aria-live="polite"></p>
   </aside>
   <section class="study-visual" aria-labelledby="study-heading">
-   <div class="section-bar"><h2 id="study-heading">Orbit, swath and study area</h2><span id="model-badge" class="badge">ILLUSTRATIVE MODEL</span></div>
+   <div class="section-bar"><h2 id="study-heading">Orbit, swath and study area</h2><div class="study-view-actions"><span id="model-badge" class="badge">ILLUSTRATIVE MODEL</span><button id="lab-map-fullscreen" class="primary" aria-pressed="false">Full screen</button></div></div>
    <div class="metrics" id="study-metrics"></div>
    <svg id="study-map" viewBox="0 0 1200 600" role="group" aria-labelledby="study-title study-desc">
     <title id="study-title">Study area, illustrative orbit ground track and swath</title><desc id="study-desc">A WGS84 world map. A rectangle is the user study area. The orbit line and shaded moving strip are a nominal teaching model, not real satellite locations. Optional observed STAC footprints are separately labeled.</desc>

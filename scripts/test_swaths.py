@@ -102,8 +102,20 @@ def check_lab(page,base):
     assert page.locator('#model-satellite circle').bounding_box()['width']<20,'Zoom must keep the model marker small enough to see the study box'
     assert page.locator('#model-satellite text').bounding_box()['width']<180,'Zoom must preserve readable label size'
     page.screenshot(path=str(QA/'swaths-aligned-study-area.png'),full_page=True)
-    page.locator('#lab-fullscreen').click();page.wait_for_function("document.fullscreenElement===document.documentElement")
-    expect(page.locator('#mission')).to_have_value('sentinel-5p');page.keyboard.press('Escape');page.wait_for_function('document.fullscreenElement===null')
+    for trigger,exit_button in (('#lab-map-fullscreen','#lab-fullscreen'),('#lab-fullscreen',None)):
+        page.locator(trigger).click();page.wait_for_function("document.fullscreenElement===document.documentElement")
+        for button in ('#lab-fullscreen','#lab-map-fullscreen'):
+            expect(page.locator(button)).to_have_text('Exit full screen');expect(page.locator(button)).to_have_attribute('aria-pressed','true')
+        expect(page.locator('#mission')).to_have_value('sentinel-5p');expect(page.locator('#study-map')).to_be_in_viewport()
+        if exit_button:page.locator(exit_button).click()
+        else:page.keyboard.press('Escape')
+        page.wait_for_function('document.fullscreenElement===null');expect(page.locator(trigger)).to_be_focused()
+        for button in ('#lab-fullscreen','#lab-map-fullscreen'):
+            expect(page.locator(button)).to_have_text('Full screen');expect(page.locator(button)).to_have_attribute('aria-pressed','false')
+    page.evaluate("Object.defineProperty(document,'fullscreenEnabled',{value:false,configurable:true})")
+    page.locator('#lab-map-fullscreen').click();expect(page.locator('body')).to_have_class(re.compile(r'.*\blab-window\b.*'))
+    assert page.evaluate('document.fullscreenElement===null')
+    page.keyboard.press('Escape');expect(page.locator('body')).not_to_have_class(re.compile(r'.*\blab-window\b.*'));expect(page.locator('#lab-map-fullscreen')).to_be_focused()
 
 
 def check_metadata(page,base):
@@ -163,7 +175,10 @@ def main():
             expect(page.frame_locator('iframe[title="EO study-area swaths and orbits"]').locator('#candidate-rows tr')).to_have_count(3)
             results.append('Book orbit/methods pages, executed lesson 08 and bundled Lab support/preset paths passed.')
             mobile=browser.new_context(viewport={'width':390,'height':844},is_mobile=True,has_touch=True);mp=mobile.new_page();mp.goto(base+'/explorer/swaths.html?q=NO2')
-            assert mp.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'Mobile horizontal overflow';mp.screenshot(path=str(QA/'swaths-mobile.png'),full_page=True);mobile.close()
+            assert mp.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'Mobile horizontal overflow';mp.screenshot(path=str(QA/'swaths-mobile.png'),full_page=True)
+            mp.locator('#lab-map-fullscreen').click();expect(mp.locator('#study-map')).to_be_in_viewport();expect(mp.locator('#lab-map-fullscreen')).to_be_in_viewport()
+            assert mp.locator('.coverage-main').bounding_box()['y']>=mp.locator('.masthead').bounding_box()['height']-1,'Full-screen header must not overlap the study view'
+            mp.locator('#lab-map-fullscreen').click();expect(mp.locator('#lab-map-fullscreen')).to_have_attribute('aria-pressed','false');mobile.close()
             offline=browser.new_context(offline=True,viewport={'width':1400,'height':1000});op=offline.new_page();network=[];op.on('request',lambda r:network.append(r.url));op.goto((ROOT/'downloads/eo-swaths.html').as_uri()+'?q=NO2');expect(op.locator('#candidate-rows tr')).to_have_count(3);op.locator('#align-pass').click();expect(op.locator('#area-assessment')).to_contain_text('Within');assert not [u for u in network if u.startswith(('https:','http:'))];offline.close();results.append('Mobile containment and fresh offline study-area lab passed; no automatic network requests.')
             if args.live:
                 page.goto(base+'/explorer/swaths.html?q=NO2&mission=sentinel-5p');page.locator('#fetch-footprints').click();expect(page.locator('#archive-status')).to_contain_text('No data assets requested',timeout=35000);assert page.locator('#footprint-rows tr').count()>0;page.screenshot(path=str(QA/'swaths-live-footprints.png'),full_page=True);results.append('Live normal-browser NO2 metadata footprint query passed.')
