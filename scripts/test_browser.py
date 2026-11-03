@@ -139,6 +139,10 @@ def check_discovery(page,base):
     expect(page.locator('.mission-row.research-match')).to_have_count(3)
     expect(page.locator('#research-results')).to_contain_text('not ground-level concentrations')
     expect(page.locator('#research-results .data-route')).to_have_count(3)
+    page.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>{window.eoCopied=value}}})")
+    page.locator('[data-copy-route="s5p-no2"]').click()
+    expect(page.locator('#handoff-status')).to_contain_text('Copied')
+    assert page.evaluate('window.eoCopied')=='https://stac.dataspace.copernicus.eu/v1'
     page.locator('#node-sentinel-5p').hover()
     expect(page.locator('#row-sentinel-5p')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
     page.locator('#row-intelsat-40e .row-select').click()
