@@ -9,10 +9,10 @@ window.EOOrbits=(()=>{
     if(["LEO","Inclined LEO","Polar LEO"].includes(c))return "leo";
     if(c==="Geostationary")return "geo";
     if(c==="Highly elliptical")return "heo";
-    if(c==="Sun-Earth L1 Lissajous")return "l1";
+    if(["Sun-Earth L1 Lissajous","Sun-Earth L1"].includes(c))return "l1";
     return "unknown";
   }
   const category=s=>byId(kind(s));
-  const matches=(s,value)=>!value||(value==="all-leo"?["sso","leo"].includes(kind(s)):value==="other-leo"?kind(s)==="leo":s.orbit.class===value);
+  const matches=(s,value)=>!value||(value==="all-leo"?["sso","leo"].includes(kind(s)):value==="other-leo"?kind(s)==="leo":value==="Sun-Earth L1"?kind(s)==="l1":s.orbit.class===value);
   return {types,byId,kind,category,matches,code:s=>category(s).code,color:s=>category(s).color};
 })();

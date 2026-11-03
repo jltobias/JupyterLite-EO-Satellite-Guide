@@ -53,3 +53,8 @@ eo:l1 a eo:OrbitType ; skos:prefLabel "Sun-Earth L1 Lissajous" ;
   skos:definition "Motion near the Sun-Earth L1 libration point, distinct from a low Earth orbit; Earth distance is not a LEO altitude." .
 eo:heo a eo:OrbitType ; skos:prefLabel "Highly elliptical" ;
   skos:definition "A highly eccentric orbit with variable altitude. Some designs dwell near apogee over high latitudes; observation geometry and acquisition schedules require separate evidence." .
+
+eo:MissionRecord a owl:Class ; rdfs:comment "A registry mission record; physical platform identity may remain under review." .
+eo:HostedInstrumentMission a owl:Class ; rdfs:comment "An instrument mission carried by a separately identified host spacecraft." .
+eo:hostPlatform a owl:ObjectProperty ; rdfs:comment "Links a hosted instrument mission to its host, without creating a duplicate spacecraft." .
+eo:missionFamily a owl:DatatypeProperty ; rdfs:comment "A nonexclusive mission-family or agency-partnership browsing tag." .

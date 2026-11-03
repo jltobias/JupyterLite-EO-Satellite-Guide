@@ -210,6 +210,9 @@ def main():
             s=by_id[sid];ref=by_id[original]["evidence"]["orbit"]
             s["orbit"]["class"]="Sun-synchronous LEO";s["evidence"]["orbit"]=ref;s["sources"]=list(dict.fromkeys(s["sources"]+ref))
     catalog.update(version="2.0.0",verified=DATE,scope=f"{len(catalog['satellites'])} curated and STAC-discovered spacecraft / constellation records, including archives and mission groups. Directory-wide bounded audit; not an exhaustive inventory, operating-status feed or proof of usable assets. Imported specifications remain unknown unless independently curated.")
+    if (ROOT / "data/mission-registry.json").exists():
+        from mission_registry import apply_registry
+        save("mission-coverage.json",apply_registry(catalog,load("mission-registry.json")))
     save("catalog.json",catalog)
     unique={(r["raw"],r["catalog"],r["field"]):r for r in crosswalk}
     coverage={"verified":DATE,"audit":"stac-audit.json","catalog_count":len(audit["catalogs"]),

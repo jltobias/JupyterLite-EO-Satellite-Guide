@@ -1,0 +1,4931 @@
+{
+  "verified": "2026-11-03",
+  "registry_record_count": 789,
+  "mapped_record_count": 789,
+  "crosswalk": [
+    {
+      "registry_id": "654",
+      "registry_name": "3D Winds",
+      "platform_id": "3d-winds",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "648",
+      "registry_name": "ACE",
+      "platform_id": "ace",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "147",
+      "registry_name": "ACRIMSAT",
+      "platform_id": "acrimsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "240",
+      "registry_name": "ADEOS",
+      "platform_id": "adeos-i",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "241",
+      "registry_name": "ADEOS-II",
+      "platform_id": "adeos-ii",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "377",
+      "registry_name": "Aeolus",
+      "platform_id": "aeolus",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "633",
+      "registry_name": "AISSat-1",
+      "platform_id": "aissat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "714",
+      "registry_name": "AISSat-2",
+      "platform_id": "aissat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "745",
+      "registry_name": "AISSat-3",
+      "platform_id": "aissat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1567",
+      "registry_name": "AISSat-4",
+      "platform_id": "aissat-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "932",
+      "registry_name": "Aist-2T N1",
+      "platform_id": "aist-2t-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "933",
+      "registry_name": "Aist-2T N2",
+      "platform_id": "aist-2t-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "143",
+      "registry_name": "ALMAZ-1B",
+      "platform_id": "almaz-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "242",
+      "registry_name": "ALOS",
+      "platform_id": "alos",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "629",
+      "registry_name": "ALOS-2",
+      "platform_id": "alos-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "630",
+      "registry_name": "ALOS-3",
+      "platform_id": "alos-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "861",
+      "registry_name": "ALOS-4",
+      "platform_id": "alos-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "985",
+      "registry_name": "ALTIUS",
+      "platform_id": "altius",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "602",
+      "registry_name": "AMAZONIA-1",
+      "platform_id": "amazonia-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1414",
+      "registry_name": "AOS-Sky",
+      "platform_id": "aos-sky",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1412",
+      "registry_name": "AOS-Storm",
+      "platform_id": "aos-storm",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "206",
+      "registry_name": "Aqua",
+      "platform_id": "aqua",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "713",
+      "registry_name": "Arctica-M N1",
+      "platform_id": "arcm1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "751",
+      "registry_name": "Arctica-M N2",
+      "platform_id": "arcm2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "812",
+      "registry_name": "Arctica-M N3",
+      "platform_id": "arctica-m-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "871",
+      "registry_name": "Arctica-M N4",
+      "platform_id": "arctica-m-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "872",
+      "registry_name": "Arctica-M N5",
+      "platform_id": "arctica-m-n5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1581",
+      "registry_name": "Arctica-M N6",
+      "platform_id": "arctica-m-n6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "691",
+      "registry_name": "Arkon-2M",
+      "platform_id": "arkon-2m",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "645",
+      "registry_name": "ASCENDS",
+      "platform_id": "ascends",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "622",
+      "registry_name": "ATHENA FIDUS",
+      "platform_id": "athena-fidus",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1454",
+      "registry_name": "Atlantic Constellation Pathfinder",
+      "platform_id": "atlantic-constellation-pathfinder",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "863",
+      "registry_name": "ATMSAT-1",
+      "platform_id": "atmsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "207",
+      "registry_name": "Aura",
+      "platform_id": "aura",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "670",
+      "registry_name": "AWiFSSAT",
+      "platform_id": "awifssat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "986",
+      "registry_name": "AWS",
+      "platform_id": "aws",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "474",
+      "registry_name": "Baumanets",
+      "platform_id": "baumanets",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "471",
+      "registry_name": "BelKA",
+      "platform_id": "belka",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "560",
+      "registry_name": "BILSAT",
+      "platform_id": "bilsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "768",
+      "registry_name": "Biomass",
+      "platform_id": "biomass",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "390",
+      "registry_name": "BIRD",
+      "platform_id": "bird",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "605",
+      "registry_name": "BJ-1",
+      "platform_id": "bj-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1589",
+      "registry_name": "C3IEL-A",
+      "platform_id": "c3iel-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "422",
+      "registry_name": "CALIPSO",
+      "platform_id": "calipso",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "854",
+      "registry_name": "CARBONITE-1",
+      "platform_id": "carbonite-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "855",
+      "registry_name": "CARBONITE-2",
+      "platform_id": "carbonite-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "275",
+      "registry_name": "CARTOSAT-1",
+      "platform_id": "cartosat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "696",
+      "registry_name": "CARTOSAT-1A",
+      "platform_id": "cartosat-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "697",
+      "registry_name": "CARTOSAT-1B",
+      "platform_id": "cartosat-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "374",
+      "registry_name": "CARTOSAT-2",
+      "platform_id": "cartosat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "703",
+      "registry_name": "CARTOSAT-2A",
+      "platform_id": "cartosat-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "672",
+      "registry_name": "CARTOSAT-2B",
+      "platform_id": "cartosat-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "704",
+      "registry_name": "CARTOSAT-2C",
+      "platform_id": "cartosat-2c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "738",
+      "registry_name": "CARTOSAT-2E",
+      "platform_id": "cartosat-2e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "565",
+      "registry_name": "CARTOSAT-3",
+      "platform_id": "cartosat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "784",
+      "registry_name": "CAS500-1",
+      "platform_id": "cas500-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "905",
+      "registry_name": "CAS500-2",
+      "platform_id": "cas500-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1014",
+      "registry_name": "CAS500-4",
+      "platform_id": "cas500-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1015",
+      "registry_name": "CAS500-5",
+      "platform_id": "cas500-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "779",
+      "registry_name": "CATS-on-ISS",
+      "platform_id": "cats-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "265",
+      "registry_name": "CBERS-1",
+      "platform_id": "cbers-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "267",
+      "registry_name": "CBERS-2",
+      "platform_id": "cbers-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "460",
+      "registry_name": "CBERS-2B",
+      "platform_id": "cbers-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "392",
+      "registry_name": "CBERS-3",
+      "platform_id": "cbers-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "393",
+      "registry_name": "CBERS-4",
+      "platform_id": "cbers-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "775",
+      "registry_name": "CBERS-4A",
+      "platform_id": "cbers-4a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "725",
+      "registry_name": "CDARS",
+      "platform_id": "cdars",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "723",
+      "registry_name": "CFOSAT",
+      "platform_id": "cfosat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "256",
+      "registry_name": "CHAMP",
+      "platform_id": "champ",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "778",
+      "registry_name": "CLARREO Pathfinder-on-ISS",
+      "platform_id": "clarreo-pathfinder-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "643",
+      "registry_name": "CLARREO-1",
+      "platform_id": "clarreo-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "688",
+      "registry_name": "CLARREO-2",
+      "platform_id": "clarreo-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "689",
+      "registry_name": "CLARREO-3",
+      "platform_id": "clarreo-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "690",
+      "registry_name": "CLARREO-4",
+      "platform_id": "clarreo-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "347",
+      "registry_name": "CloudSat",
+      "platform_id": "cloudsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "987",
+      "registry_name": "CO2Image",
+      "platform_id": "co2image",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1030",
+      "registry_name": "CO3D",
+      "platform_id": "co3d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "524",
+      "registry_name": "COMS",
+      "platform_id": "coms",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "482",
+      "registry_name": "COSMIC-1 FM1",
+      "platform_id": "cosmic-1-fm1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "483",
+      "registry_name": "COSMIC-1 FM2",
+      "platform_id": "cosmic-1-fm2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "484",
+      "registry_name": "COSMIC-1 FM3",
+      "platform_id": "cosmic-1-fm3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "485",
+      "registry_name": "COSMIC-1 FM4",
+      "platform_id": "cosmic-1-fm4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "486",
+      "registry_name": "COSMIC-1 FM5",
+      "platform_id": "cosmic-1-fm5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "487",
+      "registry_name": "COSMIC-1 FM6",
+      "platform_id": "cosmic-1-fm6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "771",
+      "registry_name": "COSMIC-2/FORMOSAT-7 (1)",
+      "platform_id": "cosmic-2-formosat-7-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "926",
+      "registry_name": "COSMIC-2/FORMOSAT-7 (2)",
+      "platform_id": "cosmic-2-formosat-7-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "927",
+      "registry_name": "COSMIC-2/FORMOSAT-7 (3)",
+      "platform_id": "cosmic-2-formosat-7-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "928",
+      "registry_name": "COSMIC-2/FORMOSAT-7 (4)",
+      "platform_id": "cosmic-2-formosat-7-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "929",
+      "registry_name": "COSMIC-2/FORMOSAT-7 (5)",
+      "platform_id": "cosmic-2-formosat-7-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "930",
+      "registry_name": "COSMIC-2/FORMOSAT-7 (6)",
+      "platform_id": "cosmic-2-formosat-7-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "786",
+      "registry_name": "COSMIC-2B (Polar)",
+      "platform_id": "cosmic-2b-polar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "395",
+      "registry_name": "COSMO-SkyMed 1",
+      "platform_id": "cosmo-skymed-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "526",
+      "registry_name": "COSMO-SkyMed 2",
+      "platform_id": "cosmo-skymed-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "527",
+      "registry_name": "COSMO-SkyMed 3",
+      "platform_id": "cosmo-skymed-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "528",
+      "registry_name": "COSMO-SkyMed 4",
+      "platform_id": "cosmo-skymed-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "378",
+      "registry_name": "CryoSat",
+      "platform_id": "cryosat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "529",
+      "registry_name": "CryoSat-2",
+      "platform_id": "cryosat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "849",
+      "registry_name": "CSES",
+      "platform_id": "cses",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "634",
+      "registry_name": "CSG-1",
+      "platform_id": "csg-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "635",
+      "registry_name": "CSG-2",
+      "platform_id": "csg-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "966",
+      "registry_name": "CSG-3",
+      "platform_id": "csg-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "967",
+      "registry_name": "CSG-4",
+      "platform_id": "csg-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "983",
+      "registry_name": "CubeMAP",
+      "platform_id": "cubemap",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "740",
+      "registry_name": "CYGNSS",
+      "platform_id": "cygnss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "414",
+      "registry_name": "DEMETER",
+      "platform_id": "demeter",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "776",
+      "registry_name": "DESIS-on-ISS",
+      "platform_id": "desis-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "423",
+      "registry_name": "Diademe 1&2",
+      "platform_id": "diademe-1-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1545",
+      "registry_name": "Dione",
+      "platform_id": "dione",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1451",
+      "registry_name": "Diwata-2",
+      "platform_id": "diwata-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "853",
+      "registry_name": "DMC3",
+      "platform_id": "dmc3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "567",
+      "registry_name": "DMSAR",
+      "platform_id": "dmsar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "302",
+      "registry_name": "DMSP F-10",
+      "platform_id": "dmsp-f-10",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "303",
+      "registry_name": "DMSP F-11",
+      "platform_id": "dmsp-f-11",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "304",
+      "registry_name": "DMSP F-12",
+      "platform_id": "dmsp-f-12",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "305",
+      "registry_name": "DMSP F-13",
+      "platform_id": "dmsp-f-13",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "306",
+      "registry_name": "DMSP F-14",
+      "platform_id": "dmsp-f-14",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "345",
+      "registry_name": "DMSP F-15",
+      "platform_id": "dmsp-f-15",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "381",
+      "registry_name": "DMSP F-16",
+      "platform_id": "dmsp-f-16",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "408",
+      "registry_name": "DMSP F-17",
+      "platform_id": "dmsp-f-17",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "409",
+      "registry_name": "DMSP F-18",
+      "platform_id": "dmsp-f-18",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "410",
+      "registry_name": "DMSP F-19",
+      "platform_id": "dmsp-f-19",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "411",
+      "registry_name": "DMSP F-20",
+      "platform_id": "dmsp-f-20",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "500",
+      "registry_name": "DMSP F-7",
+      "platform_id": "dmsp-f-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "300",
+      "registry_name": "DMSP F-8",
+      "platform_id": "dmsp-f-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "301",
+      "registry_name": "DMSP F-9",
+      "platform_id": "dmsp-f-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "970",
+      "registry_name": "DoT-1",
+      "platform_id": "dot-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "350",
+      "registry_name": "DSCOVR",
+      "platform_id": "dscovr",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "912",
+      "registry_name": "DubaiSat-1",
+      "platform_id": "dubaisat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "913",
+      "registry_name": "DubaiSat-2",
+      "platform_id": "dubaisat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1565",
+      "registry_name": "Eaglet-II",
+      "platform_id": "eaglet-ii",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "975",
+      "registry_name": "EAGLE-TIR",
+      "platform_id": "eagle-tir",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "974",
+      "registry_name": "EAGLE-VSWIR",
+      "platform_id": "eagle-vswir",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "580",
+      "registry_name": "EarthCARE",
+      "platform_id": "earthcare",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "523",
+      "registry_name": "EARTHPROBE",
+      "platform_id": "earthprobe",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "765",
+      "registry_name": "ECOSTRESS-on-ISS",
+      "platform_id": "ecostress-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "152",
+      "registry_name": "Elektro-L N1",
+      "platform_id": "elektro-l-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "530",
+      "registry_name": "Elektro-L N2",
+      "platform_id": "elektro-l-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "611",
+      "registry_name": "Elektro-L N3",
+      "platform_id": "elektro-l-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "873",
+      "registry_name": "Elektro-L N4",
+      "platform_id": "elektro-l-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "874",
+      "registry_name": "Elektro-L N5",
+      "platform_id": "elektro-l-n5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1582",
+      "registry_name": "Elektro-L N6",
+      "platform_id": "elektro-l-n6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1583",
+      "registry_name": "Elektro-L N7",
+      "platform_id": "elektro-l-n7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "923",
+      "registry_name": "EMIT-on-ISS",
+      "platform_id": "emit-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "600",
+      "registry_name": "EnMAP",
+      "platform_id": "enmap",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "694",
+      "registry_name": "Environsat-1",
+      "platform_id": "environsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "695",
+      "registry_name": "Environsat-2",
+      "platform_id": "environsat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "2",
+      "registry_name": "Envisat",
+      "platform_id": "envisat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "730",
+      "registry_name": "ePOP on CASSIOPE",
+      "platform_id": "epop-on-cassiope",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1383",
+      "registry_name": "EPS-Aeolus",
+      "platform_id": "eps-aeolus",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1455",
+      "registry_name": "EPS-Sterna",
+      "platform_id": "eps-sterna",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "216",
+      "registry_name": "ERBS",
+      "platform_id": "erbs",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "220",
+      "registry_name": "ERS-1",
+      "platform_id": "ers-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "221",
+      "registry_name": "ERS-2",
+      "platform_id": "ers-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "386",
+      "registry_name": "ESA Future Missions",
+      "platform_id": "esa-future-missions",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "398",
+      "registry_name": "ESPERIA",
+      "platform_id": "esperia",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "881",
+      "registry_name": "ESSA-1",
+      "platform_id": "essa-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "882",
+      "registry_name": "ESSA-2",
+      "platform_id": "essa-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "883",
+      "registry_name": "ESSA-3",
+      "platform_id": "essa-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "884",
+      "registry_name": "ESSA-4",
+      "platform_id": "essa-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "888",
+      "registry_name": "ESSA-5",
+      "platform_id": "essa-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "887",
+      "registry_name": "ESSA-6",
+      "platform_id": "essa-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "889",
+      "registry_name": "ESSA-7",
+      "platform_id": "essa-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "890",
+      "registry_name": "ESSA-8",
+      "platform_id": "essa-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "891",
+      "registry_name": "ESSA-9",
+      "platform_id": "essa-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "335",
+      "registry_name": "EWS-G2",
+      "platform_id": "ews-g2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "266",
+      "registry_name": "EWS-G3",
+      "platform_id": "ews-g3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1596",
+      "registry_name": "FALCON-RADAR",
+      "platform_id": "falcon-radar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "918",
+      "registry_name": "Federated Satellite Systems",
+      "platform_id": "federated-satellite-systems",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "322",
+      "registry_name": "FedSat",
+      "platform_id": "fedsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "944",
+      "registry_name": "FireBIRD 1 (TET-1)",
+      "platform_id": "firebird-1-tet-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "945",
+      "registry_name": "FireBIRD 2 (BIROS)",
+      "platform_id": "firebird-2-biros",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "836",
+      "registry_name": "FLEX",
+      "platform_id": "flex",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1046",
+      "registry_name": "FORUM",
+      "platform_id": "forum",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "399",
+      "registry_name": "FOURIER",
+      "platform_id": "fourier",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "726",
+      "registry_name": "Free Flyer-2",
+      "platform_id": "free-flyer-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "14",
+      "registry_name": "FY-1A",
+      "platform_id": "fy-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "15",
+      "registry_name": "FY-1B",
+      "platform_id": "fy-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "309",
+      "registry_name": "FY-1C",
+      "platform_id": "fy-1c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "310",
+      "registry_name": "FY-1D",
+      "platform_id": "fy-1d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "312",
+      "registry_name": "FY-2A",
+      "platform_id": "fy-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "311",
+      "registry_name": "FY-2B",
+      "platform_id": "fy-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "363",
+      "registry_name": "FY-2C",
+      "platform_id": "fy-2c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "364",
+      "registry_name": "FY-2D",
+      "platform_id": "fy-2d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "365",
+      "registry_name": "FY-2E",
+      "platform_id": "fy-2e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "531",
+      "registry_name": "FY-2F",
+      "platform_id": "fy-2f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "700",
+      "registry_name": "FY-2G",
+      "platform_id": "fy-2g",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "701",
+      "registry_name": "FY-2H",
+      "platform_id": "fy-2h",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "366",
+      "registry_name": "FY-3A",
+      "platform_id": "fy-3a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "367",
+      "registry_name": "FY-3B",
+      "platform_id": "fy-3b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "368",
+      "registry_name": "FY-3C",
+      "platform_id": "fy-3c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "369",
+      "registry_name": "FY-3D",
+      "platform_id": "fy-3d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "370",
+      "registry_name": "FY-3E",
+      "platform_id": "fy-3e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "371",
+      "registry_name": "FY-3F",
+      "platform_id": "fy-3f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "800",
+      "registry_name": "FY-3G",
+      "platform_id": "fy-3g",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "823",
+      "registry_name": "FY-3H",
+      "platform_id": "fy-3h",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "946",
+      "registry_name": "FY-3I",
+      "platform_id": "fy-3i",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "979",
+      "registry_name": "FY-3J",
+      "platform_id": "fy-3j",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "537",
+      "registry_name": "FY-4 M/A",
+      "platform_id": "fy-4-m-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "538",
+      "registry_name": "FY-4 M/B",
+      "platform_id": "fy-4-m-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "539",
+      "registry_name": "FY-4 M/C",
+      "platform_id": "fy-4-m-c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "532",
+      "registry_name": "FY-4A",
+      "platform_id": "fy-4a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "533",
+      "registry_name": "FY-4B",
+      "platform_id": "fy-4b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "534",
+      "registry_name": "FY-4C",
+      "platform_id": "fy-4c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "535",
+      "registry_name": "FY-4D",
+      "platform_id": "fy-4d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "536",
+      "registry_name": "FY-4E",
+      "platform_id": "fy-4e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "824",
+      "registry_name": "FY-4F",
+      "platform_id": "fy-4f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "825",
+      "registry_name": "FY-4G",
+      "platform_id": "fy-4g",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1488",
+      "registry_name": "FY-4M",
+      "platform_id": "fy-4m",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1515",
+      "registry_name": "G20 Satellite",
+      "platform_id": "g20-satellite",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "653",
+      "registry_name": "GACM",
+      "platform_id": "gacm",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "360",
+      "registry_name": "GCOM-C",
+      "platform_id": "gcom-c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "540",
+      "registry_name": "GCOM-C2",
+      "platform_id": "gcom-c2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "541",
+      "registry_name": "GCOM-C3",
+      "platform_id": "gcom-c3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "459",
+      "registry_name": "GCOM-W",
+      "platform_id": "gcom-w",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "542",
+      "registry_name": "GCOM-W2",
+      "platform_id": "gcom-w2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "543",
+      "registry_name": "GCOM-W3",
+      "platform_id": "gcom-w3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "766",
+      "registry_name": "GEDI-on-ISS",
+      "platform_id": "gedi-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "647",
+      "registry_name": "GEO-CAPE",
+      "platform_id": "geo-cape",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "842",
+      "registry_name": "GeoCarb",
+      "platform_id": "geocarb",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "525",
+      "registry_name": "GEO-KOMPSAT-2A",
+      "platform_id": "geo-kompsat-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "669",
+      "registry_name": "GEO-KOMPSAT-2B",
+      "platform_id": "geo-kompsat-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1513",
+      "registry_name": "GEO-KOMPSAT-5",
+      "platform_id": "geo-kompsat-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1457",
+      "registry_name": "Geo-S1",
+      "platform_id": "geo-s1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1078",
+      "registry_name": "GEOS-1",
+      "platform_id": "geos-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1459",
+      "registry_name": "Geo-S2",
+      "platform_id": "geo-s2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1079",
+      "registry_name": "GEOS-2",
+      "platform_id": "geos-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1080",
+      "registry_name": "GEOS-3",
+      "platform_id": "geos-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1475",
+      "registry_name": "GEOSAR",
+      "platform_id": "geosar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1421",
+      "registry_name": "GEOSAT",
+      "platform_id": "geosat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1062",
+      "registry_name": "GEOS-ESA-1",
+      "platform_id": "geos-esa-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1063",
+      "registry_name": "GEOS-ESA-2",
+      "platform_id": "geos-esa-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "980",
+      "registry_name": "GeoXO-1",
+      "platform_id": "geoxo-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "981",
+      "registry_name": "GeoXO-2",
+      "platform_id": "geoxo-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1458",
+      "registry_name": "GeoXO-3",
+      "platform_id": "geoxo-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1460",
+      "registry_name": "GeoXO-4",
+      "platform_id": "geoxo-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1590",
+      "registry_name": "GEZGIN-2",
+      "platform_id": "gezgin-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "615",
+      "registry_name": "GF-3 (02)",
+      "platform_id": "gf-3-02",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "616",
+      "registry_name": "GF-3 (03)",
+      "platform_id": "gf-3-03",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "892",
+      "registry_name": "GFO",
+      "platform_id": "gfo",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "693",
+      "registry_name": "GISAT-1",
+      "platform_id": "gisat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "924",
+      "registry_name": "GLIMR",
+      "platform_id": "glimr",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "447",
+      "registry_name": "Glory",
+      "platform_id": "glory",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "498",
+      "registry_name": "GMS-3",
+      "platform_id": "gms-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "81",
+      "registry_name": "GMS-4",
+      "platform_id": "gms-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "244",
+      "registry_name": "GMS-5",
+      "platform_id": "gms-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1591",
+      "registry_name": "GNSS Axis 1.1 TIR",
+      "platform_id": "gnss-axis-1-1-tir",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1592",
+      "registry_name": "GNSS Axis 1.2 SAR",
+      "platform_id": "gnss-axis-1-2-sar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1593",
+      "registry_name": "GNSS Axis 2 HR",
+      "platform_id": "gnss-axis-2-hr",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1594",
+      "registry_name": "GNSS Axis 2 VHR1",
+      "platform_id": "gnss-axis-2-vhr1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1595",
+      "registry_name": "GNSS Axis 2 VHR2",
+      "platform_id": "gnss-axis-2-vhr2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "376",
+      "registry_name": "GOCE",
+      "platform_id": "goce",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "515",
+      "registry_name": "GOES (SMS 1)",
+      "platform_id": "goes-sms-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "516",
+      "registry_name": "GOES (SMS 2)",
+      "platform_id": "goes-sms-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "518",
+      "registry_name": "GOES-1",
+      "platform_id": "goes-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "94",
+      "registry_name": "GOES-10",
+      "platform_id": "goes-10",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "95",
+      "registry_name": "GOES-11",
+      "platform_id": "goes-11",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "96",
+      "registry_name": "GOES-12",
+      "platform_id": "goes-12",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "470",
+      "registry_name": "GOES-16",
+      "platform_id": "goes-16",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "546",
+      "registry_name": "GOES-17",
+      "platform_id": "goes-17",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "727",
+      "registry_name": "GOES-18",
+      "platform_id": "goes-18",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "724",
+      "registry_name": "GOES-19",
+      "platform_id": "goes-19",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "519",
+      "registry_name": "GOES-2",
+      "platform_id": "goes-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "520",
+      "registry_name": "GOES-3",
+      "platform_id": "goes-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "521",
+      "registry_name": "GOES-4",
+      "platform_id": "goes-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "522",
+      "registry_name": "GOES-5",
+      "platform_id": "goes-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "501",
+      "registry_name": "GOES-6",
+      "platform_id": "goes-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "91",
+      "registry_name": "GOES-7",
+      "platform_id": "goes-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "200",
+      "registry_name": "GOES-8",
+      "platform_id": "goes-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "222",
+      "registry_name": "GOES-9",
+      "platform_id": "goes-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "133",
+      "registry_name": "GOMS/Electro N1",
+      "platform_id": "goms-electro-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "433",
+      "registry_name": "GOMS/Electro N3",
+      "platform_id": "goms-electro-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "917",
+      "registry_name": "GOMX4",
+      "platform_id": "gomx4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "458",
+      "registry_name": "GOSAT",
+      "platform_id": "gosat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "721",
+      "registry_name": "GOSAT-2",
+      "platform_id": "gosat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "862",
+      "registry_name": "GOSAT-GW",
+      "platform_id": "gosat-gw",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1045",
+      "registry_name": "Goumang",
+      "platform_id": "goumang",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "429",
+      "registry_name": "GPM Constellation",
+      "platform_id": "gpm-constellation",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "448",
+      "registry_name": "GPM Core",
+      "platform_id": "gpm-core",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "603",
+      "registry_name": "GPM-Br",
+      "platform_id": "gpm-br",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "337",
+      "registry_name": "GRACE",
+      "platform_id": "grace",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1511",
+      "registry_name": "GRACE-C",
+      "platform_id": "grace-c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "686",
+      "registry_name": "GRACE-FO",
+      "platform_id": "grace-fo",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "651",
+      "registry_name": "GRACE-II",
+      "platform_id": "grace-ii",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1044",
+      "registry_name": "Harmony",
+      "platform_id": "harmony",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1415",
+      "registry_name": "HAWC",
+      "platform_id": "hawc",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1517",
+      "registry_name": "Helios 2 A/B",
+      "platform_id": "helios-2-a-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1561",
+      "registry_name": "HEO",
+      "platform_id": "heo",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "781",
+      "registry_name": "HICO-on-ISS",
+      "platform_id": "hico-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1405",
+      "registry_name": "Himawari-10",
+      "platform_id": "himawari-10",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "728",
+      "registry_name": "Himawari-8",
+      "platform_id": "himawari-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "729",
+      "registry_name": "Himawari-9",
+      "platform_id": "himawari-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "463",
+      "registry_name": "HJ-1A",
+      "platform_id": "hj-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "464",
+      "registry_name": "HJ-1B",
+      "platform_id": "hj-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "465",
+      "registry_name": "HJ-1C",
+      "platform_id": "hj-1c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "947",
+      "registry_name": "HJ-2A",
+      "platform_id": "hj-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "948",
+      "registry_name": "HJ-2B",
+      "platform_id": "hj-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1480",
+      "registry_name": "HJ-2E",
+      "platform_id": "hj-2e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1481",
+      "registry_name": "HJ-2F",
+      "platform_id": "hj-2f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1485",
+      "registry_name": "HRMIS",
+      "platform_id": "hrmis",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "852",
+      "registry_name": "HRSAT",
+      "platform_id": "hrsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "466",
+      "registry_name": "HY-1A",
+      "platform_id": "hy-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "467",
+      "registry_name": "HY-1B",
+      "platform_id": "hy-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "826",
+      "registry_name": "HY-1C",
+      "platform_id": "hy-1c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "827",
+      "registry_name": "HY-1D",
+      "platform_id": "hy-1d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "828",
+      "registry_name": "HY-1E",
+      "platform_id": "hy-1e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "829",
+      "registry_name": "HY-1F",
+      "platform_id": "hy-1f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "609",
+      "registry_name": "HY-2A",
+      "platform_id": "hy-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "718",
+      "registry_name": "HY-2B",
+      "platform_id": "hy-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "719",
+      "registry_name": "HY-2C",
+      "platform_id": "hy-2c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "720",
+      "registry_name": "HY-2D",
+      "platform_id": "hy-2d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "830",
+      "registry_name": "HY-2E",
+      "platform_id": "hy-2e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "831",
+      "registry_name": "HY-2F",
+      "platform_id": "hy-2f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "832",
+      "registry_name": "HY-2G",
+      "platform_id": "hy-2g",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "833",
+      "registry_name": "HY-2H",
+      "platform_id": "hy-2h",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1486",
+      "registry_name": "HY-2N",
+      "platform_id": "hy-2n",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "617",
+      "registry_name": "HY-3C",
+      "platform_id": "hy-3c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "834",
+      "registry_name": "HY-3D",
+      "platform_id": "hy-3d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1478",
+      "registry_name": "HY-4A",
+      "platform_id": "hy-4a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "984",
+      "registry_name": "HydroGNSS",
+      "platform_id": "hydrognss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "449",
+      "registry_name": "HYDROS",
+      "platform_id": "hydros",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "621",
+      "registry_name": "HyS-OP",
+      "platform_id": "hys-op",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "644",
+      "registry_name": "HyspIRI",
+      "platform_id": "hyspiri",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "212",
+      "registry_name": "ICESat",
+      "platform_id": "icesat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "613",
+      "registry_name": "ICESat-2",
+      "platform_id": "icesat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "400",
+      "registry_name": "IGPM",
+      "platform_id": "igpm",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "570",
+      "registry_name": "IMS-1",
+      "platform_id": "ims-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1017",
+      "registry_name": "INCUS",
+      "platform_id": "incus",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1001",
+      "registry_name": "INS-2TD",
+      "platform_id": "ins-2td",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "907",
+      "registry_name": "INSAT-1A",
+      "platform_id": "insat-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "504",
+      "registry_name": "INSAT-1B",
+      "platform_id": "insat-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "505",
+      "registry_name": "INSAT-1C",
+      "platform_id": "insat-1c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "506",
+      "registry_name": "INSAT-1D",
+      "platform_id": "insat-1d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "47",
+      "registry_name": "INSAT-2A",
+      "platform_id": "insat-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "232",
+      "registry_name": "INSAT-2B",
+      "platform_id": "insat-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "49",
+      "registry_name": "INSAT-2C",
+      "platform_id": "insat-2c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "50",
+      "registry_name": "INSAT-2D",
+      "platform_id": "insat-2d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "233",
+      "registry_name": "INSAT-2E",
+      "platform_id": "insat-2e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "438",
+      "registry_name": "INSAT-3A",
+      "platform_id": "insat-3a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "493",
+      "registry_name": "INSAT-3B",
+      "platform_id": "insat-3b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "494",
+      "registry_name": "INSAT-3C",
+      "platform_id": "insat-3c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "442",
+      "registry_name": "INSAT-3D",
+      "platform_id": "insat-3d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "707",
+      "registry_name": "INSAT-3DR",
+      "platform_id": "insat-3dr",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1031",
+      "registry_name": "INSAT-3DS",
+      "platform_id": "insat-3ds",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "934",
+      "registry_name": "Ionosphera-M N1",
+      "platform_id": "ionosphera-m-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "935",
+      "registry_name": "Ionosphera-M N2",
+      "platform_id": "ionosphera-m-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "936",
+      "registry_name": "Ionosphera-M N3",
+      "platform_id": "ionosphera-m-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "937",
+      "registry_name": "Ionosphera-M N4",
+      "platform_id": "ionosphera-m-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "51",
+      "registry_name": "IRS-1A",
+      "platform_id": "irs-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "277",
+      "registry_name": "IRS-1B",
+      "platform_id": "irs-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "235",
+      "registry_name": "IRS-1C",
+      "platform_id": "irs-1c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "274",
+      "registry_name": "IRS-1D",
+      "platform_id": "irs-1d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "234",
+      "registry_name": "IRS-P2",
+      "platform_id": "irs-p2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "237",
+      "registry_name": "IRS-P3",
+      "platform_id": "irs-p3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "257",
+      "registry_name": "IRS-P4",
+      "platform_id": "irs-p4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1105",
+      "registry_name": "ISEE",
+      "platform_id": "isee",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "357",
+      "registry_name": "ISS",
+      "platform_id": "iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "677",
+      "registry_name": "ISS/JEM",
+      "platform_id": "iss-jem",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "566",
+      "registry_name": "ISTAG",
+      "platform_id": "istag",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "286",
+      "registry_name": "Jason-1",
+      "platform_id": "jason-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "592",
+      "registry_name": "Jason-3",
+      "platform_id": "jason-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "245",
+      "registry_name": "JERS-1",
+      "platform_id": "jers-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "801",
+      "registry_name": "JPSS-3",
+      "platform_id": "jpss-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "802",
+      "registry_name": "JPSS-4",
+      "platform_id": "jpss-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "436",
+      "registry_name": "KALPANA-1",
+      "platform_id": "kalpana-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "610",
+      "registry_name": "Kanopus-V N1",
+      "platform_id": "kanopus-v-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "792",
+      "registry_name": "Kanopus-V N3",
+      "platform_id": "kanopus-v-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "793",
+      "registry_name": "Kanopus-V N4",
+      "platform_id": "kanopus-v-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "794",
+      "registry_name": "Kanopus-V N5",
+      "platform_id": "kanopus-v-n5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "795",
+      "registry_name": "Kanopus-V N6",
+      "platform_id": "kanopus-v-n6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "625",
+      "registry_name": "Kanopus-V-IR",
+      "platform_id": "kanopus-v-ir",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "938",
+      "registry_name": "Kanopus-VO N1",
+      "platform_id": "kanopus-vo-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1452",
+      "registry_name": "Kanopus-V-O N1",
+      "platform_id": "kanopus-v-o-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "939",
+      "registry_name": "Kanopus-VO N2",
+      "platform_id": "kanopus-vo-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1453",
+      "registry_name": "Kanopus-V-O N2",
+      "platform_id": "kanopus-v-o-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "473",
+      "registry_name": "Kanopus-Vulkan",
+      "platform_id": "kanopus-vulkan",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "914",
+      "registry_name": "KhalifaSat",
+      "platform_id": "khalifasat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1121",
+      "registry_name": "Kometa 1",
+      "platform_id": "kometa-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1122",
+      "registry_name": "Kometa 2",
+      "platform_id": "kometa-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1123",
+      "registry_name": "Kometa 3",
+      "platform_id": "kometa-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1124",
+      "registry_name": "Kometa 4",
+      "platform_id": "kometa-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1125",
+      "registry_name": "Kometa 5",
+      "platform_id": "kometa-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "406",
+      "registry_name": "KOMPSAT-1",
+      "platform_id": "kompsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "407",
+      "registry_name": "KOMPSAT-2",
+      "platform_id": "kompsat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "637",
+      "registry_name": "KOMPSAT-3",
+      "platform_id": "kompsat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "698",
+      "registry_name": "KOMPSAT-3A",
+      "platform_id": "kompsat-3a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "638",
+      "registry_name": "KOMPSAT-5",
+      "platform_id": "kompsat-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "761",
+      "registry_name": "KOMPSAT-6",
+      "platform_id": "kompsat-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "850",
+      "registry_name": "KOMPSAT-7",
+      "platform_id": "kompsat-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "922",
+      "registry_name": "KOMPSAT-7A",
+      "platform_id": "kompsat-7a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "790",
+      "registry_name": "Kondor-FKA N1",
+      "platform_id": "kondor-fka-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "791",
+      "registry_name": "Kondor-FKA N2",
+      "platform_id": "kondor-fka-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "201",
+      "registry_name": "LAGEOS-1",
+      "platform_id": "lageos-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "238",
+      "registry_name": "LAGEOS-2",
+      "platform_id": "lageos-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "662",
+      "registry_name": "Landsat 1",
+      "platform_id": "landsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1016",
+      "registry_name": "Landsat 10",
+      "platform_id": "landsat-10",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "663",
+      "registry_name": "Landsat 2",
+      "platform_id": "landsat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "664",
+      "registry_name": "Landsat 3",
+      "platform_id": "landsat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "88",
+      "registry_name": "Landsat 4",
+      "platform_id": "landsat-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "226",
+      "registry_name": "Landsat 5",
+      "platform_id": "landsat-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "349",
+      "registry_name": "Landsat 7",
+      "platform_id": "landsat-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "547",
+      "registry_name": "Landsat 8",
+      "platform_id": "landsat-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "772",
+      "registry_name": "Landsat 9",
+      "platform_id": "landsat-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "19",
+      "registry_name": "LARES",
+      "platform_id": "lares",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "968",
+      "registry_name": "LARES-2",
+      "platform_id": "lares-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "916",
+      "registry_name": "Light-1",
+      "platform_id": "light-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "780",
+      "registry_name": "LIS-on-ISS",
+      "platform_id": "lis-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "649",
+      "registry_name": "LIST",
+      "platform_id": "list",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1382",
+      "registry_name": "LLITED",
+      "platform_id": "llited",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "748",
+      "registry_name": "LOTUSat 2",
+      "platform_id": "lotusat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "747",
+      "registry_name": "LOTUSat-1",
+      "platform_id": "lotusat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1387",
+      "registry_name": "MAGIC/MCDO",
+      "platform_id": "magic-mcdo",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1386",
+      "registry_name": "MAGIC/NGGM",
+      "platform_id": "magic-nggm",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "604",
+      "registry_name": "MAPSAR",
+      "platform_id": "mapsar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "971",
+      "registry_name": "MC-C",
+      "platform_id": "mc-c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "972",
+      "registry_name": "MC-S",
+      "platform_id": "mc-s",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "940",
+      "registry_name": "MDASat-1a",
+      "platform_id": "mdasat-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "941",
+      "registry_name": "MDASat-1b",
+      "platform_id": "mdasat-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "942",
+      "registry_name": "MDASat-1c",
+      "platform_id": "mdasat-1c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "375",
+      "registry_name": "MEGHA-TROPIQUES",
+      "platform_id": "megha-tropiques",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "678",
+      "registry_name": "MERLIN",
+      "platform_id": "merlin",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "434",
+      "registry_name": "Meteor-2 N21",
+      "platform_id": "meteor-2-n21",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "125",
+      "registry_name": "Meteor-2 N24",
+      "platform_id": "meteor-2-n24",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "126",
+      "registry_name": "Meteor-3 N5",
+      "platform_id": "meteor-3-n5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "127",
+      "registry_name": "Meteor-3 N7",
+      "platform_id": "meteor-3-n7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "128",
+      "registry_name": "Meteor-3 N8",
+      "platform_id": "meteor-3-n8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "130",
+      "registry_name": "Meteor-3M",
+      "platform_id": "meteor-3m",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "476",
+      "registry_name": "Meteor-M N1",
+      "platform_id": "meteor-m-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "477",
+      "registry_name": "Meteor-M N2",
+      "platform_id": "meteor-m-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "735",
+      "registry_name": "Meteor-M N2-1",
+      "platform_id": "meteor-m-n2-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "736",
+      "registry_name": "Meteor-M N2-2",
+      "platform_id": "meteor-m-n2-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "813",
+      "registry_name": "Meteor-M N2-3",
+      "platform_id": "meteor-m-n2-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "810",
+      "registry_name": "Meteor-M N2-4",
+      "platform_id": "meteor-m-n2-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "811",
+      "registry_name": "Meteor-M N2-5",
+      "platform_id": "meteor-m-n2-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "875",
+      "registry_name": "Meteor-M N2-6",
+      "platform_id": "meteor-m-n2-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "612",
+      "registry_name": "Meteor-M N3",
+      "platform_id": "meteor-m-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "623",
+      "registry_name": "Meteor-MP N1",
+      "platform_id": "meteor-mp-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "681",
+      "registry_name": "Meteor-MP N2",
+      "platform_id": "meteor-mp-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "682",
+      "registry_name": "Meteor-MP N3",
+      "platform_id": "meteor-mp-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "497",
+      "registry_name": "Meteosat-1",
+      "platform_id": "meteosat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "260",
+      "registry_name": "Meteosat-10",
+      "platform_id": "meteosat-10",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "451",
+      "registry_name": "Meteosat-11",
+      "platform_id": "meteosat-11",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "548",
+      "registry_name": "Meteosat-12",
+      "platform_id": "meteosat-12",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "556",
+      "registry_name": "Meteosat-13",
+      "platform_id": "meteosat-13",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "496",
+      "registry_name": "Meteosat-2",
+      "platform_id": "meteosat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "32",
+      "registry_name": "Meteosat-3",
+      "platform_id": "meteosat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "33",
+      "registry_name": "Meteosat-4",
+      "platform_id": "meteosat-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "10",
+      "registry_name": "Meteosat-5",
+      "platform_id": "meteosat-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "228",
+      "registry_name": "Meteosat-6",
+      "platform_id": "meteosat-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "258",
+      "registry_name": "Meteosat-7",
+      "platform_id": "meteosat-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "229",
+      "registry_name": "Meteosat-8",
+      "platform_id": "meteosat-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "259",
+      "registry_name": "Meteosat-9",
+      "platform_id": "meteosat-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "261",
+      "registry_name": "Metop-A",
+      "platform_id": "metop-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "230",
+      "registry_name": "Metop-B",
+      "platform_id": "metop-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "231",
+      "registry_name": "Metop-C",
+      "platform_id": "metop-c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "557",
+      "registry_name": "METOP-SG A1",
+      "platform_id": "metop-sg-a1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "838",
+      "registry_name": "METOP-SG A2",
+      "platform_id": "metop-sg-a2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "839",
+      "registry_name": "METOP-SG A3",
+      "platform_id": "metop-sg-a3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "702",
+      "registry_name": "METOP-SG B1",
+      "platform_id": "metop-sg-b1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "840",
+      "registry_name": "METOP-SG B2",
+      "platform_id": "metop-sg-b2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "841",
+      "registry_name": "METOP-SG B3",
+      "platform_id": "metop-sg-b3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "915",
+      "registry_name": "MeznSat",
+      "platform_id": "meznsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "858",
+      "registry_name": "MicroCarb",
+      "platform_id": "microcarb",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "879",
+      "registry_name": "MicroDragon",
+      "platform_id": "microdragon",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "679",
+      "registry_name": "MIOSAT",
+      "platform_id": "miosat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1384",
+      "registry_name": "MOLI-on-ISS",
+      "platform_id": "moli-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1145",
+      "registry_name": "MOMS",
+      "platform_id": "moms",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "445",
+      "registry_name": "Monitor-E",
+      "platform_id": "monitor-e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "628",
+      "registry_name": "MOS-1",
+      "platform_id": "mos-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "83",
+      "registry_name": "MOS-1B",
+      "platform_id": "mos-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "587",
+      "registry_name": "MTG-I2 (imaging)",
+      "platform_id": "mtg-i2-imaging",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "588",
+      "registry_name": "MTG-I3 (imaging)",
+      "platform_id": "mtg-i3-imaging",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "589",
+      "registry_name": "MTG-I4 (imaging)",
+      "platform_id": "mtg-i4-imaging",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "618",
+      "registry_name": "MTG-S2 (sounding)",
+      "platform_id": "mtg-s2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "307",
+      "registry_name": "MTSAT-1",
+      "platform_id": "mtsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "385",
+      "registry_name": "MTSAT-1R",
+      "platform_id": "mtsat-1r",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "384",
+      "registry_name": "MTSAT-2",
+      "platform_id": "mtsat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "549",
+      "registry_name": "MTSAT-3",
+      "platform_id": "mtsat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1439",
+      "registry_name": "MULA",
+      "platform_id": "mula",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1385",
+      "registry_name": "NACHOS",
+      "platform_id": "nachos",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "880",
+      "registry_name": "NanoDragon",
+      "platform_id": "nanodragon",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "563",
+      "registry_name": "NigeriaSat-1",
+      "platform_id": "nigeriasat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "564",
+      "registry_name": "NigeriaSat-2",
+      "platform_id": "nigeriasat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "680",
+      "registry_name": "NigeriaSat-X",
+      "platform_id": "nigeriasat-x",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "851",
+      "registry_name": "NigeriEdu-Sat-1",
+      "platform_id": "nigeriedu-sat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "893",
+      "registry_name": "NIMBUS-1",
+      "platform_id": "nimbus-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "894",
+      "registry_name": "NIMBUS-2",
+      "platform_id": "nimbus-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "351",
+      "registry_name": "NIMBUS-3",
+      "platform_id": "nimbus-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "359",
+      "registry_name": "NIMBUS-4",
+      "platform_id": "nimbus-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "895",
+      "registry_name": "NIMBUS-5",
+      "platform_id": "nimbus-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "353",
+      "registry_name": "NIMBUS-6",
+      "platform_id": "nimbus-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "354",
+      "registry_name": "NIMBUS-7",
+      "platform_id": "nimbus-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1562",
+      "registry_name": "NIMBUS-SAR",
+      "platform_id": "nimbus-sar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1566",
+      "registry_name": "NIMBUS-VHR",
+      "platform_id": "nimbus-vhr",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "642",
+      "registry_name": "NISAR",
+      "platform_id": "nisar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "203",
+      "registry_name": "NMP EO-1",
+      "platform_id": "nmp-eo-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "380",
+      "registry_name": "NMP EO-3 GIFTS",
+      "platform_id": "nmp-eo-3-gifts",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "507",
+      "registry_name": "NOAA-1",
+      "platform_id": "noaa-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "98",
+      "registry_name": "NOAA-10",
+      "platform_id": "noaa-10",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "99",
+      "registry_name": "NOAA-11",
+      "platform_id": "noaa-11",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "223",
+      "registry_name": "NOAA-12",
+      "platform_id": "noaa-12",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "101",
+      "registry_name": "NOAA-13",
+      "platform_id": "noaa-13",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "224",
+      "registry_name": "NOAA-14",
+      "platform_id": "noaa-14",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "225",
+      "registry_name": "NOAA-15",
+      "platform_id": "noaa-15",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "104",
+      "registry_name": "NOAA-16",
+      "platform_id": "noaa-16",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "105",
+      "registry_name": "NOAA-17",
+      "platform_id": "noaa-17",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "106",
+      "registry_name": "NOAA-18",
+      "platform_id": "noaa-18",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "113",
+      "registry_name": "NOAA-19",
+      "platform_id": "noaa-19",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "508",
+      "registry_name": "NOAA-2",
+      "platform_id": "noaa-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "667",
+      "registry_name": "NOAA-20",
+      "platform_id": "noaa-20",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "668",
+      "registry_name": "NOAA-21",
+      "platform_id": "noaa-21",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "509",
+      "registry_name": "NOAA-3",
+      "platform_id": "noaa-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "510",
+      "registry_name": "NOAA-4",
+      "platform_id": "noaa-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "511",
+      "registry_name": "NOAA-5",
+      "platform_id": "noaa-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "512",
+      "registry_name": "NOAA-6",
+      "platform_id": "noaa-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "513",
+      "registry_name": "NOAA-7",
+      "platform_id": "noaa-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "499",
+      "registry_name": "NOAA-8",
+      "platform_id": "noaa-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "97",
+      "registry_name": "NOAA-9",
+      "platform_id": "noaa-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "746",
+      "registry_name": "NORSAT-1",
+      "platform_id": "norsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "785",
+      "registry_name": "NORSAT-2",
+      "platform_id": "norsat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "931",
+      "registry_name": "NORSAT-3",
+      "platform_id": "norsat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1013",
+      "registry_name": "NORSAT-4",
+      "platform_id": "norsat-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1012",
+      "registry_name": "NORSAT-TD",
+      "platform_id": "norsat-td",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "856",
+      "registry_name": "NovaSAR-1",
+      "platform_id": "novasar-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1563",
+      "registry_name": "NOX-SAR",
+      "platform_id": "nox-sar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "270",
+      "registry_name": "NPOESS-1",
+      "platform_id": "npoess-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "264",
+      "registry_name": "NPOESS-2",
+      "platform_id": "npoess-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "361",
+      "registry_name": "NPOESS-3",
+      "platform_id": "npoess-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "362",
+      "registry_name": "NPOESS-4",
+      "platform_id": "npoess-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "382",
+      "registry_name": "NPOESS-5",
+      "platform_id": "npoess-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "383",
+      "registry_name": "NPOESS-6",
+      "platform_id": "npoess-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "758",
+      "registry_name": "Obzor-O N1",
+      "platform_id": "obzor-o-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "757",
+      "registry_name": "Obzor-O N2",
+      "platform_id": "obzor-o-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "759",
+      "registry_name": "Obzor-O N3",
+      "platform_id": "obzor-o-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "752",
+      "registry_name": "Obzor-O N4",
+      "platform_id": "obzor-o-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "753",
+      "registry_name": "Obzor-R N1",
+      "platform_id": "obzor-r-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "755",
+      "registry_name": "Obzor-R N2",
+      "platform_id": "obzor-r-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "754",
+      "registry_name": "Obzor-R N3",
+      "platform_id": "obzor-r-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "756",
+      "registry_name": "Obzor-R N4",
+      "platform_id": "obzor-r-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "134",
+      "registry_name": "OCEAN-01",
+      "platform_id": "ocean-01",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "278",
+      "registry_name": "OCEANSAT-2",
+      "platform_id": "oceansat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "571",
+      "registry_name": "OCEANSAT-3",
+      "platform_id": "eos-06",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "820",
+      "registry_name": "OCEANSAT-3A",
+      "platform_id": "oceansat-3a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "450",
+      "registry_name": "OCO",
+      "platform_id": "oco",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "655",
+      "registry_name": "OCO-2",
+      "platform_id": "oco-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "741",
+      "registry_name": "OCO-3-on-ISS",
+      "platform_id": "oco-3-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "388",
+      "registry_name": "Odin",
+      "platform_id": "odin",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "480",
+      "registry_name": "Oersted",
+      "platform_id": "oersted",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "122",
+      "registry_name": "OKEAN-O",
+      "platform_id": "okean-o",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "432",
+      "registry_name": "OKEAN-O1 N7",
+      "platform_id": "okean-o1-n7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "744",
+      "registry_name": "OPSIS",
+      "platform_id": "opsis",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "419",
+      "registry_name": "OSTM (Jason-2)",
+      "platform_id": "ostm-jason-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "684",
+      "registry_name": "PACE",
+      "platform_id": "pace",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "415",
+      "registry_name": "PARASOL",
+      "platform_id": "parasol",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "650",
+      "registry_name": "PATH",
+      "platform_id": "path",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "631",
+      "registry_name": "PCW-1",
+      "platform_id": "pcw-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "632",
+      "registry_name": "PCW-2",
+      "platform_id": "pcw-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "416",
+      "registry_name": "PICARD",
+      "platform_id": "picard",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "878",
+      "registry_name": "PicoDragon",
+      "platform_id": "picodragon",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1564",
+      "registry_name": "PLATINO-HYPER",
+      "platform_id": "platino-hyper",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "478",
+      "registry_name": "Pleiades 1A",
+      "platform_id": "pleiades-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "479",
+      "registry_name": "Pleiades 1B",
+      "platform_id": "pleiades-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1282",
+      "registry_name": "PLT-1",
+      "platform_id": "plt-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1283",
+      "registry_name": "PLT-2",
+      "platform_id": "plt-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1413",
+      "registry_name": "PMM",
+      "platform_id": "pmm",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1410",
+      "registry_name": "PolSIR",
+      "platform_id": "polsir",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "597",
+      "registry_name": "Post-EPS",
+      "platform_id": "post-eps",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "925",
+      "registry_name": "PREFIRE",
+      "platform_id": "prefire",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "142",
+      "registry_name": "PRIRODA",
+      "platform_id": "priroda",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "396",
+      "registry_name": "PRISMA",
+      "platform_id": "prisma",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1404",
+      "registry_name": "PRISMA2GEN",
+      "platform_id": "prisma2gen",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "403",
+      "registry_name": "PROBA",
+      "platform_id": "proba",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "737",
+      "registry_name": "PROBA-V",
+      "platform_id": "proba-v",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1461",
+      "registry_name": "QuickSounder",
+      "platform_id": "quicksounder",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "339",
+      "registry_name": "QuikSCAT",
+      "platform_id": "quikscat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "358",
+      "registry_name": "QuikTOMS",
+      "platform_id": "quiktoms",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "243",
+      "registry_name": "RADARSAT-1",
+      "platform_id": "radarsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "352",
+      "registry_name": "RADARSAT-2",
+      "platform_id": "radarsat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "469",
+      "registry_name": "RapidEye",
+      "platform_id": "rapideye",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "782",
+      "registry_name": "RapidScat-on-ISS",
+      "platform_id": "rapidscat-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "561",
+      "registry_name": "RASAT",
+      "platform_id": "rasat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "909",
+      "registry_name": "RazakSAT",
+      "platform_id": "razaksat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "584",
+      "registry_name": "RCM-1",
+      "platform_id": "rcm-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "585",
+      "registry_name": "RCM-2",
+      "platform_id": "rcm-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "586",
+      "registry_name": "RCM-3",
+      "platform_id": "rcm-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "401",
+      "registry_name": "REFIR",
+      "platform_id": "refir",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "276",
+      "registry_name": "RESOURCESAT-1",
+      "platform_id": "resourcesat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "439",
+      "registry_name": "RESOURCESAT-2",
+      "platform_id": "resourcesat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "710",
+      "registry_name": "RESOURCESAT-2A",
+      "platform_id": "resourcesat-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "573",
+      "registry_name": "RESOURCESAT-3",
+      "platform_id": "resourcesat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "817",
+      "registry_name": "RESOURCESAT-3A",
+      "platform_id": "resourcesat-3a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "818",
+      "registry_name": "RESOURCESAT-3S",
+      "platform_id": "resourcesat-3s",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "819",
+      "registry_name": "RESOURCESAT-3SA",
+      "platform_id": "resourcesat-3sa",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "444",
+      "registry_name": "Resurs DK 1",
+      "platform_id": "resurs-dk-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "135",
+      "registry_name": "Resurs-01 N2",
+      "platform_id": "resurs-01-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "136",
+      "registry_name": "Resurs-01 N3",
+      "platform_id": "resurs-01-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "153",
+      "registry_name": "Resurs-01 N4",
+      "platform_id": "resurs-01-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "443",
+      "registry_name": "Resurs-01 N5",
+      "platform_id": "resurs-01-n5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "137",
+      "registry_name": "Resurs-02",
+      "platform_id": "resurs-02",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "138",
+      "registry_name": "Resurs-F1M series",
+      "platform_id": "resurs-f1m-series",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "139",
+      "registry_name": "Resurs-F2 series",
+      "platform_id": "resurs-f2-series",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "140",
+      "registry_name": "Resurs-F2M series",
+      "platform_id": "resurs-f2m-series",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "141",
+      "registry_name": "Resurs-F3 series",
+      "platform_id": "resurs-f3-series",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "624",
+      "registry_name": "Resurs-P N1",
+      "platform_id": "resurs-p-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "626",
+      "registry_name": "Resurs-P N2",
+      "platform_id": "resurs-p-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "760",
+      "registry_name": "Resurs-P N3",
+      "platform_id": "resurs-p-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "788",
+      "registry_name": "Resurs-P N4",
+      "platform_id": "resurs-p-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "789",
+      "registry_name": "Resurs-P N5",
+      "platform_id": "resurs-p-n5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "796",
+      "registry_name": "Resurs-PM N1",
+      "platform_id": "resurs-pm-n1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "797",
+      "registry_name": "Resurs-PM N2",
+      "platform_id": "resurs-pm-n2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "969",
+      "registry_name": "Resurs-PM N3",
+      "platform_id": "resurs-pm-n3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "799",
+      "registry_name": "Resurs-PM N4",
+      "platform_id": "resurs-pm-n4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "441",
+      "registry_name": "RISAT-1",
+      "platform_id": "risat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "712",
+      "registry_name": "RISAT-1A",
+      "platform_id": "risat-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "865",
+      "registry_name": "RISAT-1B",
+      "platform_id": "risat-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "636",
+      "registry_name": "RISAT-2",
+      "platform_id": "risat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "674",
+      "registry_name": "RISAT-2F",
+      "platform_id": "risat-2f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "673",
+      "registry_name": "RISAT-3L",
+      "platform_id": "risat-3l",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1466",
+      "registry_name": "S2NG-A",
+      "platform_id": "s2ng-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1467",
+      "registry_name": "S2NG-B",
+      "platform_id": "s2ng-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1468",
+      "registry_name": "S3NGO-A",
+      "platform_id": "s3ngo-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1462",
+      "registry_name": "S3NGO-B",
+      "platform_id": "s3ngo-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1469",
+      "registry_name": "S3NGT-A",
+      "platform_id": "s3ngt-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1470",
+      "registry_name": "S3NGT-B",
+      "platform_id": "s3ngt-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1587",
+      "registry_name": "S6NG-A",
+      "platform_id": "s6ng-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1588",
+      "registry_name": "S6NG-B",
+      "platform_id": "s6ng-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "715",
+      "registry_name": "SABIA_MAR-A",
+      "platform_id": "sabia-mar-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "716",
+      "registry_name": "SABIA_MAR-B",
+      "platform_id": "sabia-mar-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "454",
+      "registry_name": "SABIA-Mar",
+      "platform_id": "sabia-mar",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "397",
+      "registry_name": "SABRINA",
+      "platform_id": "sabrina",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "343",
+      "registry_name": "SAC-A",
+      "platform_id": "sac-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "344",
+      "registry_name": "SAC-C",
+      "platform_id": "sac-c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "453",
+      "registry_name": "SAC-D/Aquarius",
+      "platform_id": "sac-d-aquarius",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "356",
+      "registry_name": "SAGE/AEM-2",
+      "platform_id": "sage-aem-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "687",
+      "registry_name": "SAGE-III-on-ISS",
+      "platform_id": "sage-iii-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "405",
+      "registry_name": "SAOCOM 1A",
+      "platform_id": "saocom-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "452",
+      "registry_name": "SAOCOM 1B",
+      "platform_id": "saocom-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "457",
+      "registry_name": "SAOCOM-2",
+      "platform_id": "saocom-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "456",
+      "registry_name": "SAOCOM-2B",
+      "platform_id": "saocom-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "572",
+      "registry_name": "SARAL",
+      "platform_id": "saral",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "596",
+      "registry_name": "SARE-2A (S1)",
+      "platform_id": "sare-2a-s1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "807",
+      "registry_name": "SARE-2A (S2)",
+      "platform_id": "sare-2a-s2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "808",
+      "registry_name": "SARE-2A (S3)",
+      "platform_id": "sare-2a-s3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "809",
+      "registry_name": "SARE-2A (S4)",
+      "platform_id": "sare-2a-s4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "973",
+      "registry_name": "SBG Constellation Pathfinder",
+      "platform_id": "sbg-constellation-pathfinder",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "764",
+      "registry_name": "SCATSAT-1",
+      "platform_id": "scatsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "864",
+      "registry_name": "SCATSAT-1A",
+      "platform_id": "scatsat-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "43",
+      "registry_name": "SCD-1",
+      "platform_id": "scd-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "44",
+      "registry_name": "SCD-2",
+      "platform_id": "scd-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "119",
+      "registry_name": "SCD-3",
+      "platform_id": "scd-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "394",
+      "registry_name": "SCISAT-1",
+      "platform_id": "scisat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "652",
+      "registry_name": "SCLP",
+      "platform_id": "sclp",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "803",
+      "registry_name": "SeaSat",
+      "platform_id": "seasat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1047",
+      "registry_name": "Sentinel CHIME-A",
+      "platform_id": "sentinel-chime-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1048",
+      "registry_name": "Sentinel CHIME-B",
+      "platform_id": "sentinel-chime-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1035",
+      "registry_name": "Sentinel CIMR-A",
+      "platform_id": "sentinel-cimr-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1032",
+      "registry_name": "Sentinel CIMR-B",
+      "platform_id": "sentinel-cimr-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1033",
+      "registry_name": "Sentinel CO2M-A",
+      "platform_id": "sentinel-co2m-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1037",
+      "registry_name": "Sentinel CO2M-B",
+      "platform_id": "sentinel-co2m-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1038",
+      "registry_name": "Sentinel CO2M-C",
+      "platform_id": "sentinel-co2m-c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1039",
+      "registry_name": "Sentinel CRISTAL-A",
+      "platform_id": "sentinel-cristal-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1040",
+      "registry_name": "Sentinel CRISTAL-B",
+      "platform_id": "sentinel-cristal-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1041",
+      "registry_name": "Sentinel LSTM-A",
+      "platform_id": "sentinel-lstm-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1042",
+      "registry_name": "Sentinel LSTM-B",
+      "platform_id": "sentinel-lstm-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1036",
+      "registry_name": "Sentinel ROSE-L A",
+      "platform_id": "sentinel-rose-l-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1034",
+      "registry_name": "Sentinel ROSE-L B",
+      "platform_id": "sentinel-rose-l-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "575",
+      "registry_name": "Sentinel-1 A",
+      "platform_id": "sentinel-1a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "576",
+      "registry_name": "Sentinel-1 B",
+      "platform_id": "sentinel-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "577",
+      "registry_name": "Sentinel-1 C",
+      "platform_id": "sentinel-1c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "814",
+      "registry_name": "Sentinel-1 D",
+      "platform_id": "sentinel-1d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1464",
+      "registry_name": "Sentinel-1 NG-A",
+      "platform_id": "sentinel-1-ng-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1465",
+      "registry_name": "Sentinel-1 NG-B",
+      "platform_id": "sentinel-1-ng-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "552",
+      "registry_name": "Sentinel-2 A",
+      "platform_id": "sentinel-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "553",
+      "registry_name": "Sentinel-2 B",
+      "platform_id": "sentinel-2b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "578",
+      "registry_name": "Sentinel-2 C",
+      "platform_id": "sentinel-2c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "920",
+      "registry_name": "Sentinel-2 D",
+      "platform_id": "sentinel-2d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "554",
+      "registry_name": "Sentinel-3 A",
+      "platform_id": "sentinel-3a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "555",
+      "registry_name": "Sentinel-3 B",
+      "platform_id": "sentinel-3b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "579",
+      "registry_name": "Sentinel-3 C",
+      "platform_id": "sentinel-3c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "921",
+      "registry_name": "Sentinel-3 D",
+      "platform_id": "sentinel-3d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "581",
+      "registry_name": "Sentinel-5 precursor",
+      "platform_id": "sentinel-5p",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "769",
+      "registry_name": "Sentinel-6  A Michael Freilich",
+      "platform_id": "sentinel-6a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "770",
+      "registry_name": "Sentinel-6 B",
+      "platform_id": "sentinel-6b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1463",
+      "registry_name": "Sentinel-6 C",
+      "platform_id": "sentinel-6c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "562",
+      "registry_name": "SEOSAT/Ingenio",
+      "platform_id": "seosat-ingenio",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1060",
+      "registry_name": "Shi Jian",
+      "platform_id": "shi-jian",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1029",
+      "registry_name": "Sich 2-30",
+      "platform_id": "sich-2-30",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "121",
+      "registry_name": "Sich-1",
+      "platform_id": "sich-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "318",
+      "registry_name": "Sich-1M",
+      "platform_id": "sich-1m",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "123",
+      "registry_name": "Sich-2",
+      "platform_id": "sich-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "742",
+      "registry_name": "SJ-9A",
+      "platform_id": "sj-9a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "743",
+      "registry_name": "SJ-9B",
+      "platform_id": "sj-9b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1254",
+      "registry_name": "Skylab",
+      "platform_id": "skylab",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "614",
+      "registry_name": "SMAP",
+      "platform_id": "smap",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "379",
+      "registry_name": "SMOS",
+      "platform_id": "smos",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "919",
+      "registry_name": "SOLAR-1",
+      "platform_id": "solar-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1416",
+      "registry_name": "SOLAR-A",
+      "platform_id": "solar-a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1417",
+      "registry_name": "SOLAR-B",
+      "platform_id": "solar-b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "346",
+      "registry_name": "SORCE",
+      "platform_id": "sorce",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1259",
+      "registry_name": "Spacelab",
+      "platform_id": "spacelab",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "247",
+      "registry_name": "SPOT-1",
+      "platform_id": "spot-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "285",
+      "registry_name": "SPOT-2",
+      "platform_id": "spot-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "249",
+      "registry_name": "SPOT-3",
+      "platform_id": "spot-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "251",
+      "registry_name": "SPOT-4",
+      "platform_id": "spot-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "253",
+      "registry_name": "SPOT-5",
+      "platform_id": "spot-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "45",
+      "registry_name": "SSR-1",
+      "platform_id": "ssr-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "46",
+      "registry_name": "SSR-2",
+      "platform_id": "ssr-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "857",
+      "registry_name": "SSTL S1-4",
+      "platform_id": "sstl-s1-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "424",
+      "registry_name": "STARLETTE",
+      "platform_id": "starlette",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "255",
+      "registry_name": "STELLA",
+      "platform_id": "stella",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1068",
+      "registry_name": "STS-51-F",
+      "platform_id": "sts-51-f",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "783",
+      "registry_name": "STSAT-3",
+      "platform_id": "stsat-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "559",
+      "registry_name": "SumbandilaSat",
+      "platform_id": "sumbandilasat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "488",
+      "registry_name": "SUNSAT",
+      "platform_id": "sunsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "413",
+      "registry_name": "Suomi NPP",
+      "platform_id": "suomi-npp",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "468",
+      "registry_name": "Swarm",
+      "platform_id": "swarm",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "646",
+      "registry_name": "SWOT",
+      "platform_id": "swot",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "835",
+      "registry_name": "TanDEM-L",
+      "platform_id": "tandem-l",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "598",
+      "registry_name": "TanDEM-X",
+      "platform_id": "tandem-x",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "876",
+      "registry_name": "TANSat",
+      "platform_id": "tansat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1489",
+      "registry_name": "TANSat-2",
+      "platform_id": "tansat-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "951",
+      "registry_name": "Taranis",
+      "platform_id": "taranis",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "734",
+      "registry_name": "TCTE",
+      "platform_id": "tcte",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "877",
+      "registry_name": "TDS-1",
+      "platform_id": "tds-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "739",
+      "registry_name": "TEMPO",
+      "platform_id": "tempo",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "204",
+      "registry_name": "Terra",
+      "platform_id": "terra",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1456",
+      "registry_name": "TerraSAR-Fox",
+      "platform_id": "terrasar-fox",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "427",
+      "registry_name": "TerraSAR-L",
+      "platform_id": "terrasar-l",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "391",
+      "registry_name": "TerraSAR-X",
+      "platform_id": "terrasar-x",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "435",
+      "registry_name": "TES",
+      "platform_id": "tes",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "569",
+      "registry_name": "TES-HYS",
+      "platform_id": "tes-hys",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1547",
+      "registry_name": "The Carruthers Geocorona Observatory",
+      "platform_id": "the-carruthers-geocorona-observatory",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "475",
+      "registry_name": "THEOS",
+      "platform_id": "theos",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "904",
+      "registry_name": "THEOS-2",
+      "platform_id": "theos-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "943",
+      "registry_name": "THEOS-2A",
+      "platform_id": "theos-2a",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1579",
+      "registry_name": "THEOS-2A (Rebuild)",
+      "platform_id": "theos-2a-rebuild",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1580",
+      "registry_name": "THEOS-3",
+      "platform_id": "theos-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "462",
+      "registry_name": "TIMED",
+      "platform_id": "timed",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "514",
+      "registry_name": "TIROS M (ITOS-1)",
+      "platform_id": "tiros-m-itos-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "355",
+      "registry_name": "TIROS N",
+      "platform_id": "tiros-n",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "896",
+      "registry_name": "TIROS-1",
+      "platform_id": "tiros-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "903",
+      "registry_name": "TIROS-10",
+      "platform_id": "tiros-10",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "897",
+      "registry_name": "TIROS-2",
+      "platform_id": "tiros-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "898",
+      "registry_name": "TIROS-3",
+      "platform_id": "tiros-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "899",
+      "registry_name": "TIROS-4",
+      "platform_id": "tiros-4",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "900",
+      "registry_name": "TIROS-5",
+      "platform_id": "tiros-5",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "901",
+      "registry_name": "TIROS-6",
+      "platform_id": "tiros-6",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "902",
+      "registry_name": "TIROS-7",
+      "platform_id": "tiros-7",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "886",
+      "registry_name": "TIROS-8",
+      "platform_id": "tiros-8",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "885",
+      "registry_name": "TIROS-9",
+      "platform_id": "tiros-9",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "908",
+      "registry_name": "TiungSAT-1",
+      "platform_id": "tiungsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "217",
+      "registry_name": "TOMS-EP",
+      "platform_id": "toms-ep",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "210",
+      "registry_name": "Topex-Poseidon",
+      "platform_id": "topex-poseidon",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "404",
+      "registry_name": "TopSat",
+      "platform_id": "topsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1546",
+      "registry_name": "TRACERS",
+      "platform_id": "tracers",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "866",
+      "registry_name": "TRISHNA",
+      "platform_id": "trishna",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "215",
+      "registry_name": "TRMM",
+      "platform_id": "trmm",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "816",
+      "registry_name": "TROPICS",
+      "platform_id": "tropics",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "988",
+      "registry_name": "TROPICS Pathfinder",
+      "platform_id": "tropics-pathfinder",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "982",
+      "registry_name": "TRUTHS",
+      "platform_id": "truths",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "767",
+      "registry_name": "TSIS-1-on-ISS",
+      "platform_id": "tsis-1-on-iss",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "837",
+      "registry_name": "TSIS-2",
+      "platform_id": "tsis-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "599",
+      "registry_name": "TSX-NG",
+      "platform_id": "tsx-ng",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "213",
+      "registry_name": "UARS",
+      "platform_id": "uars",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "426",
+      "registry_name": "UK-DMC",
+      "platform_id": "uk-dmc",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "582",
+      "registry_name": "UK-DMC2",
+      "platform_id": "uk-dmc2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "601",
+      "registry_name": "VEN\u00b5S",
+      "platform_id": "ven-s",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "402",
+      "registry_name": "VISIR",
+      "platform_id": "visir",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "750",
+      "registry_name": "VNREDSat 1b",
+      "platform_id": "vnredsat-1b",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "749",
+      "registry_name": "VNREDSat-1",
+      "platform_id": "vnredsat-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "472",
+      "registry_name": "Vulkan-Kompas-2",
+      "platform_id": "vulkan-kompas-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "906",
+      "registry_name": "WildFireSat",
+      "platform_id": "wildfiresat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "717",
+      "registry_name": "YOUTHSAT",
+      "platform_id": "youthsat",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1482",
+      "registry_name": "Yunhai-1",
+      "platform_id": "yunhai-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1043",
+      "registry_name": "Yunhai-1 03",
+      "platform_id": "yunhai-1-03",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1483",
+      "registry_name": "Yunhai-2",
+      "platform_id": "yunhai-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1484",
+      "registry_name": "Yunhai-3",
+      "platform_id": "yunhai-3",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "910",
+      "registry_name": "ZACube-1",
+      "platform_id": "zacube-1",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "911",
+      "registry_name": "ZACube-2",
+      "platform_id": "zacube-2",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "731",
+      "registry_name": "ZY-1-02C",
+      "platform_id": "zy-1-02c",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "949",
+      "registry_name": "ZY-1-02D",
+      "platform_id": "zy-1-02d",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "1049",
+      "registry_name": "ZY-1-02E",
+      "platform_id": "zy-1-02e",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "732",
+      "registry_name": "ZY-3-01",
+      "platform_id": "zy-3-01",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "821",
+      "registry_name": "ZY-3-02",
+      "platform_id": "zy-3-02",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "950",
+      "registry_name": "ZY-3-03",
+      "platform_id": "zy-3-03",
+      "hosted_payload": false
+    },
+    {
+      "registry_id": "639",
+      "registry_name": "Sentinel-4 A",
+      "platform_id": "meteosat-13",
+      "hosted_payload": true
+    },
+    {
+      "registry_id": "640",
+      "registry_name": "Sentinel-4 B",
+      "platform_id": "mtg-s2",
+      "hosted_payload": true
+    },
+    {
+      "registry_id": "641",
+      "registry_name": "Sentinel-5 A",
+      "platform_id": "metop-sg-a1",
+      "hosted_payload": true
+    },
+    {
+      "registry_id": "777",
+      "registry_name": "Sentinel-5 B",
+      "platform_id": "metop-sg-a2",
+      "hosted_payload": true
+    },
+    {
+      "registry_id": "848",
+      "registry_name": "Sentinel-5 C",
+      "platform_id": "metop-sg-a3",
+      "hosted_payload": true
+    }
+  ],
+  "catalog_record_count": 958,
+  "families": {
+    "sentinel": [
+      "sentinel-2b",
+      "sentinel-2c",
+      "sentinel-1c",
+      "sentinel-1",
+      "sentinel-1a",
+      "sentinel-1b",
+      "sentinel-1d",
+      "sentinel-2",
+      "sentinel-2a",
+      "sentinel-3",
+      "sentinel-3a",
+      "sentinel-3b",
+      "sentinel-5",
+      "sentinel-5p",
+      "sentinel-6",
+      "sentinel-6a",
+      "sentinel-6b",
+      "meteosat-13",
+      "metop-sg-a1",
+      "metop-sg-a2",
+      "metop-sg-a3",
+      "mtg-s2",
+      "sentinel-chime-a",
+      "sentinel-chime-b",
+      "sentinel-cimr-a",
+      "sentinel-cimr-b",
+      "sentinel-co2m-a",
+      "sentinel-co2m-b",
+      "sentinel-co2m-c",
+      "sentinel-cristal-a",
+      "sentinel-cristal-b",
+      "sentinel-lstm-a",
+      "sentinel-lstm-b",
+      "sentinel-rose-l-a",
+      "sentinel-rose-l-b",
+      "sentinel-1-ng-a",
+      "sentinel-1-ng-b",
+      "sentinel-2d",
+      "sentinel-3c",
+      "sentinel-3d",
+      "sentinel-6c"
+    ],
+    "landsat": [
+      "landsat-8",
+      "landsat-9",
+      "landsat",
+      "landsat-1",
+      "landsat-2",
+      "landsat-3",
+      "landsat-4",
+      "landsat-5",
+      "landsat-7",
+      "landsat-10",
+      "landsat-6"
+    ],
+    "noaa": [
+      "goes-19",
+      "adeos-ii",
+      "cygnss",
+      "dscovr",
+      "goes",
+      "goes-1",
+      "goes-10",
+      "goes-11",
+      "goes-12",
+      "goes-13",
+      "goes-14",
+      "goes-15",
+      "goes-16",
+      "goes-17",
+      "goes-18",
+      "goes-2",
+      "goes-3",
+      "goes-4",
+      "goes-5",
+      "goes-6",
+      "goes-7",
+      "goes-8",
+      "goes-9",
+      "goes-r",
+      "jason-3",
+      "jpss",
+      "metop-a",
+      "metop-b",
+      "metop-c",
+      "noaa",
+      "noaa-1",
+      "noaa-10",
+      "noaa-11",
+      "noaa-12",
+      "noaa-13",
+      "noaa-14",
+      "noaa-15",
+      "noaa-16",
+      "noaa-17",
+      "noaa-18",
+      "noaa-19",
+      "noaa-2",
+      "noaa-20",
+      "noaa-21",
+      "noaa-3",
+      "noaa-4",
+      "noaa-5",
+      "noaa-6",
+      "noaa-7",
+      "noaa-8",
+      "noaa-9",
+      "noaa-poes",
+      "sentinel-6a",
+      "sentinel-6b",
+      "suomi-npp",
+      "tiros",
+      "tiros-n",
+      "cdars",
+      "clarreo-1",
+      "clarreo-2",
+      "clarreo-3",
+      "clarreo-4",
+      "cosmic-1-fm1",
+      "cosmic-1-fm2",
+      "cosmic-1-fm3",
+      "cosmic-1-fm4",
+      "cosmic-1-fm5",
+      "cosmic-1-fm6",
+      "cosmic-2-formosat-7-1",
+      "cosmic-2-formosat-7-2",
+      "cosmic-2-formosat-7-3",
+      "cosmic-2-formosat-7-4",
+      "cosmic-2-formosat-7-5",
+      "cosmic-2-formosat-7-6",
+      "cosmic-2b-polar",
+      "dmsp-f-10",
+      "dmsp-f-11",
+      "dmsp-f-12",
+      "dmsp-f-13",
+      "dmsp-f-14",
+      "dmsp-f-15",
+      "dmsp-f-16",
+      "dmsp-f-17",
+      "dmsp-f-18",
+      "dmsp-f-19",
+      "dmsp-f-20",
+      "dmsp-f-7",
+      "dmsp-f-8",
+      "dmsp-f-9",
+      "ews-g2",
+      "ews-g3",
+      "free-flyer-2",
+      "geo-s1",
+      "geo-s2",
+      "geoxo-1",
+      "geoxo-2",
+      "geoxo-3",
+      "geoxo-4",
+      "goes-sms-1",
+      "goes-sms-2",
+      "jpss-3",
+      "jpss-4",
+      "npoess-1",
+      "npoess-2",
+      "npoess-3",
+      "npoess-4",
+      "npoess-5",
+      "npoess-6",
+      "ostm-jason-2",
+      "quicksounder",
+      "sentinel-6c",
+      "solar-1",
+      "solar-a",
+      "solar-b",
+      "tcte",
+      "tiros-m-itos-1",
+      "tiros-1",
+      "tiros-10",
+      "tiros-2",
+      "tiros-3",
+      "tiros-4",
+      "tiros-5",
+      "tiros-6",
+      "tiros-7",
+      "tiros-8",
+      "tiros-9"
+    ]
+  },
+  "scope": "958 mission/platform records combining the full CEOS All-status table and the saved STAC audit. Includes mission groups, hosted payloads, archives, proposals, cancellations and launch failures; not a unique operating-satellite count or a claim of universal coverage. Agency sources supersede registry snapshots.",
+  "attribution": "CEOS MIM Database, https://database.eohandbook.com, accessed 2026-11-03",
+  "license": "CC BY 4.0"
+}

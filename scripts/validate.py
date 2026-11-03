@@ -73,13 +73,20 @@ def main():
         assert r["collection_url"]==r["endpoint"]+"/collections/"+r["collection"]
         assert r["access_note"] and r["format"] and r["verified"]
     no2=research_matches("air quality and NO₂ measures",discovery)
-    assert no2["concepts"]==["no2"] and set(no2["platforms"])=={"sentinel-5p","aura","intelsat-40e"}
+    assert no2["concepts"]==["no2"] and set(no2["platforms"])=={"sentinel-5p","aura","intelsat-40e","meteosat-13","metop-sg-a1"}
     assert not research_matches("NO20 dinosaur observations",discovery)["concepts"]
     assert "no2" not in research_matches("aerosol and PM2.5",discovery)["concepts"]
     coverage=json.loads((ROOT / "data/stac-coverage.json").read_text(encoding="utf-8"))
     assert set(coverage["mapped_platform_ids"])<=set(ids)
     audit=json.loads((ROOT / "data/stac-audit.json").read_text(encoding="utf-8"))
     assert len(audit["catalogs"])==coverage["catalog_count"]
+    registry=json.loads((ROOT/"data/mission-registry.json").read_text(encoding="utf-8"));mission_coverage=json.loads((ROOT/"data/mission-coverage.json").read_text(encoding="utf-8"))
+    assert registry["record_count"]==len(registry["records"])==mission_coverage["mapped_record_count"]
+    assert {r["id"] for r in registry["records"]}=={r["registry_id"] for r in mission_coverage["crosswalk"]}
+    assert {r["platform_id"] for r in mission_coverage["crosswalk"]}<=set(ids)
+    assert {f"landsat-{n}" for n in range(1,11)}<=set(ids)
+    assert {f"noaa-{n}" for n in range(1,22)}<=set(ids) and {f"goes-{n}" for n in range(1,20)}<=set(ids)
+    assert all(set(members)<=set(ids) for members in mission_coverage["families"].values())
     assert all(c["documents_checked"]<=audit["limits"]["documents_per_catalog"] for c in audit["catalogs"])
     assert all(a["documents_checked"]<=a["page_limit"] for a in audit.get("supplemental_audits",[]))
     orbits=json.loads((ROOT / "data/orbit-types.json").read_text(encoding="utf-8"))

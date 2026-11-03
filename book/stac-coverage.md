@@ -1,6 +1,6 @@
 # STAC coverage audit
 
-Metadata audit: **2026-11-03**. Registry: [STAC Index](https://stacindex.org/api/catalogs). **153 listings**, **4,118 documents checked** (including supplementary NASA pages), **344 platform / constellation records** in the explorer.
+Metadata audit: **2026-11-03**. Registry: [STAC Index](https://stacindex.org/api/catalogs). **153 listings**, **4,118 documents checked** (including supplementary NASA pages), **958 platform / constellation records** in the explorer.
 
 This is a bounded directory-wide audit, not proof that every EO satellite or asset is represented. STAC also contains aircraft, stations, models and non-Earth observations. Platform identifiers are optional; collection summaries can omit spacecraft. Mission-group and individual-spacecraft records can overlap; the record count is not a count of unique satellites.
 

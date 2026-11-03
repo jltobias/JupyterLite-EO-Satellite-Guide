@@ -34,6 +34,7 @@ def check_workspace(page,base):
     for width,height in [(1280,720),(1366,768),(1920,1080)]:
         page.set_viewport_size({'width':width,'height':height})
         page.goto(base+'/explorer/')
+        page.locator('#map-mode').select_option('page')
         trigger='#fullscreen' if width==1366 else '#atlas-fullscreen'
         page.locator(trigger).click()
         page.wait_for_function("document.fullscreenElement?.id === 'poster'")
@@ -127,6 +128,7 @@ def check_discovery(page,base):
     import nbformat
     page.goto(base+'/explorer/')
     count=len(json.loads((ROOT/'data/catalog.json').read_text(encoding='utf-8'))['satellites'])
+    page.locator('#map-mode').select_option('page')
     seen=set()
     while True:
         rows=page.locator('#rows tr').evaluate_all('(rows)=>rows.map(r=>r.dataset.id)')
@@ -138,11 +140,11 @@ def check_discovery(page,base):
         page.locator('#page-next').click()
     assert len(seen)==count,(len(seen),count)
     page.goto(base+'/explorer/?q=air+quality+and+NO2+measures')
-    expected={'sentinel-5p','aura','intelsat-40e'}
+    expected={'sentinel-5p','aura','intelsat-40e','meteosat-13','metop-sg-a1'}
     assert set(page.locator('#rows tr').evaluate_all('(rows)=>rows.map(r=>r.dataset.id)'))==expected
-    expect(page.locator('.sat-node.research-match')).to_have_count(3)
+    expect(page.locator('.sat-node.research-match')).to_have_count(5)
     expect(page.locator('#node-sentinel-5p .sensor-shape > path')).to_have_count(1)
-    expect(page.locator('.mission-row.research-match')).to_have_count(3)
+    expect(page.locator('.mission-row.research-match')).to_have_count(5)
     expect(page.locator('#research-results')).to_contain_text('not ground-level concentrations')
     expect(page.locator('#research-results .data-route')).to_have_count(3)
     page.evaluate("Object.defineProperty(navigator,'clipboard',{configurable:true,value:{writeText:async value=>{window.eoCopied=value}}})")
@@ -174,7 +176,7 @@ def check_discovery(page,base):
     page.screenshot(path=str(QA/'research-fullscreen.png'),full_page=True)
     page.locator('#workspace-research').click()
     page.locator('[data-orbit="Geostationary"]').click()
-    expect(page.locator('#rows tr')).to_have_count(1)
+    expect(page.locator('#rows tr')).to_have_count(2)
     expect(page.locator('#rows')).to_contain_text('Intelsat 40e')
     page.locator('#exit-workspace').click()
     page.locator('#reset').click()
@@ -192,7 +194,7 @@ def check_discovery(page,base):
     expect(page.locator('h1').last).to_contain_text('STAC coverage audit')
     page.goto(base+'/book/notebooks/07_research_to_stac.html')
     expect(page.locator('h1').last).to_contain_text('Research question')
-    expect(page.frame_locator('iframe[title="Interactive EO constellation poster"]').locator('#rows tr')).to_have_count(3)
+    expect(page.frame_locator('iframe[title="Interactive EO constellation poster"]').locator('#rows tr')).to_have_count(5)
 
 
 def main():
@@ -215,7 +217,7 @@ def main():
             page.on("pageerror",lambda e:errors.append(str(e)))
             page.goto(base+"/explorer/")
             expect(page.locator("#rows tr")).to_have_count(13)
-            expect(page.locator(".sat-node:not(.filtered)")).to_have_count(13)
+            expect(page.locator(".sat-node:not(.filtered)")).to_have_count(len(json.loads((ROOT/'data/catalog.json').read_text(encoding='utf-8'))['satellites']))
             page.screenshot(path=str(QA / "poster-desktop.png"),full_page=True)
             page.locator("#node-landsat-8").click()
             expect(page.locator("#inspector .detail-name")).to_have_text("Landsat 8")
@@ -305,7 +307,7 @@ def main():
             op.wait_for_function('document.fullscreenElement === null')
             op.locator('#reset').click()
             op.locator('#question').fill('air quality and NO2 measures')
-            expect(op.locator('#rows tr')).to_have_count(3)
+            expect(op.locator('#rows tr')).to_have_count(5)
             expect(op.locator('#research-results .data-route')).to_have_count(3)
             assert not [u for u in requests if u.startswith(("https:","http:"))],requests
             offline.close()

@@ -98,7 +98,7 @@ def prepare():
     write(ROOT / "notebooks/support/eo-swaths.html",study)
     write(ROOT / "notebooks/data/catalog.json", catalog_text)
     write(ROOT / "notebooks/data/research-topics.json", discovery_text)
-    for name in ("stac-coverage.json","research-ontology.ttl","orbit-types.json","geometry-presets.json"):
+    for name in ("stac-coverage.json","research-ontology.ttl","orbit-types.json","geometry-presets.json","mission-registry.json","mission-coverage.json"):
         shutil.copy2(ROOT / "data" / name,ROOT / "notebooks/data" / name)
     shutil.copy2(ROOT / "src/eo_guide.py", ROOT / "notebooks/eo_guide.py")
     # Sources are kept next to each notebook in both the book and the Lite filesystem.
@@ -113,6 +113,7 @@ def prepare():
     write(ROOT / "book/references.md", "\n".join(refs))
     export_graph(catalog,discovery)
     coverage_page()
+    mission_coverage_page(catalog)
     # The splash is an original vector drawing built from our own UI and public-domain geography.
     splash(catalog, land)
     print("Prepared offline poster, notebook support files, source registry, JSON-LD and splash.")
@@ -123,10 +124,14 @@ def export_graph(catalog,discovery):
     nodes = []
     for s in catalog["satellites"]:
         curated=not s.get("stac_imported") or s.get("sensor_curation")
-        nodes.append({"@id": base+s["id"], "@type": "eo:MissionGroup" if s.get("record_kind")=="constellation / mission group" else "sosa:Platform", "label": s["name"],
+        record_type="eo:MissionGroup" if s.get("record_kind")=="constellation / mission group" else "eo:MissionRecord" if s.get("record_kind","").startswith("mission record") else "sosa:Platform"
+        nodes.append({"@id": base+s["id"], "@type": record_type, "label": s["name"],"eo:missionFamily":s.get("mission_families",[]),
                       "sosa:hosts": [{"@id": base+s["id"]+"/"+i["id"]} for i in s["sensors"]] if curated else [],
                       "eo:orbitType":{"@id":base+"orbit/"+s["orbit"]["class"].replace(" ","-").replace("/","-")},
                       "prov:wasDerivedFrom": [{"@id": catalog["sources"][sid]["url"]} for sid in s["sources"]]})
+        for mission in s.get("hosted_missions",[]):
+            nodes.append({"@id":base+mission["id"],"@type":"eo:HostedInstrumentMission","label":mission["name"],"eo:hostPlatform":{"@id":base+s["id"]},
+                "prov:wasDerivedFrom":[{"@id":catalog["sources"][sid]["url"]} for sid in mission["sources"]]})
         if not curated:
             continue
         for i in s["sensors"]:
@@ -189,6 +194,37 @@ def coverage_page():
     text.extend(["\n## Remaining identity work\n", "Identifiers deliberately excluded from the satellite map (ground/aircraft or unresolved): "+", ".join(f"`{x}`" for x in unresolved)+". Energy-catalog station identifiers are retained in the crosswalk separately. Generic provider instrument arrays are not assigned to every spacecraft in a mixed collection.\n",
                  "## Refresh and review\n", "Run `python scripts/audit_stac.py --refresh` explicitly, review failures and bounds, then `python scripts/curate_stac.py`. The crosswalk code contains the reviewed identity rules. Recheck specific catalogs with `--catalog SLUG`. Inspect the diff before committing, validate, rebuild, and run browser tests. Expand operator-backed orbit/instrument records without replacing unknowns with guesses.\n"])
     write(ROOT / "book/stac-coverage.md","\n".join(text))
+
+
+def mission_coverage_page(catalog):
+    registry=json.loads((ROOT/"data/mission-registry.json").read_text(encoding="utf-8"))
+    report=json.loads((ROOT/"data/mission-coverage.json").read_text(encoding="utf-8"))
+    by_id={s["id"]:s for s in catalog["satellites"]}
+    text=["# Mission inventory and family coverage\n",
+        f"Snapshot: **{report['verified']}**. The explorer combines **{len(catalog['satellites'])} mission/platform records** with **all {registry['record_count']} records** from the [CEOS All-status mission table]({registry['source']}) and the saved [STAC audit](stac-coverage.md). Every CEOS permanent identifier is accounted for in the [mission crosswalk](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/data/mission-coverage.json).\n",
+        "The default **All matching records** map displays every matching record at once. **Mission family** starts a fresh view of all Sentinels, Landsats, or NOAA and partners; it clears other filters and the research question. Search accepts punctuation variants such as `Sentinel 5` and `Sentinel-5`. **Locate a mission** selects a named record, reveals its table page and opens its evidence. Hover/focus a small overview mark to reveal its table row. Large marks identify the current 13 table rows. Choose **Table page** for 13 larger, labeled symbols. Both views retain fullscreen, pins, orbit colors and linked brushing.\n",
+        "## What the count means\n",
+        "These are registry records, not a count of unique spacecraft now in orbit. CEOS includes completed, operational, commissioning, approved, planned, considered and cancelled missions; STAC adds mission groups and commercial identifiers. Some records describe multi-spacecraft missions or hosted instruments. Generic registry entries retain the type `MissionRecord` until platform identity is reviewed. Forecast dates, expected end of life, nominal repeat and intended orbit do not establish flight, usable observations or a data service.\n",
+        "The full checked-in [CEOS factual snapshot](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/data/mission-registry.json) records the source selection, response hash, original mission IDs, payload links and nominal orbit fields. CEOS is an agency-survey registry; [its documentation](https://database.eohandbook.com/about.aspx) says agency information takes precedence. This union substantially broadens coverage, but cannot certify every private, newly launched or unreported EO spacecraft worldwide.\n",
+        "## Hosted Sentinel missions\n",
+        "[EUMETSAT](https://www.eumetsat.int/our-satellites/sentinel-series) distinguishes dedicated Sentinel spacecraft from hosted Sentinel-4 and Sentinel-5 instruments. Sentinel-4A is represented on **Meteosat-13 / MTG-S1**; Sentinel-4B on **MTG-S2**. Sentinel-5A/B/C are represented on **Metop-SG A1/A2/A3**. Sentinel-5P is a separate spacecraft. Host and payload source identifiers map to the same physical host record, with explicit hosted-mission links in the ontology. Planned hosts retain planned labels.\n",
+        "The NO2 profile now also highlights the Sentinel-4A and Sentinel-5A hosts using [Sentinel-4](https://www.eumetsat.int/sentinel-4) and [Sentinel-5](https://www.eumetsat.int/sentinel-5) operator evidence. Their operator documentation routes are separate from the three verified STAC NO2 routes; a Sentinel-5P collection must not be substituted for Sentinel-5 data. Geometry presets are not inferred for the newly added hosts.\n",
+        "## Family rosters\n",
+        "Family membership includes archive and future records. The NOAA view includes missions with NOAA listed as an agency, plus the NOAA/GOES/TIROS/JPSS identifiers in the STAC audit; partnership does not imply exclusive NOAA ownership.\n"]
+    for family,title in (("sentinel","Sentinel"),("landsat","Landsat"),("noaa","NOAA and partners")):
+        text.extend([f"### {title}\n",f"**{len(report['families'][family])} records**. [Open this family](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/?family={family}).\n",
+            "| Mission / host | Lifecycle label | Record type | Evidence |\n|---|---|---|---|"])
+        for sid in report["families"][family]:
+            s=by_id[sid];ref=catalog["sources"][s["evidence"]["mission"][0]]
+            text.append(f"| {s['name'].replace('|','/')} | {s['status']} | {s.get('record_kind','spacecraft')} | [Source]({ref['url']}) |")
+        text.append("\n")
+    text.extend(["## Operator corrections and reference resources\n",
+        "[USGS](https://www.usgs.gov/landsat-missions/landsat-6) confirms that Landsat 6 failed to achieve orbit; its historical record is labeled **failed / no orbit achieved**, and supplies no EO archive. [Landsat 7](https://www.usgs.gov/landsat-missions/landsat-7) distinguishes its end of imaging from decommissioning on 4 June 2025. The [NOAA S-NPP notice](https://www.nesdis.noaa.gov/news/update-4-cessation-of-suomi-national-polar-orbiting-partnership-s-npp-data-users-november-02-2026-1540-utc-and-decommissioning-issued-november-2-2026-1800-utc) confirms permanent science-data delivery cessation on 2 November 2026; this service retirement overrides the older registry status without claiming that the spacecraft has already reentered.\n",
+        "The user-supplied [NOAA introduction](https://www.nesdis.noaa.gov/news/what-satellite) explains satellites and their bus, instruments and power source; its 2016 fleet counts are historical. The [Wikipedia EO satellite list](https://en.wikipedia.org/wiki/List_of_Earth_observation_satellites) is a secondary discovery reference with an update warning, rather than the authority for current lifecycle labels. [KeepTrack](https://app.keeptrack.space/) is linked as a separate orbit exploration tool; no KeepTrack code, imagery or orbital feed is copied or implied by the schematic positions here.\n",
+        "## Attribution and refresh\n",
+        registry["attribution"]+". CEOS-derived factual metadata are adapted under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); normalization, crosswalks, host consolidation and agency overrides are documented transformations. No source imagery is reproduced. The original application code and graphics retain their MIT license; CEOS metadata retain CC BY 4.0.\n",
+        "Refresh explicitly with `python scripts/mission_registry.py --refresh`, then `python scripts/curate_stac.py` and `python scripts/curate_research.py`. Review source/identity changes, run validation and tests, and rebuild. Ordinary builds use the saved snapshot and make no registry requests. The permanent-ID crosswalk and validation guard against dropping family members on refresh.\n"])
+    write(ROOT/"book/mission-coverage.md","\n".join(text))
 
 
 def splash(catalog, land):
@@ -279,7 +315,7 @@ def main():
         archive.write(ROOT / "LICENSE","LICENSE")
         archive.write(ROOT / "data/catalog.json","data/catalog.json")
         archive.write(ROOT / "data/catalog.jsonld","data/catalog.jsonld")
-        for name in ("research-topics.json","research-ontology.ttl","stac-coverage.json","stac-audit.json","orbit-types.json","geometry-presets.json"):
+        for name in ("research-topics.json","research-ontology.ttl","stac-coverage.json","stac-audit.json","orbit-types.json","geometry-presets.json","mission-registry.json","mission-coverage.json"):
             archive.write(ROOT / "data" / name,"data/"+name)
     hashes={str(p.relative_to(ROOT)).replace("\\","/"):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT / "data/catalog.json",ROOT / "assets/ne_110m_land.geojson",ROOT / "downloads/eo-explorer.html"]}
     write(site / "build-manifest.json",json.dumps({"catalog_verified":json.loads((ROOT / "data/catalog.json").read_text(encoding="utf-8"))["verified"],"sha256":hashes},indent=2)+"\n")

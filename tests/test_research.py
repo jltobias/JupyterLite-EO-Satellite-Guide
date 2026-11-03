@@ -23,7 +23,7 @@ class ResearchTests(unittest.TestCase):
     def test_specific_pollutant_excludes_broad_parent(self):
         result=research_matches("What can inform air quality and NO₂ measures?",self.profile)
         self.assertEqual(result["concepts"],["no2"])
-        self.assertEqual(set(result["platforms"]),{"sentinel-5p","aura","intelsat-40e"})
+        self.assertEqual(set(result["platforms"]),{"sentinel-5p","aura","intelsat-40e","meteosat-13","metop-sg-a1"})
         self.assertEqual({r["id"] for r in result["routes"]},{"s5p-no2","tempo-no2","omi-no2"})
         self.assertTrue(any("not ground-level" in q for q in result["qualifications"]))
 

@@ -6,7 +6,7 @@
   const discovery = window.EO_DISCOVERY;
   const $ = id => document.getElementById(id);
   const esc = value => String(value ?? "Unknown / not curated").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-  const families = {multispectral:{label:"Multispectral",color:"#60dfc4",symbol:"square"},radar:{label:"Radar",color:"#bb9cf5",symbol:"diamond"},hyperspectral:{label:"Hyperspectral",color:"#f29d81",symbol:"hexagon"},weather:{label:"Weather radiometry",color:"#84b7f6",symbol:"circle"},ocean:{label:"Ocean colour",color:"#f2d879",symbol:"triangle"},atmosphere:{label:"Atmospheric chemistry",color:"#ffcf91",symbol:"cross"},other:{label:"STAC metadata discovery",color:"#b6c8d4",symbol:"octagon"}};
+  const families = {multispectral:{label:"Multispectral",color:"#60dfc4",symbol:"square"},radar:{label:"Radar",color:"#bb9cf5",symbol:"diamond"},hyperspectral:{label:"Hyperspectral",color:"#f29d81",symbol:"hexagon"},weather:{label:"Weather radiometry",color:"#84b7f6",symbol:"circle"},ocean:{label:"Ocean colour",color:"#f2d879",symbol:"triangle"},atmosphere:{label:"Atmospheric chemistry",color:"#ffcf91",symbol:"cross"},other:{label:"Sensing family uncurated",color:"#b6c8d4",symbol:"octagon"}};
   const orbitModel=window.EOOrbits;
   const state = {selected:null,pins:new Set(),brush:null,ascending:true,sorted:false,page:0,view:[0,0,1200,650],research:window.EOResearch.resolve("")};
   const pageSize=13;
@@ -15,6 +15,8 @@
   const workspace = {active:false,native:false,scrollY:0,focus:null};
   const fullscreenButtons = [$("fullscreen"),$("atlas-fullscreen")];
   const filters = ["search","agency","type","orbit","status","property","application"];
+  const compact=value=>String(value).toLowerCase().normalize("NFKD").replace(/[^a-z0-9]/g,"");
+  const searchIndex=new Map(catalog.satellites.map(s=>[s.id,compact(JSON.stringify({id:s.id,name:s.name,aliases:s.aliases,agency:s.agency,region:s.region,purpose:s.purpose,orbit:s.orbit.class,sensors:s.sensors.map(i=>({name:i.name,method:i.method,observes:i.observes,spatial:i.spatial,spectral:i.spectral,products:i.products.map(p=>[p.name,p.level])})),registry:s.registry_records?.map(r=>[r.name,r.full_name])}))]));
   const svgNS = "http://www.w3.org/2000/svg";
   const byId = id => catalog.satellites.find(s => s.id === id);
   const sources = ids => `<span class="source-links">${[...new Set(ids)].map(id => { const s=catalog.sources[id]; return `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer" title="${esc(s.title)}">[${esc(id)}] ↗</a>`; }).join(" ")}</span>`;
@@ -28,8 +30,8 @@
   optionList("property",catalog.satellites.flatMap(s=>s.sensors.flatMap(i=>i.observes)));
   $("application").insertAdjacentHTML("beforeend",catalog.applications.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join(""));
   function visible() {
-    const q=$("search").value.trim().toLowerCase();
-    const matches=catalog.satellites.filter(s=>(!$("question").value.trim()||!$("research-only").checked||state.research.platforms.has(s.id))&&(!q||JSON.stringify(s).toLowerCase().includes(q))&&(!$("agency").value||s.agency===$("agency").value)&&(!$("type").value||s.type===$("type").value)&&orbitModel.matches(s,$("orbit").value)&&(!$("status").value||s.status===$("status").value)&&(!$("property").value||s.sensors.some(i=>i.observes.includes($("property").value)))&&(!$("application").value||catalog.applications.find(a=>a.id===$("application").value).satellites.includes(s.id)));
+    const q=compact($("search").value);
+    const matches=catalog.satellites.filter(s=>(!$("question").value.trim()||!$("research-only").checked||state.research.platforms.has(s.id))&&(!q||searchIndex.get(s.id).includes(q))&&(!$("mission-family").value||s.mission_families?.includes($("mission-family").value))&&(!$("agency").value||s.agency===$("agency").value)&&(!$("type").value||s.type===$("type").value)&&orbitModel.matches(s,$("orbit").value)&&(!$("status").value||s.status===$("status").value)&&(!$("property").value||s.sensors.some(i=>i.observes.includes($("property").value)))&&(!$("application").value||catalog.applications.find(a=>a.id===$("application").value).satellites.includes(s.id)));
     return state.sorted?matches.sort((a,b)=>state.ascending?a.name.localeCompare(b.name):b.name.localeCompare(a.name)):matches;
   }
   function pathForLand() {
@@ -54,7 +56,7 @@
     g.addEventListener("click",()=>select(s.id));g.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();select(s.id);}});g.addEventListener("pointerenter",()=>brush(s.id));g.addEventListener("pointerleave",()=>brush(null));g.addEventListener("focus",()=>brush(s.id));g.addEventListener("blur",()=>brush(null));$("satellites").append(g);
   });
   document.querySelectorAll(".sat-label").forEach(label=>{if(label.textContent.length>24)label.textContent=label.textContent.slice(0,22)+"…";});
-  $("legend").innerHTML=Object.entries(families).map(([id,f])=>`<button data-family="${id}" aria-pressed="false" style="--family:${f.color}"><svg viewBox="-12 -12 24 24" aria-hidden="true">${shape(id)}</svg>${f.label}</button>`).join("")+'<span class="legend-note">Solid halo: operational source snapshot · dashed: retired · dotted: unverified · gold dot: pinned</span>';
+  $("legend").innerHTML=Object.entries(families).map(([id,f])=>`<button data-family="${id}" aria-pressed="false" style="--family:${f.color}"><svg viewBox="-12 -12 24 24" aria-hidden="true">${shape(id)}</svg>${f.label}</button>`).join("")+'<span class="legend-note">Lifecycle is reported in the table; marks include historical and future missions. Solid halo: operational source snapshot · dashed: retired · dotted: unverified · gold dot: pinned</span>';
   $("legend").addEventListener("click",e=>{const b=e.target.closest("button");if(b){$("type").value=$("type").value===b.dataset.family?"":b.dataset.family;state.page=0;render();}});
   $("orbit-key").innerHTML=orbitModel.types.map(t=>`<button data-orbit="${esc(t.filter)}" aria-pressed="false" style="--orbit-color:${t.color}" title="${esc(t.description)}"><i aria-hidden="true"></i>${esc(t.label)}</button>`).join("")+'<a href="../book/orbit-guide.html" target="_blank" rel="noopener">Orbit guide ↗</a>';
   $("orbit-key").addEventListener("click",e=>{const b=e.target.closest("[data-orbit]");if(b){$("orbit").value=$("orbit").value===b.dataset.orbit?"":b.dataset.orbit;state.page=0;render();}});
@@ -67,7 +69,7 @@
   }
   $("color-mode").addEventListener("change",applyEncoding);
   function brush(id) {
-    state.brush=id; syncHighlights();
+    state.brush=id;if(id&&$("map-mode").value==="overview")revealRow(id);syncHighlights();
     if(workspace.active&&id){
       // Scroll only the table pane when a short viewport cannot show every row.
       const row=$(`row-${id}`), pane=$("catalog").querySelector(".table-scroll");
@@ -83,6 +85,7 @@
     document.querySelectorAll("[data-select]").forEach(e=>e.setAttribute("aria-expanded",String(e.dataset.select===state.selected)));
     const active=byId(state.brush||state.selected);
     $("brush-readout").textContent=active?`${active.name} · ${orbitCode(active)} / ${active.orbit.class} · ${families[active.type].label}`:"Hover or focus a satellite or row to link the views.";
+    inventoryTooltip(active);
   }
   function workspacePanel(name,open) {
     document.body.classList.toggle(`workspace-${name}-open`,open);
@@ -141,11 +144,26 @@
     if(fromInspector)$("inspector").querySelector(`[data-pin="${id}"]`)?.focus({preventScroll:true});
     $("announcement").textContent=`${byId(id).name} ${state.pins.has(id)?"pinned":"unpinned"}. ${state.pins.size} missions pinned.`;
   }
-  function setView(v) { state.view=v;$("constellation").setAttribute("viewBox",v.join(" ")); }
+  function setView(v) { state.view=v;$("constellation").setAttribute("viewBox",v.join(" "));inventoryTooltip(byId(state.brush||state.selected)); }
+  function inventoryTooltip(s){
+    const tip=$("inventory-tooltip"),hidden=!s||!document.body.classList.contains("inventory-overview")||$(`node-${s.id}`).classList.contains("filtered");tip.toggleAttribute("hidden",hidden);if(hidden)return;
+    const label=tip.querySelector(".inventory-name"),context=tip.querySelector(".inventory-context"),p=$(`node-${s.id}`).transform.baseVal.consolidate().matrix;
+    label.textContent=s.name.length>58?s.name.slice(0,55)+"…":s.name;context.textContent=`${orbitCode(s)} · ${s.status} · highlighted in the table`;
+    const width=Math.max(label.getComputedTextLength(),context.getComputedTextLength())+20,k=state.view[2]/1200;tip.querySelector("rect").setAttribute("width",width);
+    const x=Math.max(state.view[0]+5*k,Math.min(state.view[0]+state.view[2]-(width+5)*k,p.e+10*k)),y=Math.max(state.view[1]+5*k,Math.min(state.view[1]+state.view[3]-51*k,p.f-52*k));tip.setAttribute("transform",`translate(${x},${y}) scale(${k})`);
+  }
+  function pageControls(matches){
+    const list=pageList(),ids=new Set(list.map(s=>s.id)),overview=$("map-mode").value==="overview";
+    $("count").textContent=`${matches.length} MATCHES · ${overview?"ALL ON MAP":list.length+" ON MAP"}`;
+    $("page-status").textContent=`Rows ${matches.length?state.page*pageSize+1:0}–${Math.min(matches.length,(state.page+1)*pageSize)} of ${matches.length} · ${overview?"all on map":"map + table"}`;
+    $("page-prev").disabled=state.page===0;$("page-next").disabled=(state.page+1)*pageSize>=matches.length;document.querySelectorAll(".sat-node").forEach(e=>e.classList.toggle("on-table-page",ids.has(e.dataset.id)));
+  }
+  function revealRow(id){const matches=visible(),index=matches.findIndex(s=>s.id===id);if(index<0)return;const page=Math.floor(index/pageSize);if(page===state.page)return;state.page=page;pageControls(matches);renderRows();}
   function select(id) {
+    if($("map-mode").value==="overview")revealRow(id);
     if(state.selected===id){closeDetail();return;}
     state.selected=id;renderInspector();syncHighlights();
-    const s=byId(id),position=$(`node-${id}`).transform.baseVal.consolidate().matrix;if(!workspace.active)setView([Math.max(0,Math.min(320,position.e-440)),Math.max(0,Math.min(170,position.f-240)),880,480]);
+    const s=byId(id),position=$(`node-${id}`).transform.baseVal.consolidate().matrix;if(!workspace.active&&$("map-mode").value==="page")setView([Math.max(0,Math.min(320,position.e-440)),Math.max(0,Math.min(170,position.f-240)),880,480]);
     $("announcement").textContent=workspace.active?`${s.name} selected in both views. Use Details for sensor metadata.`:`${s.name} selected. Details and sources are open. Use Overview to restore the atlas.`;
   }
   const initialInspector=$("inspector").innerHTML;
@@ -156,11 +174,12 @@
     const applications=catalog.applications.filter(a=>a.satellites.includes(s.id));
     $("inspector").innerHTML=`<div class="detail-head"><span class="eyebrow">PLATFORM / EVIDENCE</span><button data-close aria-label="Close satellite details">× Close</button></div><h3 class="detail-name">${esc(s.name)}</h3><span class="badge ${s.status}">${esc(s.status)}</span><p class="detail-purpose">${esc(s.purpose)}</p><button class="pin-button" data-pin="${s.id}" aria-pressed="${state.pins.has(s.id)}">${state.pins.has(s.id)?"✓ Pinned for comparison":"+ Pin for comparison"}</button><dl class="facts"><div><dt>Operator</dt><dd>${esc(s.agency)}</dd></div><div><dt>Region</dt><dd>${esc(s.region)}</dd></div><div><dt>Orbit</dt><dd>${esc(s.orbit.class)}</dd></div><div><dt>Altitude</dt><dd>${altitude(s)}</dd></div><div><dt>Launch</dt><dd>${esc(s.launch)}</dd></div><div><dt>Mission end</dt><dd>${s.end?esc(s.end):"Not recorded"}</dd></div></dl><p class="detail-note">${esc(s.orbit.temporal_note)}</p><p class="detail-note">${esc(s.status_note)}</p>${sensorHTML}<details class="evidence-groups"><summary>Evidence by field · verified ${esc(s.verified)}</summary>${Object.entries(s.evidence).map(([group,ids])=>`<p><b>${esc(group)}</b>${sources(ids)}</p>`).join("")}</details>${applications.map(a=>`<details class="pathway"><summary>${esc(a.name)} →</summary><h4>${esc(a.evidence_type)}</h4>${a.historical_platform?`<p><b>${esc(a.historical_platform)}</b></p>`:""}<ol>${a.chain.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>${a.design?`<p>${esc(a.design)}</p><p>${esc(a.finding)}</p>`:""}<p class="detail-note">${esc(a.limitations)}</p>${sources(a.sources)}</details>`).join("")}`;
     const routes=discovery.routes.filter(r=>r.platforms.includes(s.id));
+    if(s.registry_records?.length)$("inspector").insertAdjacentHTML("beforeend",`<details class="registry-evidence"><summary>Mission registry, payloads and lifecycle</summary><p class="detail-note">CEOS MIM Database · CC BY 4.0 · snapshot ${esc(s.verified)}. Expected end of life is not retirement; operator sources take precedence. Registry inclusion does not establish usable products.</p>${s.registry_records.map(r=>`<p><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.name)} ↗</a><br>${esc(r.status)} · launch: ${esc(r.launch||"not recorded")} · reported EOL: ${esc(r.eol||"not recorded")}</p><p>Listed payloads: ${r.instruments.map(i=>`<a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.name)}</a>`).join(", ")||"Not listed"}</p>${r.links.map(l=>`<p><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a></p>`).join("")}`).join("")}</details>`);
     const hasGeometry=window.EO_GEOMETRY.presets.some(p=>p.id===s.id),studyURL=new URL("https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/swaths.html");if(hasGeometry)studyURL.searchParams.set("mission",s.id);if($("question").value)studyURL.searchParams.set("q",$("question").value);
     $("inspector").insertAdjacentHTML("beforeend",`<p>${hasGeometry?"":"Nominal swath geometry is not curated for this record. "}<a class="study-link" href="${esc(studyURL.href)}" target="_blank" rel="noopener">${hasGeometry?"Study this mission’s swath and study-area geometry":"Compare curated geometry examples"} ↗</a></p>`);
-    $("inspector").insertAdjacentHTML("beforeend",`<p class="detail-note">Record: ${esc(s.record_kind||"curated spacecraft")}. ${s.stac_imported&&!s.sensor_curation?"Discovery metadata; instrument lists may describe a mixed collection. Specifications are not operator-verified.":"Selected instruments and source-backed teaching specifications."}</p>${routes.length?'<h4>Research data pathways</h4>'+routes.map(r=>`<p><a href="${esc(r.collection_url)}" target="_blank" rel="noopener">${esc(r.label)} ↗</a><br><small>${esc(r.access_note)}</small></p>`).join(""):""}${s.stac_collections?.length?`<details><summary>${s.stac_collections.length} STAC metadata mentions</summary><p class="detail-note">A mention is not proof of current operations or usable assets. Groupings and derived collections may overlap.</p>${s.stac_collections.map(r=>`<p><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.catalog)} / ${esc(r.id)}</a></p>`).join("")}</details>`:""}`);
+    $("inspector").insertAdjacentHTML("beforeend",`<p class="detail-note">Record: ${esc(s.record_kind||"curated spacecraft")}. ${s.stac_imported&&!s.sensor_curation?"Inspect the registry payload links and provider metadata. Instrument specifications and product availability are not inferred from mission identity.":"Selected instruments and source-backed teaching specifications."}</p>${routes.length?'<h4>Research data pathways</h4>'+routes.map(r=>`<p><a href="${esc(r.collection_url)}" target="_blank" rel="noopener">${esc(r.label)} ↗</a><br><small>${esc(r.access_note)}</small></p>`).join(""):""}${s.stac_collections?.length?`<details><summary>${s.stac_collections.length} STAC metadata mentions</summary><p class="detail-note">A mention is not proof of current operations or usable assets. Groupings and derived collections may overlap.</p>${s.stac_collections.map(r=>`<p><a href="${esc(r.url)}" target="_blank" rel="noopener">${esc(r.catalog)} / ${esc(r.id)}</a></p>`).join("")}</details>`:""}`);
   }
-  $("inspector").addEventListener("click",e=>{if(e.target.closest("[data-close]")){const id=state.selected;closeDetail();document.getElementById(`node-${id}`)?.focus();}if(e.target.closest("[data-pin]"))pin(e.target.closest("[data-pin]").dataset.pin);if(e.target.closest("#start"))select("landsat-8");});
+  $("inspector").addEventListener("click",e=>{if(e.target.closest("[data-close]")){const id=state.selected;closeDetail();document.getElementById(`node-${id}`)?.focus();}if(e.target.closest("[data-pin]"))pin(e.target.closest("[data-pin]").dataset.pin);if(e.target.closest("#start")&&visible().length)select(visible()[0].id);});
   function renderRows() {
     const list=pageList();
     $("rows").innerHTML=list.map(s=>{
@@ -168,7 +187,7 @@
       const orbitHeight=s.orbit.altitude_km==null?"not curated":`${s.orbit.altitude_km.toLocaleString()} km`;
       return `<tr class="mission-row${state.research.platforms.has(s.id)?" research-match":""}" data-id="${s.id}" id="row-${s.id}">
         <td><button class="pin-button" data-pin="${s.id}" aria-label="${state.pins.has(s.id)?"Unpin":"Pin"} ${esc(s.name)}" aria-pressed="${state.pins.has(s.id)}">${state.pins.has(s.id)?"✓":"+ Pin"}</button></td>
-        <td><button class="row-select" data-select="${s.id}" aria-expanded="${s.id===state.selected}" aria-controls="inspector">${esc(s.name)}</button><small>${esc(s.sensors.map(i=>i.name).join(" / "))}</small></td>
+        <td><button class="row-select" data-select="${s.id}" aria-expanded="${s.id===state.selected}" aria-controls="inspector"><span class="row-status ${s.status}">${esc(s.status)}</span>${esc(s.name)}</button><small>${esc(s.sensors.map(i=>i.name).join(" / "))}</small></td>
         <td>${esc(s.agency)}<small>${esc(s.region)}</small></td>
         <td style="--family:${families[s.type].color}"><i class="family-dot" aria-hidden="true"></i>${families[s.type].label}</td>
         <td title="${esc(s.orbit.class)}; ${esc(altitude(s))}"><i class="orbit-swatch" aria-hidden="true"></i><span class="orbit-long">${esc(s.orbit.class)}</span><span class="orbit-short">${orbitType} · ${orbitHeight}</span><small>${altitude(s)}</small></td>
@@ -198,21 +217,30 @@
   $("clear-pins").addEventListener("click",()=>{state.pins.clear();renderRows();renderComparison();if(state.selected)renderInspector();syncHighlights();});
   function render() {
     const matches=visible();state.page=Math.min(state.page,Math.max(0,Math.ceil(matches.length/pageSize)-1));
-    const page=pageList(),ids=new Set(page.map(s=>s.id));state.brush=null;
+    const page=pageList(),mapList=$("map-mode").value==="overview"?matches:page,ids=new Set(mapList.map(s=>s.id));state.brush=null;
+    const dense=$("map-mode").value==="overview"&&mapList.length>pageSize;document.body.classList.toggle("inventory-overview",dense);
     if(state.selected&&!ids.has(state.selected))closeDetail();
     document.querySelectorAll(".sat-node").forEach(e=>{const shown=ids.has(e.dataset.id),match=state.research.platforms.has(e.dataset.id);e.classList.toggle("filtered",!shown);e.setAttribute("tabindex",shown?"0":"-1");e.setAttribute("aria-hidden",String(!shown));e.classList.toggle("research-match",match);e.classList.toggle("research-muted",!!$("question").value.trim()&&!match);});
     const slots=catalog.satellites.slice(0,pageSize).map(s=>s.display);
-    page.forEach((s,i)=>{const p=slots[i];$(`node-${s.id}`).setAttribute("transform",`translate(${p.x},${p.y})`);});
+    if(dense){const sorted=[...mapList].sort((a,b)=>orbitModel.kind(a).localeCompare(orbitModel.kind(b))||a.name.localeCompare(b.name));let i=0,ring=0;
+      while(i<sorted.length){const rx=Math.max(60,560-ring*24),ry=Math.max(30,280-ring*13),capacity=Math.max(8,Math.floor(2*Math.PI*ry/18)),n=Math.min(capacity,sorted.length-i);
+        for(let j=0;j<n;j++){const angle=2*Math.PI*j/n+ring*.12;$(`node-${sorted[i++].id}`).setAttribute("transform",`translate(${600+rx*Math.cos(angle)},${325+ry*Math.sin(angle)})`);}ring++;
+      }
+    }else mapList.forEach((s,i)=>{const p=slots[i];$(`node-${s.id}`).setAttribute("transform",`translate(${p.x},${p.y})`);});
     document.querySelectorAll("[data-family]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.family===$("type").value)));
     document.querySelectorAll("[data-orbit]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.orbit===$("orbit").value)));
     $("orbit-explanation").textContent=orbitModel.types.find(t=>t.filter===$("orbit").value)?.description||"SSO is a near-polar LEO subtype. Select All LEO to include SSO, or click a color to filter both views. Paths are schematic.";
-    $("count").textContent=`${matches.length} MATCHES · ${ids.size} IN VIEW`;
-    $("page-status").textContent=`${matches.length?state.page*pageSize+1:0}–${Math.min(matches.length,(state.page+1)*pageSize)} of ${matches.length} · map + table`;
-    $("page-prev").disabled=state.page===0;$("page-next").disabled=(state.page+1)*pageSize>=matches.length;
+    pageControls(matches);
+    $("inventory-summary").textContent=`${matches.length} matching records of ${catalog.satellites.length}. ${$("map-mode").value==="overview"?"Every match is on the map; the table shows 13 at a time.":"Map and table show the same 13 records; use Next for more."}`;
+    $("jump-mission").innerHTML='<option value="">Choose a mission…</option>'+[...matches].sort((a,b)=>a.name.localeCompare(b.name)).map(s=>`<option value="${esc(s.id)}">${esc(s.name)} · ${esc(s.status)}</option>`).join("");
+    if($("start")){$("start").disabled=!matches.length;$("start").textContent=matches.length?`Explore ${matches[0].name} →`:"No matching missions";}
     renderRows();$("rows").querySelectorAll("tr").forEach(row=>row.classList.toggle("research-match",state.research.platforms.has(row.dataset.id)));
   }
   filters.forEach(id=>$(id).addEventListener(id==="search"?"input":"change",()=>{state.page=0;render();}));
-  $("reset").addEventListener("click",()=>{filters.forEach(id=>$(id).value="");state.page=0;closeDetail();render();});
+  $("mission-family").addEventListener("change",()=>{filters.forEach(id=>$(id).value="");$("question").value="";closeDetail();runResearch();});
+  $("map-mode").addEventListener("change",()=>{closeDetail();render();});
+  $("jump-mission").addEventListener("change",()=>{const id=$("jump-mission").value;if(id)select(id);});
+  $("reset").addEventListener("click",()=>{filters.forEach(id=>$(id).value="");$("mission-family").value="";state.page=0;closeDetail();render();});
   $("page-prev").addEventListener("click",()=>{state.page--;closeDetail();render();});
   $("page-next").addEventListener("click",()=>{state.page++;closeDetail();render();});
   $("overview").addEventListener("click",()=>setView([0,0,1200,650]));
@@ -229,14 +257,16 @@
     const url=URL.createObjectURL(new Blob(["\ufeff"+records.map(r=>r.map(csv).join(",")).join("\r\n")],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="eo-satellite-catalog.csv";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
   });
   $("scope").textContent=catalog.scope;
-  $("snapshot-count").textContent=`${catalog.satellites.length} platform / constellation records · ${Object.keys(families).length} sensing families · no live tracking`;
+  $("snapshot-count").textContent=`${catalog.satellites.length} mission/platform records · ${Object.keys(families).length} sensing families · no live tracking`;
   function saveJSON(name,value){const url=URL.createObjectURL(new Blob([JSON.stringify(value,null,2)],{type:"application/json"}));const a=document.createElement("a");a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function brief(){return {profile:"eo-research-brief/1",question:$("question").value.trim(),created:new Date().toISOString(),catalog_snapshot:catalog.verified,concepts:state.research.concepts.map(t=>t.id),platforms:[...state.research.platforms].filter(id=>byId(id)),routes:discovery.routes.filter(r=>state.research.routes.includes(r.id)),qualifications:state.research.concepts.map(t=>t.caution),source:"https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/",fieldwork:"Planning metadata only. Not a FieldWork workflow, raster handoff or acquired-data receipt."};}
   function runResearch(){
     state.research=window.EOResearch.resolve($("question").value);state.page=0;
     const {concepts,platforms,routes}=state.research;
     const matches=catalog.satellites.filter(s=>platforms.has(s.id));
-    $("research-results").innerHTML=!$("question").value.trim()?'<p>Enter a question or choose an example to highlight potential measurement pathways.</p>':!concepts.length?'<p>No curated measurement pathway matches this wording. Try a named measurement such as NO₂, aerosol, surface temperature or surface water. A missing match does not mean data do not exist.</p>':`<h3>${matches.length} candidate platforms · ${concepts.map(t=>esc(t.label)).join(" + ")}</h3><p><a href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/swaths.html?q=${encodeURIComponent($("question").value)}" target="_blank" rel="noopener">Compare these candidates over your study area ↗</a></p>${concepts.map(t=>`<p>${esc(t.chain)}</p><p class="research-caution">${esc(t.caution)}</p>${sources(t.sources)}`).join("")}${discovery.routes.filter(r=>routes.includes(r.id)).map(r=>`<article class="data-route"><b>${esc(r.label)}</b><p>${esc(r.measurement)} · ${esc(r.format)} · ${esc(r.access_note)}</p><p>Catalog URL: <code>${esc(r.endpoint)}</code><br>Collection: <code>${esc(r.collection)}</code></p><p><a href="${esc(r.collection_url)}" target="_blank" rel="noopener">Inspect collection ↗</a><button data-copy-route="${esc(r.id)}">Copy catalog URL</button></p><small>Metadata checked ${esc(r.verified)}. ${esc(r.note)}</small></article>`).join("")}<p>Gold highlights indicate potential relevance. Other filters still apply; clear them if matching missions are hidden. Each page shows up to 13 records in both views.</p>`;
+    $("research-results").innerHTML=!$("question").value.trim()?'<p>Enter a question or choose an example to highlight potential measurement pathways.</p>':!concepts.length?'<p>No curated measurement pathway matches this wording. Try a named measurement such as NO₂, aerosol, surface temperature or surface water. A missing match does not mean data do not exist.</p>':`<h3>${matches.length} candidate platforms · ${concepts.map(t=>esc(t.label)).join(" + ")}</h3><p><a href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/swaths.html?q=${encodeURIComponent($("question").value)}" target="_blank" rel="noopener">Compare these candidates over your study area ↗</a></p>${concepts.map(t=>`<p>${esc(t.chain)}</p><p class="research-caution">${esc(t.caution)}</p>${sources(t.sources)}`).join("")}${discovery.routes.filter(r=>routes.includes(r.id)).map(r=>`<article class="data-route"><b>${esc(r.label)}</b><p>${esc(r.measurement)} · ${esc(r.format)} · ${esc(r.access_note)}</p><p>Catalog URL: <code>${esc(r.endpoint)}</code><br>Collection: <code>${esc(r.collection)}</code></p><p><a href="${esc(r.collection_url)}" target="_blank" rel="noopener">Inspect collection ↗</a><button data-copy-route="${esc(r.id)}">Copy catalog URL</button></p><small>Metadata checked ${esc(r.verified)}. ${esc(r.note)}</small></article>`).join("")}<p>Gold highlights indicate potential relevance. Other filters still apply; clear them if matching missions are hidden. The overview shows every match; the table shows 13 rows at a time. Hover a map mark to reveal its row.</p>`;
+    const hosted=matches.filter(s=>s.hosted_missions?.length&&s.sensor_curation);
+    if(hosted.length)$("research-results").insertAdjacentHTML("beforeend",`<div class="operator-routes"><h4>Additional candidates · operator documentation</h4>${hosted.map(s=>`<p><a href="${esc(s.sensors[0].products[0].access)}" target="_blank" rel="noopener">${esc(s.name)} ↗</a></p>`).join("")}<p>These hosted missions have operator documentation links; no verified STAC collection is bundled for them. Sentinel-5P data are not a substitute for Sentinel-5 data.</p></div>`);
     ["export-question","research-notebook","share-question"].forEach(id=>$(id).disabled=!concepts.length);
     render();
   }
@@ -256,6 +286,8 @@
     $("handoff-status").innerHTML='Notebook saved. <a href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/lab/index.html" target="_blank" rel="noopener">Open this Guide’s Lab ↗</a>, upload the notebook, edit area/dates, then Run All.';
   });
   $("sources").innerHTML=Object.entries(catalog.sources).map(([id,s])=>`<p class="source-entry" id="source-${esc(id)}"><b>[${esc(id)}]</b> ${esc(s.publisher)}. <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a>. ${s.published?`Published ${esc(s.published)}. `:""}Accessed ${esc(s.accessed)}. ${s.locators?esc(s.locators):""}${s.license?` ${esc(s.license)}.`:""}</p>`).join("");
-  $("question").value=(new URLSearchParams(location.search).get("q")||window.EO_INITIAL_QUESTION||"").slice(0,500);
-  runResearch();renderComparison();
+  const initialParams=new URLSearchParams(location.search);$("question").value=(initialParams.get("q")||window.EO_INITIAL_QUESTION||"").slice(0,500);
+  if(["sentinel","landsat","noaa"].includes(initialParams.get("family")))$("mission-family").value=initialParams.get("family");
+  if(initialParams.get("map")==="page")$("map-mode").value="page";
+  runResearch();renderComparison();if(visible().some(s=>s.id===initialParams.get("mission")))select(initialParams.get("mission"));
 })();

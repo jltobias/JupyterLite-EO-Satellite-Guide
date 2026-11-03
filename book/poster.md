@@ -8,7 +8,7 @@
 
 ## Interaction guide
 
-Use **Full screen** in the explorer's top navigation to open a linked workspace. On desktop screens the constellation and a compact mission table sit side by side, with up to 13 records per synchronized map/table page visible at common laptop and monitor sizes. Hovering or focusing either view highlights the matching platform in both views. The atlas stays at the overview when selecting a row, and larger satellite labels make the matching platform easier to find.
+Use **Full screen** beside the constellation or in the top navigation to open a linked workspace. The default **All matching records** overview displays the complete filtered inventory, with 13 table rows visible at a time. Hover/focus a mark to reveal its table page and highlight both views. **Mission family** starts a fresh Sentinel, Landsat or NOAA/partner view; **Locate a mission** opens a named record. Choose **Table page** for 13 larger, labeled symbols synchronized with the current table page. The atlas remains at the overview when selecting a row in fullscreen. See the [family rosters and source crosswalk](mission-coverage.md).
 
 The workspace's **Filters**, **Details** and **Compare** controls expose the full filters, selected mission metadata and pinned comparison. Hover over a shortened table cell for its complete text. **Exit full screen** or **Escape** returns to the page while preserving filters and pins. If browser fullscreen is unavailable, the same workspace fits the current window. Narrow or short screens keep scrolling within the table pane so the constellation remains visible.
 

@@ -19,6 +19,7 @@ parts:
     chapters:
       - file: data-model
       - file: stac-coverage
+      - file: mission-coverage
       - file: implementation
       - file: offline
       - file: references

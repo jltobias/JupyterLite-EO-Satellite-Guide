@@ -16,7 +16,9 @@
       "platforms": [
         "sentinel-5p",
         "aura",
-        "intelsat-40e"
+        "intelsat-40e",
+        "meteosat-13",
+        "metop-sg-a1"
       ],
       "routes": [
         "s5p-no2",
@@ -27,7 +29,9 @@
       "caution": "Satellite NO\u2082 columns are not ground-level concentrations or personal exposure. Check retrieval version, units, clouds, quality flags, averaging kernels, overpass time and validation before analysis.",
       "sources": [
         "tropomi-no2",
-        "tempo-products"
+        "tempo-products",
+        "eumetsat-sentinel4",
+        "eumetsat-sentinel5"
       ]
     },
     {
@@ -87,21 +91,25 @@
         "noaa-20",
         "noaa-21",
         "sentinel-3a",
-        "sentinel-3b"
+        "sentinel-3b",
+        "meteosat-13",
+        "metop-sg-a1"
       ],
       "routes": [
         "s5p-no2",
         "tempo-no2",
         "sentinel3-aod",
-        "modis-aod",
-        "omi-no2"
+        "omi-no2",
+        "modis-aod"
       ],
       "chain": "Air-quality question \u2192 choose a pollutant and observable \u2192 instrument \u2192 product \u2192 validation",
       "caution": "Specify the pollutant and whether you need a column, optical depth or near-surface concentration. Broad air-quality matches are possible measurement pathways, not interchangeable products.",
       "sources": [
         "tropomi-no2",
         "tempo-products",
-        "nasa-aerosols"
+        "nasa-aerosols",
+        "eumetsat-sentinel4",
+        "eumetsat-sentinel5"
       ]
     },
     {

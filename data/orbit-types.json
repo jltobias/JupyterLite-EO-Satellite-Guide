@@ -1,13 +1,78 @@
 {
-  "version":"1.0.0",
-  "verified":"2026-11-03",
-  "scope":"Nominal orbit categories for learning and filtering; SSO is a LEO subtype. Colors do not imply current ephemerides, scheduled acquisitions or data availability.",
-  "types":[
-    {"id":"sso","code":"SSO","label":"SSO · LEO subtype","filter":"Sun-synchronous LEO","color":"#42d9ba","description":"A near-polar LEO whose orbital plane precesses to maintain approximately the same local solar crossing time. Seasons, terrain and viewing geometry still change illumination.","sources":["esa-orbits","nasa-orbit-guide"]},
-    {"id":"leo","code":"LEO","label":"Other LEO","filter":"other-leo","color":"#68adff","description":"Low Earth orbits are below about 2,000 km. Many EO missions take roughly 90–120 minutes per orbit. This color groups curated LEO classes other than SSO; choose All LEO in the filter to include SSO.","sources":["esa-orbits","nasa-orbit-guide"]},
-    {"id":"geo","code":"GEO","label":"Geostationary","filter":"Geostationary","color":"#f6bf58","description":"A circular equatorial orbit near 35,786 km, with one sidereal-day period (about 23 h 56 min). It keeps an approximately fixed Earth view; instrument scan cadence is a separate quantity.","sources":["esa-orbits","nasa-orbit-guide"]},
-    {"id":"heo","code":"HEO","label":"Highly elliptical","filter":"Highly elliptical","color":"#c396ff","description":"Altitude varies strongly around an ellipse. Molniya-type designs dwell near apogee over high latitudes. Ellipticity alone does not determine the region observed or instrument acquisition schedule.","sources":["nasa-orbit-guide","wmo-arctica1","wmo-arctica2"]},
-    {"id":"l1","code":"L1","label":"Sun–Earth L1","filter":"Sun-Earth L1 Lissajous","color":"#ff9299","description":"A trajectory near the Sun–Earth L1 libration point, as used by DSCOVR. Distance from Earth is not a LEO altitude, and an Earth-orbit ring is not a physical L1 trajectory.","sources":["dscovr-orbit"]},
-    {"id":"unknown","code":"?","label":"Orbit uncurated","filter":"Unknown / not curated","color":"#a5b2bf","description":"The orbit has not been verified in this catalog. STAC metadata mentions do not establish orbit geometry. Gray is an explicit knowledge gap, not a class inferred from the spacecraft name.","sources":["stac-index"]}
+  "version": "1.0.0",
+  "verified": "2026-11-03",
+  "scope": "Nominal orbit categories for learning and filtering; SSO is a LEO subtype. Colors do not imply current ephemerides, scheduled acquisitions or data availability.",
+  "types": [
+    {
+      "id": "sso",
+      "code": "SSO",
+      "label": "SSO \u00b7 LEO subtype",
+      "filter": "Sun-synchronous LEO",
+      "color": "#42d9ba",
+      "description": "A near-polar LEO whose orbital plane precesses to maintain approximately the same local solar crossing time. Seasons, terrain and viewing geometry still change illumination.",
+      "sources": [
+        "esa-orbits",
+        "nasa-orbit-guide"
+      ]
+    },
+    {
+      "id": "leo",
+      "code": "LEO",
+      "label": "Other LEO",
+      "filter": "other-leo",
+      "color": "#68adff",
+      "description": "Low Earth orbits are below about 2,000 km. Many EO missions take roughly 90\u2013120 minutes per orbit. This color groups curated LEO classes other than SSO; choose All LEO in the filter to include SSO.",
+      "sources": [
+        "esa-orbits",
+        "nasa-orbit-guide"
+      ]
+    },
+    {
+      "id": "geo",
+      "code": "GEO",
+      "label": "Geostationary",
+      "filter": "Geostationary",
+      "color": "#f6bf58",
+      "description": "A circular equatorial orbit near 35,786 km, with one sidereal-day period (about 23 h 56 min). It keeps an approximately fixed Earth view; instrument scan cadence is a separate quantity.",
+      "sources": [
+        "esa-orbits",
+        "nasa-orbit-guide"
+      ]
+    },
+    {
+      "id": "heo",
+      "code": "HEO",
+      "label": "Highly elliptical",
+      "filter": "Highly elliptical",
+      "color": "#c396ff",
+      "description": "Altitude varies strongly around an ellipse. Molniya-type designs dwell near apogee over high latitudes. Ellipticity alone does not determine the region observed or instrument acquisition schedule.",
+      "sources": [
+        "nasa-orbit-guide",
+        "wmo-arctica1",
+        "wmo-arctica2"
+      ]
+    },
+    {
+      "id": "l1",
+      "code": "L1",
+      "label": "Sun\u2013Earth L1",
+      "filter": "Sun-Earth L1",
+      "color": "#ff9299",
+      "description": "A trajectory near the Sun\u2013Earth L1 libration point, as used by DSCOVR. Distance from Earth is not a LEO altitude, and an Earth-orbit ring is not a physical L1 trajectory.",
+      "sources": [
+        "dscovr-orbit"
+      ]
+    },
+    {
+      "id": "unknown",
+      "code": "?",
+      "label": "Orbit uncurated",
+      "filter": "Unknown / not curated",
+      "color": "#a5b2bf",
+      "description": "The orbit has not been verified in this catalog. STAC metadata mentions do not establish orbit geometry. Gray is an explicit knowledge gap, not a class inferred from the spacecraft name.",
+      "sources": [
+        "stac-index"
+      ]
+    }
   ]
 }

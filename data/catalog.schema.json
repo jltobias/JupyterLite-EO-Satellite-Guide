@@ -11,11 +11,11 @@
       "type": "object", "required": ["id", "name", "agency", "region", "status", "status_note", "verified", "orbit", "type", "purpose", "sensors", "sources", "evidence", "display"],
       "properties": {
         "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
-        "status": {"enum": ["operational", "retired", "planned", "unverified"]},
+        "status": {"enum": ["operational", "retired", "planned", "commissioning", "considered", "cancelled", "failed", "unverified"]},
         "type": {"enum": ["multispectral", "radar", "hyperspectral", "weather", "ocean", "atmosphere", "other"]},
         "verified": {"type": "string", "format": "date"},
         "orbit": {"type": "object", "required": ["class", "altitude_km", "repeat_days", "temporal_note"], "properties": {
-          "class": {"enum": ["Sun-synchronous LEO", "Geostationary", "Inclined LEO", "Polar LEO", "LEO", "Highly elliptical", "Sun-Earth L1 Lissajous", "Unknown / not curated"]},
+          "class": {"enum": ["Sun-synchronous LEO", "Geostationary", "Inclined LEO", "Polar LEO", "LEO", "Highly elliptical", "Sun-Earth L1 Lissajous", "Sun-Earth L1", "No orbit achieved", "Unknown / not curated"]},
           "altitude_km": {"type": ["number", "null"], "minimum": 0},
           "repeat_days": {"type": ["number", "null"], "minimum": 0}
         }},

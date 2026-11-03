@@ -2,7 +2,7 @@
 
 Open the [explorer](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/?q=air+quality+and+NO2+measures) and enter **air quality and NO₂ measures**. The curated vocabulary recognizes NO₂ and highlights Sentinel-5P/TROPOMI, Aura/OMI and Intelsat 40e/TEMPO in both the map and table. A specific pollutant takes precedence over the broad air-quality concept. A gold outline means potential relevance. Hover/focus and selection remain separate linked states.
 
-The map and table page together in groups of up to 13 records. Filters still intersect the research matches. Clear filters if candidates are hidden. Uncheck **Show matching missions only** to compare with the full catalog; page through it with Previous/Next. All filtered matches are included in CSV export, even when they span several pages. Fullscreen keeps the current page and both views visible; the Research button opens the question controls.
+The default map shows every research match. The table shows 13 rows at a time; hovering/focusing a map mark reveals its row. **Table page** mode keeps 13 larger symbols synchronized with the table. Other filters still intersect research matches. Selecting a mission family starts a fresh family view, clearing the question and other filters. All filtered matches export to CSV. Fullscreen keeps both views visible, with question controls under **Research**. The NO2 profile includes Sentinel-4A and Sentinel-5A hosts with operator documentation links; their data are not substituted with a Sentinel-5P STAC collection.
 
 ## The evidence chain
 

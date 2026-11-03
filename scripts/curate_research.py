@@ -6,6 +6,9 @@ ROOT=Path(__file__).resolve().parents[1]
 path=ROOT / "data/research-topics.json"
 profile=json.loads(path.read_text(encoding="utf-8"))
 for topic in profile["topics"]:
+    if topic["id"] in ("no2","air-quality"):
+        topic["platforms"]=list(dict.fromkeys(topic["platforms"]+["meteosat-13","metop-sg-a1"]))
+        topic["sources"]=list(dict.fromkeys(topic["sources"]+["eumetsat-sentinel4","eumetsat-sentinel5"]))
     topic["routes"]=["sentinel3-aod" if r=="modis-aod" else r for r in topic["routes"]]
     if topic["id"] in ("aerosol","air-quality"):
         topic["platforms"]=list(dict.fromkeys(topic["platforms"]+["sentinel-3a","sentinel-3b"]))
