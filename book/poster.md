@@ -16,7 +16,7 @@ Select a satellite or table name to expand its metadata. Select it again, use Cl
 
 Hover or keyboard-focus a map object or table control to highlight the corresponding platform in both views. Pins mark map objects and populate the comparison matrix. Pinned selections persist across filters, so you can compare missions from different filtered subsets. Reset filters restores the catalog; Clear pins resets the comparison.
 
-All platforms are accessible through search, standard buttons and the table. Central icon shapes and textual labels complement family colours. Tab traverses controls; Enter/Space selects; Escape closes details. Browser zoom remains available. A full screen-reader and classroom usability assessment remains future work.
+All platforms are accessible through search, standard buttons and the table. Central sensor shapes and textual labels complement orbit colours; the color selector also offers sensing-family colours. See the [orbit guide](orbit-guide.md) for the palette and SSO/LEO hierarchy. Tab traverses controls; Enter/Space selects; Escape closes details. Browser zoom remains available. A full screen-reader and classroom usability assessment remains future work.
 
 ## Print and export
 

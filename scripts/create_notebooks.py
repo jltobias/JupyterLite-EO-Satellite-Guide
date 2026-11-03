@@ -1,4 +1,4 @@
-"""Recreate starter lessons. Maintainers: this overwrites the seven source notebooks."""
+"""Recreate starter lessons. Maintainers: this overwrites the eight source notebooks."""
 from pathlib import Path
 import nbformat as nbf
 
@@ -227,6 +227,41 @@ Compare the temporal and geographic scope of Sentinel-5P and TEMPO for your ques
     ])
 
 
+def swaths_notebook():
+    save("08_swaths_orbits_study_area.ipynb",[
+        ("md", """# 08 · Research question, study area, swath and sampling
+
+**Goal:** connect the measurement needed for a research question to candidate platforms, then compare how their nominal geometry and sampling relate to a study area.
+
+The embedded tab is shared with the standalone **Swaths & orbits** page. It runs locally with no required provider requests. Its moving satellite uses a spherical-Earth circular-orbit teaching model with an arbitrary phase: **it does not predict a real pass or planned acquisition**. GEO remains fixed in the Earth frame. Source-backed nominal specifications and observed STAC metadata are labeled separately.
+
+Use [ESA's Types of orbits](https://www.esa.int/Enabling_Support/Space_Transportation/Types_of_orbits) and the [NASA orbit guide](https://science.nasa.gov/earth/earth-observatory/catalog-of-earth-satellite-orbits/) to interpret LEO, its SSO subtype, GEO and highly elliptical designs. Similar local solar time does not guarantee identical illumination; seasons, look angle, terrain and clouds still matter."""),
+        ("code", "from eo_guide import research_matches, swath_lab\nquestion = 'air quality and NO2 measures'\nbbox = [-76, 39, -74, 41]  # West, South, East, North (CRS84); example around Philadelphia\nbrief = research_matches(question)\nprint('Measurement concepts:', brief['concepts'])\nprint('Candidate platforms:', brief['platforms'])\nprint('Study bbox:', bbox)"),
+        ("code", "swath_lab(question=question, bbox=bbox, mission='sentinel-5p', height=1500)"),
+        ("md", """## Work through one question
+
+1. Compare Sentinel-5P/TROPOMI, Aura/OMI and Intelsat 40e/TEMPO. The study box stays fixed when changing candidates. The selection list also offers other curated geometry examples; a candidate without a preset remains explicitly uncurated.
+2. Choose **Demonstrate a pass over this box**. This deliberately places the model over the box at T+0; it is not an acquisition prediction. Play, pause and scrub time. Change the box with coordinates or **Draw box**, then zoom to it.
+3. Compare the same 30 × 20 displayed cells. Their physical extent changes with the stated sampling. A 10 m output grid is not automatically a 10 m native resolution. Footprint size and swath width also differ.
+4. Compare the model's orbital period with the documented ground-track repeat and GEO scan interval. The sampled proximity intervals on the timeline are not measured revisit or cloud-free availability.
+5. Optionally choose archive dates and click **Fetch up to 10 Item footprints**. This makes a public metadata request only. Orange outlines are cataloged footprints, not simulated swaths or valid-pixel masks. Collections can contain several platforms; inspect each returned Item's platform and QA.
+6. Copy a study link or save the study brief. It preserves the question, box, candidate, arbitrary model phase and archive dates. Copy the catalog URL and bbox into [JupyterLite STAC Browser](https://jltobias.github.io/JupyterLite-STAC-Browser/explorer/) to inspect assets and continue.
+
+The worked region/dates are examples, not a validated exposure analysis. NO₂ columns are not ground-level concentrations. Use appropriate retrieval QA, units, clouds, spatial support, temporal aggregation, validation and study design."""),
+        ("code", "# Represent the question and area without inventing an observation or an acquired dataset.\nimport json\nfrom pathlib import Path\nwest, south, east, north = bbox\nwkt = f'<http://www.opengis.net/def/crs/OGC/1.3/CRS84> POLYGON(({west} {south}, {east} {south}, {east} {north}, {west} {north}, {west} {south}))'\nbase = 'https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/'\ngraph = {\n '@context': {'eo':'https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/vocab/', 'geo':'http://www.opengis.net/ont/geosparql#', 'schema':'https://schema.org/'},\n '@graph': [\n  {'@id':'urn:example:research-question', '@type':'eo:ResearchQuestion', 'schema:text':question, 'eo:studyArea':{'@id':'urn:example:study-area'}, 'eo:researchTopic':[{'@id':base+'topic/'+c} for c in brief['concepts']]},\n  {'@id':'urn:example:study-area', '@type':'geo:Feature', 'geo:hasGeometry':{'@id':'urn:example:study-geometry'}},\n  {'@id':'urn:example:study-geometry', '@type':'geo:Geometry', 'geo:asWKT':{'@value':wkt,'@type':'geo:wktLiteral'}}\n ]}\nPath('my-research-area.jsonld').write_text(json.dumps(graph, indent=2), encoding='utf-8')\nprint('Saved question and area graph; no scientific observation or workflow-run receipt asserted.')"),
+        ("md", """## Sources and limits
+
+The panel's source disclosure links the selected mission's orbit and instrument documentation. Presets cover eight named mission/instrument examples, not every imported catalog record. The generic model omits ephemerides/TLEs, J2 precession, actual mission phasing, attitude, steering, sensor pointing, observation plans, terrain, instrument health, clouds and QA. The Sentinel-1 nadir strip is intentionally a simplified swath-width demonstration; real SAR is side-looking. TEMPO's collection envelope is advertised archive metadata, not a sensor field of view.
+
+The [methods guide](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/swaths.html) documents the distance-to-box proxy, date-line handling and bounded metadata query. Model and metadata checks do not establish current or future coverage. For actual pass predictions use authoritative ephemerides and an appropriate sensor access model; for analysis inspect the real product and validation evidence.
+
+## Exercise
+
+Share a question/area link with a colleague. Ask them to distinguish: measurement relevance, latitude reach, geometric opportunity, recorded Item footprint, valid observation and usable analysis input. Identify which of those claims the app can support and which require additional evidence."""),
+    ])
+
+
 if __name__=="__main__":
     main()
     research_notebook()
+    swaths_notebook()

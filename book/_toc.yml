@@ -11,7 +11,10 @@ parts:
       - file: notebooks/05_observation_to_public_health
       - file: notebooks/06_knowledge_graph_and_curation
       - file: notebooks/07_research_to_stac
+      - file: notebooks/08_swaths_orbits_study_area
       - file: research-discovery
+      - file: swaths
+      - file: orbit-guide
   - caption: Evidence and stewardship
     chapters:
       - file: data-model

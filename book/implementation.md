@@ -19,7 +19,9 @@ The user's request governs the repository work. The supplied `earth-observation-
 | Research discovery and sharing | Local topic matcher, linked highlights, exact collection cards, shared URL, research brief and runnable notebook |
 | STAC coverage | Directory-wide bounded audit and reviewed identifier crosswalk; unknowns/failures retained |
 | Keyboard access | Native controls, SVG keyboard selection, table access, focus highlights, Escape |
-| Browser learning environment | Seven Python notebooks with shared local support files, packaged into JupyterLite and Jupyter Book |
+| Browser learning environment | Eight Python notebooks with shared local support files, packaged into JupyterLite and Jupyter Book |
+| Orbit color coding and legend | Shared palette, SSO/LEO hierarchy, sensor shapes and matching table swatches |
+| Research question and study area | Separate swath tab, editable/drawable bbox, eight nominal geometry presets, playback, sampling/temporal context, optional observed STAC footprints and shareable planning context |
 
 ## Explicit extension work
 

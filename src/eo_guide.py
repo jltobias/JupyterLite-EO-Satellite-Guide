@@ -106,10 +106,25 @@ def poster(height=1100, question=""):
         path = root / "support" / "eo-explorer.html"
         if path.exists():
             document=path.read_text(encoding="utf-8")
+            document=document.replace('href="eo-swaths.html"','href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/swaths.html"')
             initial=json.dumps(str(question)[:500]).replace("<", "\\u003c")
             document=document.replace("<head>","<head><script>window.EO_INITIAL_QUESTION="+initial+";</script>",1)
             return iframe_document(document, "Interactive EO constellation poster", height)
     raise FileNotFoundError("support/eo-explorer.html missing. Run scripts/build.py --prepare.")
+
+
+def swath_lab(height=1350, question="air quality and NO2 measures", bbox=(-76,39,-74,41), mission="sentinel-5p"):
+    """Embed the shared, offline-capable AOI teaching model; no provider requests."""
+    if (len(bbox)!=4 or not all(isinstance(v,(int,float)) and math.isfinite(v) for v in bbox)
+            or not -180<=bbox[0]<bbox[2]<=180 or not -90<=bbox[1]<bbox[3]<=90):
+        raise ValueError("Use west,south,east,north coordinates; split date-line boxes")
+    for root in (Path.cwd(),Path(__file__).resolve().parent):
+        path=root / "support/eo-swaths.html"
+        if path.exists():
+            initial=json.dumps({"question":str(question)[:500],"bbox":list(bbox),"mission":str(mission)}).replace("<","\\u003c")
+            document=path.read_text(encoding="utf-8").replace("<head>","<head><script>window.EO_INITIAL_SWATH="+initial+";</script>",1)
+            return iframe_document(document,"EO study-area swaths and orbits",height)
+    raise FileNotFoundError("support/eo-swaths.html missing. Run scripts/build.py --prepare.")
 
 
 def query(catalog, *, family=None, property_name=None, agency=None):

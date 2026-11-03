@@ -8,6 +8,8 @@
 
 The [Pages workflow](.github/workflows/pages.yml) builds and publishes these destinations from `main`. The [standalone HTML](downloads/eo-explorer.html) also opens directly from a local checkout without installation or internet.
 
+**[Swaths & orbits · study-area lab](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/swaths.html?q=air+quality+and+NO2+measures&mission=sentinel-5p&bbox=-76,39,-74,41)** connects a research question to candidate measurements, a user-selected study box, nominal geometry and optional observed STAC footprints.
+
 ## Explore, unfold and compare
 
 The upper poster combines a global map with a selectable, schematic constellation and orbit rings. Click a satellite to expand or contract its mission record; unfold instruments and products for sensor method, spatial/spectral characteristics, temporal context, coverage, processing level and data-access links. Hover or focus a satellite or an attribute-table control to highlight the same platform in both views.
@@ -15,6 +17,8 @@ The upper poster combines a global map with a selectable, schematic constellatio
 The lower poster provides a linked mission index and a comparison matrix. Pin multiple platforms, search capabilities, filter by agency, sensor family, orbit, status, observed property or application, export a contextual CSV, and print with an A1 landscape stylesheet. Legends use colour, central icon shapes and text. Keyboard controls include Tab, Enter/Space and Escape.
 
 Choose **Full screen** for a viewport-filling workspace with the constellation and compact mission table side by side. Larger satellite labels and synchronized highlights make linked brushing visible without scrolling the page. Filters, metadata and comparisons remain available from the workspace controls; Escape returns to the page. On smaller screens only the table pane scrolls while the constellation stays visible.
+
+**Color encodes orbit type by default**: teal SSO (a LEO subtype), blue other LEO, gold GEO, purple highly elliptical, coral Sun–Earth L1 and gray uncurated. Sensor types retain distinct central shapes. The table carries matching orbit swatches; **Color by → Sensing family** supplies the alternate encoding. Click a legend to filter both views. **All LEO (including SSO)** respects the hierarchy. [ESA's orbit guide](https://www.esa.int/Enabling_Support/Space_Transportation/Types_of_orbits) informs the definitions; similar local solar time does not guarantee identical illumination.
 
 The catalog now contains **344 spacecraft and constellation records**, expanding the original 13 teaching examples through a bounded audit of **153 STAC Index listings**, dated **2026-11-03**. These include archives and mission groups, so the count is not a count of unique, operating satellites. The [coverage report](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/stac-coverage.html) records checked, partial, inaccessible and skipped catalogs and unresolved identifiers. It cannot establish that every EO satellite is represented. New discovery records keep unverified specifications explicit. Positions and orbit rings are schematic; SSO, GEO, inclined LEO and unknown orbit labels appear in both linked views.
 
@@ -28,6 +32,10 @@ The original [ontology profile](data/research-ontology.ttl), [curated concepts/r
 
 ## Learn in the browser
 
+The separate **Swaths & orbits** tab carries the question and selected mission into an editable/drawable CRS84 bbox. Eight source-backed geometry examples cover the three NO₂ candidates plus Landsat 8/9, Sentinel-2B/2C and Sentinel-1C. Compare moving nominal ground tracks, a simplified swath strip, sampling/ground extent, orbital period, documented repeat and GEO scan interval while keeping the study box fixed.
+
+The arbitrary-phase teaching model **does not predict real passes or acquisitions**. A separate action fetches up to 10 historical STAC Item metadata footprints for the same bbox/dates, identifies other/unspecified platforms, links footprints to a table and exports footprint GeoJSON. No assets are fetched. Share a study URL or save the question, bbox, preset, model phase and archive settings as a planning brief. [Methods and limitations](book/swaths.md) distinguish geometric opportunity, metadata footprint and usable observation.
+
 | Notebook | Investigation |
 |---|---|
 | [01 · Constellation poster](notebooks/01_constellation_poster.ipynb) | Embed and explore the full interactive map, metadata, table and comparison |
@@ -37,6 +45,7 @@ The original [ontology profile](data/research-ontology.ttl), [curated concepts/r
 | [05 · Observation to public health](notebooks/05_observation_to_public_health.ipynb) | Trace Philadelphia heat evidence; interpret HELIX, Jackson and contextual OSM examples |
 | [06 · Knowledge graph and curation](notebooks/06_knowledge_graph_and_curation.ipynb) | Validate sources and export a small SOSA/DCAT/PROV application profile |
 | [07 · Research to STAC](notebooks/07_research_to_stac.ipynb) | Resolve research topics, highlight platforms, share a brief and optionally query exact STAC collection metadata |
+| [08 · Swaths, orbits and study areas](notebooks/08_swaths_orbits_study_area.ipynb) | Connect a question and bbox to candidate geometry, spatial/temporal sampling, observed STAC footprints and an area ontology graph |
 
 JupyterLite runs Python locally in the browser; no account, API key or server kernel is needed. **First launch downloads Pyodide.** The standalone explorer needs no remote assets and works offline; the first-load Python runtime is not bundled. See [offline and publishing instructions](book/offline.md). Notebook simulations use synthetic data and do not imply validated remote-sensing or health results.
 
@@ -59,9 +68,12 @@ For browser checks:
 python -m pip install -r requirements-dev.txt
 python -m playwright install chromium
 python scripts/test_browser.py
+python scripts/test_swaths.py
 ```
 
 The browser test starts its own local server, checks map/table brushing, details, filters, pins, CSV export, keyboard interactions, mobile layout and offline first load, and saves screenshots under `tmp/qa/`.
+
+The study-area tests verify orbit colors/hierarchy, model invariants, AOI drawing/sharing, sampling comparisons, inert provider text, metadata-only queries and obsolete-request cancellation. Add `--live` for a normal-browser NO₂ footprint query and `--lite` to execute notebook 08 in a real Pyodide kernel. Both are optional network checks. The offline ZIP includes both `eo-explorer.html` and `eo-swaths.html`, plus the catalog, presets, audit evidence and attribution.
 
 Maintainers explicitly refresh evidence with `python scripts/audit_stac.py --refresh` and `python scripts/audit_nasa.py --refresh`, review the bounds/failures, then run `python scripts/curate_stac.py`. `data/stac-audit.json` preserves results and `data/stac-coverage.json` preserves the platform/constellation identifier crosswalk, including non-satellite/unresolved values. Builds use the checked-in snapshot and never crawl providers. `python scripts/curate_research.py` regenerates the reviewed route definitions. Run `python -m unittest discover -s tests -v` for the matching, identity and metadata-access contracts. Live notebook requests are opt-in and fetch metadata only.
 

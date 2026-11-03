@@ -2614,6 +2614,60 @@
       "url": "https://stac.dataspace.copernicus.eu/v1/collections/ccm-optical",
       "accessed": "2026-11-03",
       "locators": "Mission identity in provider platform/constellation metadata. This is not verification of operations, orbit or asset usability."
+    },
+    "nasa-orbit-guide": {
+      "title": "Catalog of Earth satellite orbits",
+      "publisher": "NASA Earth Observatory",
+      "url": "https://science.nasa.gov/earth/earth-observatory/catalog-of-earth-satellite-orbits/",
+      "accessed": "2026-11-03"
+    },
+    "wmo-arctica1": {
+      "title": "Arctica-M N1 nominal Molniya orbit",
+      "publisher": "WMO OSCAR / Space",
+      "url": "https://space.oscar.wmo.int/satellites/view/arctica_m_n1",
+      "accessed": "2026-11-03"
+    },
+    "wmo-arctica2": {
+      "title": "Arctica-M N2 nominal Molniya orbit",
+      "publisher": "WMO OSCAR / Space",
+      "url": "https://space.oscar.wmo.int/satellites/view/arctica_m_n2",
+      "accessed": "2026-11-03"
+    },
+    "aura-spacecraft": {
+      "title": "Aura spacecraft and instruments",
+      "publisher": "NASA",
+      "url": "https://science.nasa.gov/mission/aura/spacecraft-and-instruments/",
+      "accessed": "2026-11-03"
+    },
+    "omi-instrument": {
+      "title": "Ozone Monitoring Instrument",
+      "publisher": "NASA",
+      "url": "https://science.nasa.gov/mission/aura/omi/",
+      "accessed": "2026-11-03"
+    },
+    "tempo-longitude": {
+      "title": "TEMPO hosted instrument and longitude",
+      "publisher": "WMO OSCAR / Space",
+      "url": "https://space.oscar.wmo.int/satellites/view/tempo",
+      "accessed": "2026-11-03"
+    },
+    "omi-geometry": {
+      "title": "Aura validation overview: OMI spatial sampling and swath",
+      "publisher": "NASA Aura",
+      "url": "https://aura.gsfc.nasa.gov/images/aura_validation_v1.0.pdf",
+      "accessed": "2026-11-03"
+    },
+    "s5p-no2-resolution": {
+      "title": "Sentinel-5P TROPOMI high-resolution NO2 Level-2 product",
+      "publisher": "NASA Open Data / GES DISC",
+      "url": "https://data.nasa.gov/dataset/sentinel-5p-tropomi-near-real-time-nrt-tropospheric-no2-1-orbit-l2-5-5km-x-3-5km-v2-s5p-l2",
+      "accessed": "2026-11-03"
+    },
+    "tempo-stac-extent": {
+      "title": "TEMPO NO2 Level-2 V04 collection extent",
+      "publisher": "NASA CMR / ASDC",
+      "url": "https://cmr.earthdata.nasa.gov/stac/LARC_CLOUD/collections/TEMPO_NO2_L2_V04",
+      "accessed": "2026-11-03"
     }
   },
   "satellites": [
@@ -8648,7 +8702,7 @@
     },
     {
       "id": "arcm1",
-      "name": "ARCM1",
+      "name": "Arktika-M1 (ARCM1)",
       "agency": "Not curated; see provider metadata",
       "region": "Not curated",
       "status": "unverified",
@@ -8661,24 +8715,28 @@
       "stac_imported": true,
       "purpose": "Discover source metadata and confirm the platform, instrument, product, coverage, access and license before use.",
       "orbit": {
-        "class": "Unknown / not curated",
+        "class": "Highly elliptical",
         "altitude_km": null,
         "repeat_days": null,
-        "temporal_note": "Not curated. Collection extent is advertised archive coverage, not repeat, revisit or current operations."
+        "temporal_note": "Nominal ~12-hour Molniya orbit; long apogee dwell supports high-latitude views. Orbit period is not imaging cadence.",
+        "period_minutes": 720,
+        "inclination_deg": 63.4,
+        "altitude_note": "Variable altitude; a single nominal altitude is not representative."
       },
       "display": {
         "x": 600,
         "y": 80
       },
       "sources": [
-        "stac-platform-arcm1"
+        "stac-platform-arcm1",
+        "wmo-arctica1"
       ],
       "evidence": {
         "mission": [
           "stac-platform-arcm1"
         ],
         "orbit": [
-          "stac-platform-arcm1"
+          "wmo-arctica1"
         ],
         "sensors": [
           "stac-platform-arcm1"
@@ -8725,7 +8783,7 @@
     },
     {
       "id": "arcm2",
-      "name": "ARCM2",
+      "name": "Arktika-M2 (ARCM2)",
       "agency": "Not curated; see provider metadata",
       "region": "Not curated",
       "status": "unverified",
@@ -8738,24 +8796,28 @@
       "stac_imported": true,
       "purpose": "Discover source metadata and confirm the platform, instrument, product, coverage, access and license before use.",
       "orbit": {
-        "class": "Unknown / not curated",
+        "class": "Highly elliptical",
         "altitude_km": null,
         "repeat_days": null,
-        "temporal_note": "Not curated. Collection extent is advertised archive coverage, not repeat, revisit or current operations."
+        "temporal_note": "Nominal ~12-hour Molniya orbit; long apogee dwell supports high-latitude views. Orbit period is not imaging cadence.",
+        "period_minutes": 720,
+        "inclination_deg": 63.4,
+        "altitude_note": "Variable altitude; a single nominal altitude is not representative."
       },
       "display": {
         "x": 600,
         "y": 80
       },
       "sources": [
-        "stac-platform-arcm2"
+        "stac-platform-arcm2",
+        "wmo-arctica2"
       ],
       "evidence": {
         "mission": [
           "stac-platform-arcm2"
         ],
         "orbit": [
-          "stac-platform-arcm2"
+          "wmo-arctica2"
         ],
         "sensors": [
           "stac-platform-arcm2"

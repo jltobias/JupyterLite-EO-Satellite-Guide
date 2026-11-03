@@ -99,6 +99,15 @@ def main():
       "dscovr-orbit":("DSCOVR L1 Lissajous orbit","NASA JPL","https://science.jpl.nasa.gov/projects/dscovr/"),
       "s3-orbit":("Sentinel-3 mission orbit","ESA / Copernicus","https://sentiwiki.copernicus.eu/web/s3-mission"),
       "eumetsat-orbits":("Meteosat, Metop and Sentinel launch/orbit overview","EUMETSAT","https://www.eumetsat.int/satellite-operations/launches-and-orbits"),
+      "nasa-orbit-guide":("Catalog of Earth satellite orbits","NASA Earth Observatory","https://science.nasa.gov/earth/earth-observatory/catalog-of-earth-satellite-orbits/"),
+      "wmo-arctica1":("Arctica-M N1 nominal Molniya orbit","WMO OSCAR / Space","https://space.oscar.wmo.int/satellites/view/arctica_m_n1"),
+      "wmo-arctica2":("Arctica-M N2 nominal Molniya orbit","WMO OSCAR / Space","https://space.oscar.wmo.int/satellites/view/arctica_m_n2"),
+      "aura-spacecraft":("Aura spacecraft and instruments","NASA","https://science.nasa.gov/mission/aura/spacecraft-and-instruments/"),
+      "omi-instrument":("Ozone Monitoring Instrument","NASA","https://science.nasa.gov/mission/aura/omi/"),
+      "tempo-longitude":("TEMPO hosted instrument and longitude","WMO OSCAR / Space","https://space.oscar.wmo.int/satellites/view/tempo"),
+      "omi-geometry":("Aura validation overview: OMI spatial sampling and swath","NASA Aura","https://aura.gsfc.nasa.gov/images/aura_validation_v1.0.pdf"),
+      "s5p-no2-resolution":("Sentinel-5P TROPOMI high-resolution NO2 Level-2 product","NASA Open Data / GES DISC","https://data.nasa.gov/dataset/sentinel-5p-tropomi-near-real-time-nrt-tropospheric-no2-1-orbit-l2-5-5km-x-3-5km-v2-s5p-l2"),
+      "tempo-stac-extent":("TEMPO NO2 Level-2 V04 collection extent","NASA CMR / ASDC","https://cmr.earthdata.nasa.gov/stac/LARC_CLOUD/collections/TEMPO_NO2_L2_V04"),
       "esa-orbits":("Types of orbits","ESA","https://www.esa.int/Enabling_Support/Space_Transportation/Types_of_orbits"),
       "fieldwork-profile":("FieldWork STAC application profile (experimental)","Digital Twin Public Health contributors","https://github.com/digital-twin-ph/fieldwork/blob/main/ontology/stac.ttl")}
     for key,(title,publisher,url) in extras.items():
@@ -185,6 +194,15 @@ def main():
     for sid,(kind,height,ref) in orbit_facts.items():
         if sid in by_id:
             s=by_id[sid];s["orbit"].update({"class":kind,"altitude_km":height})
+            s["sources"].append(ref);s["evidence"]["orbit"]=[ref]
+    for sid,number in (("arcm1",1),("arcm2",2)):
+        if sid in by_id:
+            s=by_id[sid];ref=f"wmo-arctica{number}"
+            s["name"]=f"Arktika-M{number} ({sid.upper()})"
+            s.update(type="weather",agency="Roscosmos / RosHydroMet",region="Russia",record_kind="spacecraft")
+            s["orbit"].update({"class":"Highly elliptical","altitude_km":None,"period_minutes":720,
+                "inclination_deg":63.4,"altitude_note":"Variable altitude; a single nominal altitude is not representative.",
+                "temporal_note":"Nominal ~12-hour Molniya orbit; long apogee dwell supports high-latitude views. Orbit period is not imaging cadence."})
             s["sources"].append(ref);s["evidence"]["orbit"]=[ref]
     # Orbit information is only transferred from same-series operator evidence for these explicit siblings.
     for sid,original in {"sentinel-1a":"sentinel-1c","sentinel-1b":"sentinel-1c","sentinel-1d":"sentinel-1c","sentinel-2a":"sentinel-2b"}.items():

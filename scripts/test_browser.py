@@ -135,7 +135,7 @@ def check_discovery(page,base):
     expected={'sentinel-5p','aura','intelsat-40e'}
     assert set(page.locator('#rows tr').evaluate_all('(rows)=>rows.map(r=>r.dataset.id)'))==expected
     expect(page.locator('.sat-node.research-match')).to_have_count(3)
-    expect(page.locator('#node-sentinel-5p g[fill] > circle')).to_have_count(1)
+    expect(page.locator('#node-sentinel-5p .sensor-shape > path')).to_have_count(1)
     expect(page.locator('.mission-row.research-match')).to_have_count(3)
     expect(page.locator('#research-results')).to_contain_text('not ground-level concentrations')
     expect(page.locator('#research-results .data-route')).to_have_count(3)
@@ -307,6 +307,8 @@ def main():
             # Verify deep paths under a project-site prefix, not just an origin root.
             response=context.request.get(base+"/book/intro.html");assert response.status==200
             response=context.request.get(base+"/lab/index.html");assert response.status==200
+            html=context.request.get(base+"/explorer/").text()
+            assert all(name+'?v=' in html for name in ('catalog.js','orbits.js','app.js'))
             lite_config=context.request.get(base+"/jupyter-lite.json").json()
             assert any(x['name']=='@jupyterlite/pyodide-kernel-extension' for x in lite_config['jupyter-config-data']['federated_extensions'])
             for name in ["01_constellation_poster.ipynb","06_knowledge_graph_and_curation.ipynb","07_research_to_stac.ipynb","data/catalog.json","data/research-topics.json","data/research-ontology.ttl","support/eo-explorer.html","eo_guide.py"]:

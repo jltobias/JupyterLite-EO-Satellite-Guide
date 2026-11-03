@@ -983,28 +983,34 @@
     {
       "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/arcm1",
       "@type": "sosa:Platform",
-      "label": "ARCM1",
+      "label": "Arktika-M1 (ARCM1)",
       "sosa:hosts": [],
       "eo:orbitType": {
-        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Unknown---not-curated"
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Highly-elliptical"
       },
       "prov:wasDerivedFrom": [
         {
           "@id": "https://s3.gptl.ru/stac-web-free/Arctic-M/collection.json"
+        },
+        {
+          "@id": "https://space.oscar.wmo.int/satellites/view/arctica_m_n1"
         }
       ]
     },
     {
       "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/arcm2",
       "@type": "sosa:Platform",
-      "label": "ARCM2",
+      "label": "Arktika-M2 (ARCM2)",
       "sosa:hosts": [],
       "eo:orbitType": {
-        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Unknown---not-curated"
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Highly-elliptical"
       },
       "prov:wasDerivedFrom": [
         {
           "@id": "https://s3.gptl.ru/stac-web-free/Arctic-M/collection.json"
+        },
+        {
+          "@id": "https://space.oscar.wmo.int/satellites/view/arctica_m_n2"
         }
       ]
     },
@@ -5734,27 +5740,53 @@
     },
     {
       "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Geostationary",
-      "@type": "eo:OrbitType",
+      "@type": [
+        "eo:OrbitType",
+        "skos:Concept"
+      ],
       "label": "Geostationary"
     },
     {
+      "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Highly-elliptical",
+      "@type": [
+        "eo:OrbitType",
+        "skos:Concept"
+      ],
+      "label": "Highly elliptical"
+    },
+    {
       "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/LEO",
-      "@type": "eo:OrbitType",
+      "@type": [
+        "eo:OrbitType",
+        "skos:Concept"
+      ],
       "label": "LEO"
     },
     {
       "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Sun-Earth-L1-Lissajous",
-      "@type": "eo:OrbitType",
+      "@type": [
+        "eo:OrbitType",
+        "skos:Concept"
+      ],
       "label": "Sun-Earth L1 Lissajous"
     },
     {
       "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Sun-synchronous-LEO",
-      "@type": "eo:OrbitType",
-      "label": "Sun-synchronous LEO"
+      "@type": [
+        "eo:OrbitType",
+        "skos:Concept"
+      ],
+      "label": "Sun-synchronous LEO",
+      "skos:broader": {
+        "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/LEO"
+      }
     },
     {
       "@id": "https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/id/orbit/Unknown---not-curated",
-      "@type": "eo:OrbitType",
+      "@type": [
+        "eo:OrbitType",
+        "skos:Concept"
+      ],
       "label": "Unknown / not curated"
     },
     {

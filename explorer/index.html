@@ -13,7 +13,7 @@
 <a class="skip" href="#catalog">Skip to satellite table</a>
 <header class="masthead">
   <a class="brand" href="#"><span class="brand-mark" aria-hidden="true">◎</span> GLOBAL <b>EO</b><span class="brand-divider">/</span><span class="brand-sub">THE SATELLITE GUIDE</span></a>
-  <nav aria-label="Project"><a aria-current="page" href="#atlas">Explorer</a><a href="../book/intro.html">Field guide ↗</a><a href="../lab/index.html?path=01_constellation_poster.ipynb">JupyterLite Lab ↗</a><button id="fullscreen" class="primary" aria-pressed="false" aria-controls="poster">⛶ Full screen</button></nav>
+  <nav aria-label="Project"><a aria-current="page" href="#atlas">Explorer</a><a href="swaths.html" target="_blank" rel="noopener">Swaths & orbits ↗</a><a href="../book/intro.html">Field guide ↗</a><a href="../lab/index.html?path=01_constellation_poster.ipynb">JupyterLite Lab ↗</a><button id="fullscreen" class="primary" aria-pressed="false" aria-controls="poster">⛶ Full screen</button></nav>
 </header>
 <main id="poster">
   <div class="workspace-bar" aria-label="Full-screen workspace controls">
@@ -47,7 +47,7 @@
     <button id="reset" class="quiet">Reset filters</button>
   </section>
   <section class="atlas-section" id="atlas" aria-labelledby="atlas-heading">
-    <div class="section-bar"><h2 id="atlas-heading"><span>01</span> The constellation</h2><div class="atlas-actions"><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="overview">Overview</button><button id="print">Print poster</button></div></div>
+    <div class="section-bar"><h2 id="atlas-heading"><span>01</span> The constellation</h2><div class="atlas-actions"><label class="color-control">Color by <select id="color-mode"><option value="orbit">Orbit type</option><option value="sensor">Sensing family</option></select></label><button id="zoom-out" aria-label="Zoom out">−</button><button id="zoom-in" aria-label="Zoom in">+</button><button id="overview">Overview</button><button id="print">Print poster</button></div></div>
     <div class="canvas-grid">
       <div class="atlas-wrap">
         <div class="atlas-key"><span>SCHEMATIC ORBIT ATLAS</span><span id="count" role="status" aria-live="polite"></span></div>
@@ -57,16 +57,18 @@
           <defs><radialGradient id="ocean"><stop stop-color="#133d51"/><stop offset="1" stop-color="#0a2236"/></radialGradient><pattern id="stars" width="89" height="71" patternUnits="userSpaceOnUse"><circle cx="13" cy="17" r="0.7" fill="#7299b3" opacity=".45"/><circle cx="67" cy="52" r=".6" fill="#7299b3" opacity=".25"/></pattern><clipPath id="map-clip"><rect x="180" y="180" width="840" height="310" rx="155"/></clipPath></defs>
           <rect width="1200" height="650" fill="url(#stars)"/>
           <g id="world" clip-path="url(#map-clip)"><rect x="180" y="180" width="840" height="310" fill="url(#ocean)"/><g id="graticule"></g><path id="land" fill="#276174" stroke="#4c8a96" stroke-width=".6" opacity=".75"/><path id="equator" d="M180 335H1020" stroke="#7aafba" stroke-dasharray="5 7" opacity=".4"/></g>
-          <ellipse cx="600" cy="300" rx="490" ry="225" fill="none" stroke="#51d9c2" stroke-width="1" opacity=".3"/>
+          <ellipse cx="600" cy="300" rx="490" ry="225" fill="none" stroke="#68adff" stroke-width="1" opacity=".3"/>
           <ellipse cx="600" cy="335" rx="557" ry="258" fill="none" stroke="#f6c478" stroke-dasharray="6 7" opacity=".5"/>
-          <ellipse cx="600" cy="315" rx="150" ry="230" fill="none" stroke="#6289ad" opacity=".18" transform="rotate(25 600 315)"/>
+          <ellipse cx="600" cy="315" rx="150" ry="230" fill="none" stroke="#42d9ba" opacity=".3" transform="rotate(25 600 315)"/>
+          <ellipse cx="610" cy="310" rx="520" ry="135" fill="none" stroke="#c396ff" stroke-dasharray="3 6" opacity=".22" transform="rotate(-18 610 310)"/>
           <text x="580" y="300" class="map-label">EARTH</text><text x="580" y="322" class="map-sub">OUR SHARED OBSERVATORY</text>
           <text x="33" y="640" class="orbit-label">— LOW EARTH ORBIT · ILLUSTRATIVE</text><text x="740" y="640" class="orbit-label geo-label">- - GEOSTATIONARY · ~35,786 km NOMINAL</text>
           <g id="satellites"></g>
         </svg>
         <p class="map-note">Satellite slots, rings and relative distances are illustrative. Geographic positions are not ephemerides. Map: Natural Earth.</p>
-        <div id="legend" class="legend" aria-label="Sensing family legend"></div>
-        <div id="orbit-key" class="orbit-key" aria-label="Orbit type legend"></div><p id="orbit-explanation" class="map-note" role="status">SSO: similar local solar time. GEO: fixed Earth view. Inclined LEO: changing local time. L1: Lissajous near a Sun-Earth libration point. Unknown: not curated. Click a type to filter both views; slots are schematic, including L1.</p>
+        <p id="encoding-note" class="map-note">Color = orbit type · central shape = sensing family · outer gold highlight = research match.</p>
+        <div id="orbit-key" class="orbit-key" aria-label="Orbit type color legend"></div><p id="orbit-explanation" class="map-note" role="status">SSO is a near-polar LEO subtype. Click an orbit color to filter both views. Positions and paths are schematic.</p>
+        <div id="legend" class="legend" aria-label="Sensing family shape legend"></div>
       </div>
       <aside id="inspector" aria-label="Satellite details"><div class="empty-details"><span class="eyebrow">START WITH A QUESTION</span><h3>What do you<br>want to observe?</h3><p>Select any satellite to unfold its instruments, products and evidence.</p><div class="starter"><span>01</span> Click a satellite or table row</div><div class="starter"><span>02</span> Open a sensor to go deeper</div><div class="starter"><span>03</span> Pin missions to compare</div><button id="start" class="primary">Explore Landsat 8 →</button><p class="small">Keyboard: Tab to a satellite, Enter to open, Escape to return.</p></div></aside>
     </div>
@@ -87,6 +89,7 @@
 <noscript>This explorer requires JavaScript. The Jupyter Book and catalog JSON provide readable alternatives.</noscript>
 <script src="catalog.js"></script>
 <script src="research.js"></script>
+<script src="orbits.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

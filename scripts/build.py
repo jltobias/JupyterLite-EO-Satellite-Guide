@@ -9,6 +9,7 @@ import argparse
 import asyncio
 import hashlib
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -38,13 +39,31 @@ def reset_generated(directory):
         shutil.rmtree(resolved)
 
 
+def version_explorer_assets(directory):
+    """Keep HTML and its coupled catalog/modules consistent across cached deploys."""
+    for name in ("index.html","swaths.html"):
+        path=directory / name
+        text=path.read_text(encoding="utf-8")
+        def version(match):
+            relative=match.group(2)
+            asset=(directory / relative).resolve()
+            if not asset.is_relative_to(directory.resolve()) or not asset.is_file():
+                return match.group(0)
+            digest=hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+            return f'{match.group(1)}="{relative}?v={digest}"'
+        text=re.sub(r'(src|href)="([^":?#]+\.(?:js|css))"',version,text)
+        write(path,text)
+
+
 def prepare():
     catalog_text = (ROOT / "data/catalog.json").read_text(encoding="utf-8")
     catalog = json.loads(catalog_text)
     discovery_text=(ROOT / "data/research-topics.json").read_text(encoding="utf-8")
     discovery=json.loads(discovery_text)
+    orbit_text=(ROOT / "data/orbit-types.json").read_text(encoding="utf-8")
+    geometry_text=(ROOT / "data/geometry-presets.json").read_text(encoding="utf-8")
     land = json.loads((ROOT / "assets/ne_110m_land.geojson").read_text(encoding="utf-8"))
-    payload = "window.EO_CATALOG=" + script_json(catalog) + ";\nwindow.EO_DISCOVERY=" + script_json(discovery) + ";\nwindow.EO_LAND=" + json.dumps(land, separators=(",", ":")) + ";\n"
+    payload = "window.EO_CATALOG=" + script_json(catalog) + ";\nwindow.EO_DISCOVERY=" + script_json(discovery) + ";\nwindow.EO_ORBITS="+script_json(json.loads(orbit_text))+";\nwindow.EO_GEOMETRY="+script_json(json.loads(geometry_text))+";\nwindow.EO_LAND=" + json.dumps(land, separators=(",", ":")) + ";\n"
     write(ROOT / "explorer/catalog.js", payload)
     template = (ROOT / "explorer/index.html").read_text(encoding="utf-8")
     css = (ROOT / "explorer/style.css").read_text(encoding="utf-8")
@@ -56,16 +75,30 @@ def prepare():
     research_js=(ROOT / "explorer/research.js").read_text(encoding="utf-8")
     document=document.replace('<link rel="stylesheet" href="discovery.css">',f"<style>{discovery_css}</style>")
     document=document.replace('<script src="research.js"></script>',f"<script>{research_js}</script>")
+    orbit_js=(ROOT / "explorer/orbits.js").read_text(encoding="utf-8")
+    document=document.replace('<script src="orbits.js"></script>',f"<script>{orbit_js}</script>")
     document = document.replace('<script src="catalog.js"></script>', f"<script>{payload}</script>")
     document = document.replace('<script src="app.js"></script>', f"<script>{js}</script>")
     document = document.replace('href="../book/', 'href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/')
     document = document.replace('href="../lab/', 'href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/lab/')
     document = document.replace("<!doctype html>", "<!doctype html>\n<!--\n" + (ROOT / "LICENSE").read_text(encoding="utf-8") + "\n-->", 1)
+    document=document.replace('href="swaths.html"','href="eo-swaths.html"')
     write(ROOT / "downloads/eo-explorer.html", document)
     write(ROOT / "notebooks/support/eo-explorer.html", document)
+    study=(ROOT / "explorer/swaths.html").read_text(encoding="utf-8")
+    for name in ("style.css","coverage.css"):
+        study=study.replace(f'<link rel="stylesheet" href="{name}">',"<style>"+(ROOT / "explorer" / name).read_text(encoding="utf-8")+"</style>")
+    study=study.replace('<script src="catalog.js"></script>',f"<script>{payload}</script>")
+    for name in ("research.js","orbits.js","coverage-model.js","coverage.js"):
+        study=study.replace(f'<script src="{name}"></script>',"<script>"+(ROOT / "explorer" / name).read_text(encoding="utf-8")+"</script>")
+    study=study.replace('href="../book/','href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/')
+    study=study.replace('href="index.html"','href="eo-explorer.html"').replace('href="swaths.html"','href="eo-swaths.html"')
+    study=study.replace("<!doctype html>","<!doctype html>\n<!--\n"+(ROOT / "LICENSE").read_text(encoding="utf-8")+"\n-->",1)
+    write(ROOT / "downloads/eo-swaths.html",study)
+    write(ROOT / "notebooks/support/eo-swaths.html",study)
     write(ROOT / "notebooks/data/catalog.json", catalog_text)
     write(ROOT / "notebooks/data/research-topics.json", discovery_text)
-    for name in ("stac-coverage.json","research-ontology.ttl"):
+    for name in ("stac-coverage.json","research-ontology.ttl","orbit-types.json","geometry-presets.json"):
         shutil.copy2(ROOT / "data" / name,ROOT / "notebooks/data" / name)
     shutil.copy2(ROOT / "src/eo_guide.py", ROOT / "notebooks/eo_guide.py")
     # Sources are kept next to each notebook in both the book and the Lite filesystem.
@@ -108,7 +141,10 @@ def export_graph(catalog,discovery):
     properties = sorted({p for s in catalog["satellites"] for i in s["sensors"] for p in i["observes"] if p!="Not curated"})
     nodes.extend({"@id":base+"property/"+p.replace(" ", "-"),"@type":"sosa:ObservableProperty","label":p} for p in properties)
     for orbit in sorted({s["orbit"]["class"] for s in catalog["satellites"]}):
-        nodes.append({"@id":base+"orbit/"+orbit.replace(" ","-").replace("/","-"),"@type":"eo:OrbitType","label":orbit})
+        node={"@id":base+"orbit/"+orbit.replace(" ","-").replace("/","-"),"@type":["eo:OrbitType","skos:Concept"],"label":orbit}
+        if orbit in ("Sun-synchronous LEO","Inclined LEO","Polar LEO"):
+            node["skos:broader"]={"@id":base+"orbit/LEO"}
+        nodes.append(node)
     for t in discovery["topics"]:
         nodes.append({"@id":base+"topic/"+t["id"],"@type":["eo:ResearchTopic","skos:Concept"],"skos:prefLabel":t["label"],
                       "skos:altLabel":t["aliases"],"skos:broader":[{"@id":base+"topic/"+t["broader"]}] if t.get("broader") else [],
@@ -227,6 +263,7 @@ def main():
     shutil.copytree(book_output / "_build/html",site / "book",dirs_exist_ok=True)
     for name in ("explorer","assets","data","downloads"):
         shutil.copytree(ROOT / name,site / name,dirs_exist_ok=True)
+    version_explorer_assets(site / "explorer")
     for name in ("ATTRIBUTIONS.md","LICENSE"):
         shutil.copy2(ROOT / name,site / name)
     # The config loader reads the root index as well as jupyter-lite.json.
@@ -237,11 +274,12 @@ def main():
     write(site / ".nojekyll", "")
     with zipfile.ZipFile(site / "downloads/eo-explorer-offline.zip","w",zipfile.ZIP_DEFLATED) as archive:
         archive.write(ROOT / "downloads/eo-explorer.html","eo-explorer.html")
+        archive.write(ROOT / "downloads/eo-swaths.html","eo-swaths.html")
         archive.write(ROOT / "ATTRIBUTIONS.md","ATTRIBUTIONS.md")
         archive.write(ROOT / "LICENSE","LICENSE")
         archive.write(ROOT / "data/catalog.json","data/catalog.json")
         archive.write(ROOT / "data/catalog.jsonld","data/catalog.jsonld")
-        for name in ("research-topics.json","research-ontology.ttl","stac-coverage.json","stac-audit.json"):
+        for name in ("research-topics.json","research-ontology.ttl","stac-coverage.json","stac-audit.json","orbit-types.json","geometry-presets.json"):
             archive.write(ROOT / "data" / name,"data/"+name)
     hashes={str(p.relative_to(ROOT)).replace("\\","/"):hashlib.sha256(p.read_bytes()).hexdigest() for p in [ROOT / "data/catalog.json",ROOT / "assets/ne_110m_land.geojson",ROOT / "downloads/eo-explorer.html"]}
     write(site / "build-manifest.json",json.dumps({"catalog_verified":json.loads((ROOT / "data/catalog.json").read_text(encoding="utf-8"))["verified"],"sha256":hashes},indent=2)+"\n")

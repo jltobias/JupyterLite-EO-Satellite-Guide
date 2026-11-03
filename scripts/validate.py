@@ -50,7 +50,7 @@ def main():
     for app in catalog["applications"]:
         assert set(app["satellites"])<=set(ids),"Application refers to unknown platform"
     notebook_paths=sorted((ROOT / "notebooks").glob("*.ipynb"))
-    assert len(notebook_paths)==7,"Expected seven guided lessons"
+    assert len(notebook_paths)==8,"Expected eight guided lessons"
     for path in notebook_paths:
         notebook=nbformat.read(path,as_version=4)
         nbformat.validate(notebook)
@@ -82,6 +82,22 @@ def main():
     assert len(audit["catalogs"])==coverage["catalog_count"]
     assert all(c["documents_checked"]<=audit["limits"]["documents_per_catalog"] for c in audit["catalogs"])
     assert all(a["documents_checked"]<=a["page_limit"] for a in audit.get("supplemental_audits",[]))
+    orbits=json.loads((ROOT / "data/orbit-types.json").read_text(encoding="utf-8"))
+    for orbit in orbits["types"]:
+        assert orbit["description"] and set(orbit["sources"])<=set(sources)
+        assert len(orbit["color"])==7 and orbit["color"].startswith("#")
+    geometry=json.loads((ROOT / "data/geometry-presets.json").read_text(encoding="utf-8"))
+    assert len({p["id"] for p in geometry["presets"]})==len(geometry["presets"])
+    for p in geometry["presets"]:
+        assert p["id"] in ids and p["altitude_km"]>0 and p["pixel_x_m"]>0 and p["pixel_y_m"]>0
+        assert p["route"] in route_ids and set(p["sources"])<=set(sources)
+        if p["kind"]=="leo":
+            assert 0<=p["inclination_deg"]<=180 and p["swath_km"]>0
+        else:
+            assert p["kind"]=="geo" and len(p["envelope"])==4
+        for concept,override in p.get("measurement_overrides",{}).items():
+            assert concept in topic_ids and override["pixel_x_m"]>0 and override["pixel_y_m"]>0
+            assert set(override["sources"])<=set(sources)
     assert abs(orbital_period_minutes(705)-98.73)<.5
     assert 1435<orbital_period_minutes(35786)<1440
     assert all(0<synthetic_reflectance(w)<1 for w in range(400,2401))

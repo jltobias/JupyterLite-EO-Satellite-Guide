@@ -1,0 +1,207 @@
+{
+  "version": "1.0.0",
+  "verified": "2026-11-03",
+  "model": "Spherical Earth, circular two-body orbit and uniform Earth rotation, with arbitrary phase. Nominal SSO inclination is used without J2 precession. GEO is fixed in the Earth frame. This is a teaching model, not an ephemeris, pass prediction, tasking plan, cloud-free revisit forecast or calibrated sensor simulator.",
+  "presets": [
+    {
+      "id": "sentinel-5p",
+      "label": "Sentinel-5P \u00b7 TROPOMI NO\u2082",
+      "kind": "leo",
+      "orbit": "Sun-synchronous LEO",
+      "altitude_km": 824,
+      "inclination_deg": 98.7,
+      "swath_km": 2600,
+      "pixel_x_m": 3500,
+      "pixel_y_m": 5500,
+      "repeat_days": 16,
+      "cadence_minutes": null,
+      "route": "s5p-no2",
+      "sampling": "Illustrative 3.5 \u00d7 5.5 km nadir NO\u2082 footprint; actual size varies across track, processing version and acquisition date.",
+      "temporal": "Near-daily global sampling design; 16-day ground-track cycle. Clouds, QA, viewing geometry and product latency affect usable observations.",
+      "limitations": "A retrieved atmospheric column is not a surface concentration. A modeled swath crossing does not establish a valid NO\u2082 retrieval.",
+      "sources": [
+        "s5p-mission",
+        "tropomi-no2",
+        "s5p-no2-resolution"
+      ]
+    },
+    {
+      "id": "aura",
+      "label": "Aura \u00b7 OMI NO\u2082",
+      "kind": "leo",
+      "orbit": "Sun-synchronous LEO",
+      "altitude_km": 705,
+      "inclination_deg": 98,
+      "swath_km": 2600,
+      "pixel_x_m": 24000,
+      "pixel_y_m": 13000,
+      "repeat_days": 16,
+      "cadence_minutes": null,
+      "route": "omi-no2",
+      "sampling": "Nominal 13 \u00d7 24 km nadir VIS/UV-2 footprint, shown with illustrative orientation. Pixel geometry varies across track.",
+      "temporal": "Daily global sampling design; 16-day ground-track repeat. Row-anomaly flags, clouds, QA and instrument status affect usable data.",
+      "limitations": "These are nominal acquisition-era geometry values; the model does not verify present spacecraft or instrument operations.",
+      "sources": [
+        "aura-spacecraft",
+        "omi-geometry"
+      ]
+    },
+    {
+      "id": "intelsat-40e",
+      "label": "Intelsat 40e \u00b7 TEMPO NO\u2082",
+      "kind": "geo",
+      "orbit": "Geostationary",
+      "altitude_km": 35786,
+      "longitude_deg": -91,
+      "swath_km": null,
+      "pixel_x_m": 2000,
+      "pixel_y_m": 4750,
+      "repeat_days": null,
+      "cadence_minutes": 60,
+      "envelope": [
+        -170,
+        10,
+        -10,
+        80
+      ],
+      "route": "tempo-no2",
+      "sampling": "Nominal 2.0 \u00d7 4.75 km Level-2 footprint, drawn in illustrative orientation. Off-nadir geometry changes the actual footprint; Level-3 grids are different.",
+      "temporal": "Hourly daytime scans over North America. Scan schedule, daylight, clouds and QA are not simulated.",
+      "limitations": "The dashed rectangle is the provider's advertised collection envelope, not its sensor field of view or a promise of coverage. A geometric horizon test alone does not establish an observation.",
+      "sources": [
+        "tempo-products",
+        "tempo-mission",
+        "tempo-longitude",
+        "tempo-stac-extent"
+      ]
+    },
+    {
+      "id": "landsat-8",
+      "label": "Landsat 8 \u00b7 OLI multispectral",
+      "kind": "leo",
+      "orbit": "Sun-synchronous LEO",
+      "altitude_km": 705,
+      "inclination_deg": 98.2,
+      "swath_km": 185,
+      "pixel_x_m": 30,
+      "pixel_y_m": 30,
+      "repeat_days": 16,
+      "cadence_minutes": null,
+      "route": "landsat-temperature",
+      "sampling": "30 m multispectral sampling. Panchromatic is 15 m; TIRS is 100 m native, often distributed on a 30 m grid.",
+      "temporal": "16-day single-platform repeat; Landsat 9 provides an offset. Usable optical revisit depends on clouds, acquisition plans and QA.",
+      "limitations": "The displayed strip is a simplified nadir 60-second swath segment, not a real Landsat scene or an acquisition schedule.",
+      "sources": [
+        "usgs-l8",
+        "l8-thermal"
+      ],
+      "measurement_overrides": {
+        "heat": {
+          "label": "Landsat 8 / TIRS surface heat",
+          "pixel_x_m": 100,
+          "pixel_y_m": 100,
+          "sampling": "100 m native thermal sampling for this heat question. A distributed 30 m surface-temperature grid does not create 30 m thermal detail; OLI multispectral bands are a different measurement.",
+          "sources": [
+            "l8-thermal"
+          ]
+        }
+      }
+    },
+    {
+      "id": "landsat-9",
+      "label": "Landsat 9 \u00b7 OLI-2 multispectral",
+      "kind": "leo",
+      "orbit": "Sun-synchronous LEO",
+      "altitude_km": 705,
+      "inclination_deg": 98.2,
+      "swath_km": 185,
+      "pixel_x_m": 30,
+      "pixel_y_m": 30,
+      "repeat_days": 16,
+      "cadence_minutes": null,
+      "route": "landsat-temperature",
+      "sampling": "30 m multispectral sampling; 15 m panchromatic. TIRS-2 native thermal sampling is 100 m.",
+      "temporal": "16-day repeat for this platform; the Landsat 8/9 pair is nominally offset by eight days.",
+      "limitations": "Repeat is not a guarantee of an image over this box, clear skies, product delivery or identical viewing conditions.",
+      "sources": [
+        "usgs-l9",
+        "landsat-products"
+      ],
+      "measurement_overrides": {
+        "heat": {
+          "label": "Landsat 9 / TIRS-2 surface heat",
+          "pixel_x_m": 100,
+          "pixel_y_m": 100,
+          "sampling": "100 m native thermal sampling for this heat question. A distributed 30 m surface-temperature grid does not create 30 m thermal detail; OLI multispectral bands are a different measurement.",
+          "sources": [
+            "usgs-l9",
+            "landsat-products"
+          ]
+        }
+      }
+    },
+    {
+      "id": "sentinel-2b",
+      "label": "Sentinel-2B \u00b7 MSI",
+      "kind": "leo",
+      "orbit": "Sun-synchronous LEO",
+      "altitude_km": 786,
+      "inclination_deg": 98.62,
+      "swath_km": 290,
+      "pixel_x_m": 10,
+      "pixel_y_m": 10,
+      "repeat_days": 10,
+      "cadence_minutes": null,
+      "route": "sentinel2-reflectance",
+      "sampling": "10 m for selected MSI bands; other bands are sampled at 20 or 60 m. Band selection matters.",
+      "temporal": "10-day single-platform repeat. Nominal B/C pairing shortens revisit; clouds and observation planning affect usable imagery.",
+      "limitations": "A swath intersection is a geometric opportunity in this arbitrary-phase model, not a forecast or a cloud-free observation.",
+      "sources": [
+        "s2",
+        "s2-products"
+      ]
+    },
+    {
+      "id": "sentinel-2c",
+      "label": "Sentinel-2C \u00b7 MSI",
+      "kind": "leo",
+      "orbit": "Sun-synchronous LEO",
+      "altitude_km": 786,
+      "inclination_deg": 98.62,
+      "swath_km": 290,
+      "pixel_x_m": 10,
+      "pixel_y_m": 10,
+      "repeat_days": 10,
+      "cadence_minutes": null,
+      "route": "sentinel2-reflectance",
+      "sampling": "10, 20 or 60 m by band; the illustration selects a 10 m band.",
+      "temporal": "10-day single-platform repeat; B/C pairing has a nominal five-day revisit, subject to observation conditions.",
+      "limitations": "The example Earth Search collection summary names 2A/2B. Confirm 2C availability in actual Items or choose another provider; the model is independent of archive availability.",
+      "sources": [
+        "s2",
+        "s2-products"
+      ]
+    },
+    {
+      "id": "sentinel-1c",
+      "label": "Sentinel-1C \u00b7 C-SAR IW",
+      "kind": "leo",
+      "orbit": "Sun-synchronous LEO",
+      "altitude_km": 693,
+      "inclination_deg": 98.18,
+      "swath_km": 250,
+      "pixel_x_m": 10,
+      "pixel_y_m": 10,
+      "repeat_days": 12,
+      "cadence_minutes": null,
+      "route": "sentinel1-radar",
+      "sampling": "Illustrative 10 m output grid. IW native resolution is about 5 \u00d7 20 m in single-look geometry; output spacing is not resolution.",
+      "temporal": "12-day single-platform repeat; acquisition mode, pointing, observation plan and constellation configuration affect sampling.",
+      "limitations": "Real SAR is side-looking. The symmetric nadir strip here only teaches swath-width/area relationships and cannot represent an actual SAR access window or footprint.",
+      "sources": [
+        "s1",
+        "stac-pc"
+      ]
+    }
+  ]
+}

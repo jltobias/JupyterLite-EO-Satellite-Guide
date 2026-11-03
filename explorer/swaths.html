@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Global EO | Research area, swaths and orbits</title><meta name="description" content="Connect a research question to nominal satellite swaths, study-area geometry, spatial sampling and observed STAC metadata footprints.">
+<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="coverage.css"></head>
+<body class="coverage-page"><a class="skip" href="#study-map">Skip to study map</a>
+<header class="masthead"><a class="brand" href="index.html">GLOBAL <b>EO</b> / STUDY AREA LAB</a><nav aria-label="Project"><a href="index.html">Constellation</a><a aria-current="page" href="swaths.html">Swaths & orbits</a><a href="../book/swaths.html">Field guide ↗</a><button id="lab-fullscreen">Full screen</button></nav></header>
+<main class="coverage-main">
+ <section class="lab-intro"><p class="eyebrow">RESEARCH QUESTION → MEASUREMENT → GEOMETRY → DATA</p><h1>What can observe <em>your study area?</em></h1><p>Explore how a candidate sensor’s swath and sampling relate to a study box. The moving satellite is a teaching model with an arbitrary phase, <strong>not a real pass prediction</strong>. Observed STAC footprints are a separate, optional layer.</p></section>
+ <div class="coverage-layout">
+  <aside class="study-controls" aria-label="Research and study area controls">
+   <form id="lab-question-form"><label for="lab-question">Research question or measurement</label><div class="field-row"><input id="lab-question" maxlength="500" type="search" placeholder="air quality and NO₂"><button type="submit">Find</button></div></form>
+   <div class="example-buttons"><button data-topic="air quality and NO2 measures">NO₂</button><button data-topic="heat">Heat</button><button data-topic="flooding">Floods</button><button data-topic="vegetation">Vegetation</button></div>
+   <p id="question-summary" role="status" class="small"></p>
+   <label for="mission">Candidate / nominal geometry example</label><select id="mission"></select>
+   <p id="mission-note" class="small"></p>
+   <fieldset><legend>Study area · WGS84 / CRS84</legend><div class="bounds-grid"><label>West <input id="west" type="number" step=".01" min="-180" max="180" value="-76"></label><label>South <input id="south" type="number" step=".01" min="-90" max="90" value="39"></label><label>East <input id="east" type="number" step=".01" min="-180" max="180" value="-74"></label><label>North <input id="north" type="number" step=".01" min="-90" max="90" value="41"></label></div><div class="field-row"><button id="apply-bbox">Apply box</button><button id="draw-bbox" aria-pressed="false">Draw box</button></div><p class="small">Longitude, latitude. Drag on the map after choosing Draw box. Split areas that cross the date line.</p></fieldset>
+   <p id="box-error" role="alert"></p>
+   <div class="field-row"><button id="zoom-box">Zoom to box</button><button id="world-view">World view</button></div>
+   <button id="align-pass">Demonstrate a pass over this box</button><p class="small">This places an illustrative LEO pass over the box at T+0. It does not schedule or predict an acquisition.</p>
+   <label for="duration">Model window<select id="duration"><option value="6">6 hours</option><option value="12">12 hours</option><option value="24">24 hours</option></select></label>
+   <details><summary>Geometry assumptions and sources</summary><p id="model-assumptions" class="small"></p><div id="geometry-sources"></div><p><a href="https://www.esa.int/Enabling_Support/Space_Transportation/Types_of_orbits" target="_blank" rel="noopener">ESA · Types of orbits ↗</a></p></details>
+   <div class="field-row"><button id="share-study">Copy study link</button><button id="save-study">Save study brief</button><button id="copy-bbox">Copy bbox</button></div><p id="lab-status" role="status" aria-live="polite"></p>
+  </aside>
+  <section class="study-visual" aria-labelledby="study-heading">
+   <div class="section-bar"><h2 id="study-heading">Orbit, swath and study area</h2><span id="model-badge" class="badge">ILLUSTRATIVE MODEL</span></div>
+   <div class="metrics" id="study-metrics"></div>
+   <svg id="study-map" viewBox="0 0 1200 600" role="group" aria-labelledby="study-title study-desc">
+    <title id="study-title">Study area, illustrative orbit ground track and swath</title><desc id="study-desc">A WGS84 world map. A rectangle is the user study area. The orbit line and shaded moving strip are a nominal teaching model, not real satellite locations. Optional observed STAC footprints are separately labeled.</desc>
+    <defs><pattern id="study-stars" width="100" height="80" patternUnits="userSpaceOnUse"><circle cx="10" cy="12" r=".6" fill="#7eabb8" opacity=".4"/></pattern></defs>
+    <rect x="0" y="0" width="1200" height="600" fill="#0b2535"/><rect width="1200" height="600" fill="url(#study-stars)"/>
+    <g id="study-graticule"></g><path id="study-land" fill="#24566a" stroke="#568291" stroke-width=".5"/>
+    <g id="geo-envelope"></g><path id="ground-track" fill="none" stroke-width="2" vector-effect="non-scaling-stroke"/>
+    <g id="observed-footprints"></g><path id="current-swath" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+    <rect id="study-box" fill="#ffffff12" stroke="#fff" stroke-width="2" stroke-dasharray="5 3" vector-effect="non-scaling-stroke"/>
+    <g id="model-satellite"><circle r="6" fill="#fff" stroke="#061827" stroke-width="2"/><text y="-14" text-anchor="middle">MODEL</text></g>
+    <rect id="draw-preview" hidden fill="#ffffff22" stroke="#fff" stroke-width="2" vector-effect="non-scaling-stroke"/>
+   </svg>
+   <div class="map-legend"><span><i class="study-key"></i>Study box</span><span><i id="track-key"></i>Modeled track + 60-second strip</span><span><i class="observed-key"></i>Observed STAC metadata footprint</span><span id="geo-key" hidden>Dashed: advertised collection envelope</span></div>
+   <div class="playback"><button id="play" aria-pressed="false">▶ Play model</button><label for="model-time">Elapsed model time <output id="time-label">T+00:00:00</output></label><input id="model-time" type="range" min="0" max="21600" step="10" value="0"><label>Speed<select id="speed"><option value="60">1 model min / second</option><option value="600" selected>10 model min / second</option></select></label><button id="restart-model">Restart</button></div>
+   <p id="area-assessment" class="assessment" role="status"></p>
+   <div class="resolution-layout"><article><h3>30 × 20 cells · compare the ground extent</h3><svg id="pixel-view" viewBox="0 0 420 190" role="img" aria-label="Thirty by twenty illustrative sampling cells with physical scale"></svg><p id="pixel-note" class="small"></p></article><article><h3>Temporal context</h3><div id="time-context"></div><svg id="opportunity-view" viewBox="0 0 600 80" role="img" aria-label="Approximate modeled proximity intervals, not predicted acquisitions"></svg><p id="opportunity-note" class="small"></p></article></div>
+  </section>
+ </div>
+ <section class="candidate-section"><div class="section-bar"><h2>Research candidates in this study area</h2><a id="back-to-research" href="index.html">Linked constellation ↗</a></div><p class="small">Measurement relevance comes from the curated research profile. Geometry examples exist only for named presets. Selecting a candidate preserves your study box. Nominal capabilities do not establish usable data.</p><div class="table-scroll"><table><thead><tr><th>Platform / sensor</th><th>Orbit</th><th>Spatial meaning</th><th>Temporal meaning</th><th>Study view</th></tr></thead><tbody id="candidate-rows"></tbody></table></div></section>
+ <section class="observed-section" aria-labelledby="observed-heading"><div class="section-bar"><h2 id="observed-heading">Check observed STAC footprints</h2><span class="badge">METADATA · OPTIONAL NETWORK</span></div><p>Query the named collection for your box and dates, then compare returned Item footprints with the teaching model. A footprint does not establish valid pixels, clear skies, QA, exposure or future availability. Multi-platform collections can return other spacecraft; inspect each Item’s platform.</p>
+  <div class="archive-controls"><label>Collection<select id="route"></select></label><label>From (UTC)<input id="archive-start" type="date" value="2025-07-01"></label><label>Until (UTC)<input id="archive-end" type="date" value="2025-07-07"></label><button id="fetch-footprints" class="primary">Fetch up to 10 Item footprints</button><button id="save-footprints" disabled>Save footprint GeoJSON</button></div>
+  <p id="archive-status" role="status" aria-live="polite">No provider request has been made.</p><div id="archive-links"></div><div class="table-scroll"><table><thead><tr><th>Item</th><th>Platform</th><th>Time</th><th>Source</th></tr></thead><tbody id="footprint-rows"></tbody></table></div>
+ </section>
+ <footer><p>Original teaching models and graphics: MIT. Made with Natural Earth (public domain). Mission specifications and product metadata retain their source terms. <a href="../book/swaths.html">Methods, limitations and citations</a> · <a href="https://jltobias.github.io/JupyterLite-STAC-Browser/explorer/" target="_blank" rel="noopener">JupyterLite STAC Browser ↗</a></p></footer>
+</main>
+<script src="catalog.js"></script><script src="research.js"></script><script src="orbits.js"></script><script src="coverage-model.js"></script><script src="coverage.js"></script></body></html>

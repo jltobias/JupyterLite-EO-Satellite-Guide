@@ -7,6 +7,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix schema: <https://schema.org/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
 
 eo: a owl:Ontology ;
   dcterms:title "Global EO research discovery application profile" ;
@@ -28,6 +29,8 @@ eo:STACCollection a owl:Class ; rdfs:subClassOf dcat:Dataset ;
   rdfs:comment "Metadata-described collection. Extent and membership do not verify asset access." .
 
 eo:researchTopic a owl:ObjectProperty ; rdfs:domain eo:ResearchQuestion ; rdfs:range eo:ResearchTopic .
+eo:studyArea a owl:ObjectProperty ; rdfs:domain eo:ResearchQuestion ; rdfs:range geo:Feature ;
+  rdfs:comment "The question's declared area; its GeoSPARQL geometry is not inferred from a satellite footprint." .
 eo:observableProperty a owl:ObjectProperty ; rdfs:domain eo:ResearchTopic ; rdfs:range sosa:ObservableProperty .
 eo:potentialPlatform a owl:ObjectProperty ; rdfs:domain eo:ResearchTopic ;
   rdfs:comment "Editorial candidate, requiring product-specific review. No claim of study suitability." .
@@ -48,3 +51,5 @@ eo:unknown a eo:OrbitType ; skos:prefLabel "Unknown / not curated" ;
   skos:definition "An explicit knowledge gap, never inferred from a STAC orbit_state value." .
 eo:l1 a eo:OrbitType ; skos:prefLabel "Sun-Earth L1 Lissajous" ;
   skos:definition "Motion near the Sun-Earth L1 libration point, distinct from a low Earth orbit; Earth distance is not a LEO altitude." .
+eo:heo a eo:OrbitType ; skos:prefLabel "Highly elliptical" ;
+  skos:definition "A highly eccentric orbit with variable altitude. Some designs dwell near apogee over high latitudes; observation geometry and acquisition schedules require separate evidence." .

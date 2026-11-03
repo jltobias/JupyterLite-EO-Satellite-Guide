@@ -11,11 +11,18 @@
 .sat-orbit{fill:var(--gold);font:10px system-ui;letter-spacing:.5px}.sat-node.research-match .halo{stroke:var(--gold);stroke-width:3;fill:#58421b66}
 .mission-row.research-match{box-shadow:inset 3px 0 var(--gold)}.sat-node.research-muted{opacity:.18}
 .sat-node.is-brushed .halo{stroke:var(--mint)}.orbit-key a{font-size:10px}.badge.discovery{color:var(--gold)}
+.color-control{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted)}.color-control select{font-size:11px;padding:5px;width:125px}
+.atlas-actions{flex-wrap:wrap}.orbit-key button i,.orbit-swatch{display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--orbit-color);margin-right:5px;border:1px solid #ffffff66}
+.sat-node .halo{stroke:var(--encoding)}.sat-orbit{fill:var(--encoding)}
+.legend button svg{width:15px;height:15px;vertical-align:middle;margin-right:5px;fill:none;stroke:var(--text);stroke-width:1.5}
+body[data-color-mode=sensor] .legend button svg{stroke:var(--family)}
+body[data-color-mode=orbit] .family-dot{display:none}.row-select:before{content:"";display:inline-block;width:6px;height:6px;background:var(--encoding);border-radius:50%;margin-right:6px}
+.sat-node.research-match .halo{stroke:var(--gold)}.sat-node.is-brushed .halo{stroke:var(--mint)}
 @media screen{
  .workspace-mode #research{display:none;position:absolute;z-index:8;top:62px;left:12px;max-height:calc(100dvh - 88px);overflow:auto;width:min(610px,calc(100% - 24px));box-shadow:0 12px 40px #000a}
  .workspace-research-open #research{display:block}.workspace-mode .page-controls{flex:none;font-size:10px;padding-bottom:5px;gap:4px}
  .workspace-mode .page-controls button{font-size:9px;padding:4px 7px}.workspace-mode .sat-orbit{font-size:12px}
- .workspace-mode #orbit-explanation{font-size:8px;margin:0 12px 6px}.workspace-mode .orbit-key{padding:0 12px 6px;gap:4px}
+ .workspace-mode #orbit-explanation{font-size:9px;margin:0 12px 6px}.workspace-mode .orbit-key{padding:0 12px 6px;gap:4px}
  .workspace-mode .orbit-key button{font-size:8px;padding:2px 4px}
  .workspace-mode .orbit-long{display:none}.workspace-mode .orbit-short{display:inline}
  .workspace-mode #mission-table td:nth-child(5){white-space:normal;font-size:9px}

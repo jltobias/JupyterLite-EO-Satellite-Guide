@@ -14,6 +14,8 @@ Matching is deterministic phrase/alias lookup, performed locally. Eight starting
 
 ## NO₂ example
 
+**Compare these candidates over your study area** carries the question into the [Swaths & orbits tab](swaths.md). Candidate selection preserves the bbox. The nominal model teaches geometric relationships; a separate optional query checks historical Item footprints in the same area. Study briefs preserve the question, area, preset, arbitrary phase and archive settings without asserting a pass prediction or valid observation.
+
 [TROPOMI's NO₂ product](https://www.tropomi.eu/data-products/nitrogen-dioxide) contains atmospheric column retrievals. [Sentinel-5P](https://sentiwiki.copernicus.eu/web/s5p-mission) flies in a near-polar Sun-synchronous orbit: near-daily sampling and a 16-day orbital cycle describe different temporal properties. [TEMPO](https://tempo.si.edu/overview.html) is hosted on the geostationary Intelsat 40e spacecraft and observes North America during daytime. Its [Level-2 products](https://tempo.si.edu/data_for_scientists.html) have a nominal 2.0 × 4.75 km footprint; viewing geometry and processing matter. Neither column retrieval is automatically a near-surface concentration or an exposure estimate.
 
 The NO₂ route cards name verified collection identifiers and access conditions. Copernicus metadata can be public while asset downloads require authentication. NASA assets can require Earthdata Login. Read version-specific units, quality flags, clouds, averaging kernels, sampling and validation documentation before analysis. NetCDF products are not automatically GeoTIFF rasters accepted by downstream tools.

@@ -6,7 +6,9 @@
 
 <a href="../explorer/index.html">Open the interactive poster</a> · <a href="../lab/index.html?path=01_constellation_poster.ipynb">Launch JupyterLite Lab</a> · <a href="../downloads/eo-explorer.html" download>Download the offline poster</a>
 
-The poster combines a world map and schematic orbit atlas, expandable mission and sensor cards, a linked attribute table, pins for comparison, visual legends, search and filters. The seven notebooks teach exploration, contextual comparison, hyperspectral interpretation, orbital geometry, public-health evidence knowledge-graph curation and research-to-STAC discovery.
+The poster combines a world map and schematic orbit atlas, expandable mission and sensor cards, a linked attribute table, pins for comparison, visual legends, search and filters. The eight notebooks teach exploration, contextual comparison, hyperspectral interpretation, orbital geometry, public-health evidence, knowledge-graph curation, research-to-STAC discovery and research/study-area geometry.
+
+The [Swaths & orbits tab](swaths.md) connects a question and bounding box to nominal swaths, spatial/temporal sampling and optional historical STAC footprints. Orbit colors and sensor shapes are explained in the [orbit guide](orbit-guide.md). Simulated geometry, operator specifications and cataloged footprints remain distinct.
 
 ## Start here
 
