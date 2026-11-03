@@ -1,6 +1,7 @@
 # Book v1 is intentionally pinned; its Sphinx/MyST build requires no Node.js.
 jupyter-book==1.0.4.post1
-jupyterlite-core==0.8.2
+# The contents extra installs jupyter-server for indexing bundled notebooks/files.
+jupyterlite-core[contents]==0.8.2
 jupyterlite-pyodide-kernel==0.8.3
 nbclient==0.11.0
 nbformat==5.10.4

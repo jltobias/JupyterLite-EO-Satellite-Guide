@@ -13,6 +13,8 @@ python -m http.server 8000 --directory _site
 
 Open `http://localhost:8000/`, the Book at `/book/intro.html`, the poster at `/explorer/`, and JupyterLite at `/lab/index.html?path=01_constellation_poster.ipynb`. Use HTTP for JupyterLite and the Book. To refresh only shared assets and content, use `python scripts/build.py --prepare`.
 
+The JupyterLite `contents` extra installs Jupyter Server to generate notebook and file indexes during the build. The published Lab still runs Python entirely in the browser.
+
 The build uses intentionally pinned **Jupyter Book v1**, in maintenance mode, for a reproducible Sphinx/MyST pipeline that does not require Node.js. See [Jupyter Book v1 documentation](https://jupyter-book.readthedocs.io/v1/intro.html). Upgrade the Book toolchain as a deliberate migration; do not install v2 into this build unchanged.
 
 ## Standalone explorer

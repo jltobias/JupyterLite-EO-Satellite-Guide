@@ -6,7 +6,7 @@
 
 **[Explore the poster](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/explorer/)** · **[Read the Jupyter Book](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/intro.html)** · **[Launch JupyterLite Lab](https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/lab/index.html?path=01_constellation_poster.ipynb)** · [Source](https://github.com/jltobias/JupyterLite-EO-Satellite-Guide)
 
-These are the configured GitHub Pages destinations. They become live after this work is pushed and the Pages workflow succeeds; local builds do not publish them. The repository is currently private; a public website needs the owner's publication decision and a GitHub plan that supports Pages for this repository. The [standalone HTML](downloads/eo-explorer.html) already opens directly from a local checkout without installation or internet.
+The [Pages workflow](.github/workflows/pages.yml) builds and publishes these destinations from `main`. The [standalone HTML](downloads/eo-explorer.html) also opens directly from a local checkout without installation or internet.
 
 ## Explore, unfold and compare
 
