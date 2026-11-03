@@ -135,6 +135,7 @@ def check_discovery(page,base):
     expected={'sentinel-5p','aura','intelsat-40e'}
     assert set(page.locator('#rows tr').evaluate_all('(rows)=>rows.map(r=>r.dataset.id)'))==expected
     expect(page.locator('.sat-node.research-match')).to_have_count(3)
+    expect(page.locator('#node-sentinel-5p g[fill] > circle')).to_have_count(1)
     expect(page.locator('.mission-row.research-match')).to_have_count(3)
     expect(page.locator('#research-results')).to_contain_text('not ground-level concentrations')
     expect(page.locator('#research-results .data-route')).to_have_count(3)

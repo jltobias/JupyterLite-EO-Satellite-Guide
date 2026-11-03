@@ -42,7 +42,7 @@
     if(type==="radar")return '<path d="M0 -8L8 0 0 8 -8 0Z"/>';
     if(type==="hyperspectral")return '<path d="M-8 0L-4 -7H4L8 0 4 7H-4Z"/>';
     if(type==="ocean")return '<path d="M0 -9L9 7H-9Z"/>';
-    if(type==="weather")return '<circle r="7"/>';
+    if(type==="weather"||type==="atmosphere")return '<circle r="7"/>';
     return '<rect x="-6" y="-6" width="12" height="12"/>';
   }
   catalog.satellites.forEach(s=>{

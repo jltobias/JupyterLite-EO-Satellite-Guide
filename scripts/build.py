@@ -25,6 +25,11 @@ def write(path, content):
     path.write_text(content, encoding="utf-8")
 
 
+def script_json(value):
+    """Serialize provider metadata safely inside an HTML script element."""
+    return json.dumps(value,ensure_ascii=True).replace("<", "\\u003c")
+
+
 def reset_generated(directory):
     resolved=directory.resolve()
     if not resolved.is_relative_to(ROOT) or directory.is_symlink() or resolved==ROOT:
@@ -39,7 +44,7 @@ def prepare():
     discovery_text=(ROOT / "data/research-topics.json").read_text(encoding="utf-8")
     discovery=json.loads(discovery_text)
     land = json.loads((ROOT / "assets/ne_110m_land.geojson").read_text(encoding="utf-8"))
-    payload = "window.EO_CATALOG=" + json.dumps(catalog, ensure_ascii=True) + ";\nwindow.EO_DISCOVERY=" + json.dumps(discovery,ensure_ascii=True) + ";\nwindow.EO_LAND=" + json.dumps(land, separators=(",", ":")) + ";\n"
+    payload = "window.EO_CATALOG=" + script_json(catalog) + ";\nwindow.EO_DISCOVERY=" + script_json(discovery) + ";\nwindow.EO_LAND=" + json.dumps(land, separators=(",", ":")) + ";\n"
     write(ROOT / "explorer/catalog.js", payload)
     template = (ROOT / "explorer/index.html").read_text(encoding="utf-8")
     css = (ROOT / "explorer/style.css").read_text(encoding="utf-8")

@@ -12,6 +12,7 @@ sys.path[:0]=[str(ROOT / "src"),str(ROOT / "scripts")]
 from eo_guide import research_matches, search_stac
 from curate_stac import identity, constellation_identity
 from audit_stac import audit_listing, safe
+from build import script_json
 
 
 class ResearchTests(unittest.TestCase):
@@ -77,6 +78,17 @@ class ResearchTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 asyncio.run(search_stac(route,bbox=[-76,39,-74,41],start="2025-07-01",end="2025-07-07",limit=3000))
         self.assertEqual(len(calls),1)
+
+    def test_provider_text_cannot_end_the_offline_data_script(self):
+        from html.parser import HTMLParser
+        tags=[]
+        class Parser(HTMLParser):
+            def handle_starttag(self,tag,attrs):tags.append(tag)
+        value={"title":"</script><img src=x onerror=alert(1)>"}
+        serialized=script_json(value)
+        Parser().feed("<script>window.payload="+serialized+";</script>")
+        self.assertEqual(tags,["script"])
+        self.assertEqual(json.loads(serialized),value)
 
 
 if __name__=="__main__":unittest.main()
