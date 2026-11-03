@@ -74,6 +74,8 @@ def prepare():
     discovery_css=(ROOT / "explorer/discovery.css").read_text(encoding="utf-8")
     research_js=(ROOT / "explorer/research.js").read_text(encoding="utf-8")
     document=document.replace('<link rel="stylesheet" href="discovery.css">',f"<style>{discovery_css}</style>")
+    document=document.replace('<link rel="stylesheet" href="legend.css">',"<style>"+(ROOT/"explorer/legend.css").read_text(encoding="utf-8")+"</style>")
+    document=document.replace('<script src="layers.js"></script>',"<script>"+(ROOT/"explorer/layers.js").read_text(encoding="utf-8")+"</script>")
     document=document.replace('<script src="research.js"></script>',f"<script>{research_js}</script>")
     orbit_js=(ROOT / "explorer/orbits.js").read_text(encoding="utf-8")
     document=document.replace('<script src="orbits.js"></script>',f"<script>{orbit_js}</script>")

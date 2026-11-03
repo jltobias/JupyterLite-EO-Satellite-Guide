@@ -12,6 +12,8 @@ The [Pages workflow](.github/workflows/pages.yml) builds and publishes these des
 
 ## Explore, unfold and compare
 
+The **Satellite legend** stays visible across the top, including fullscreen, with orbit-color swatches and labeled sensor shapes. Toggle **Active**, **Retired** and **Other statuses**, or open **Layers** to choose individual lifecycle states and combine mission families such as Sentinel, Landsat, GOES, NOAA, Metop, Planet and RADARSAT. The constellation, linked table, mission picker and CSV export use the same layer selection.
+
 The upper poster combines a global map with a selectable, schematic constellation and orbit rings. Click a satellite to expand or contract its mission record; unfold instruments and products for sensor method, spatial/spectral characteristics, temporal context, coverage, processing level and data-access links. Hover or focus a satellite or an attribute-table control to highlight the same platform in both views.
 
 The lower poster provides a linked mission index and a comparison matrix. Pin multiple platforms, search capabilities, filter by agency, sensor family, orbit, status, observed property or application, export a contextual CSV, and print with an A1 landscape stylesheet. Legends use colour, central icon shapes and text. Keyboard controls include Tab, Enter/Space and Escape.
@@ -70,6 +72,7 @@ python -m playwright install chromium
 python scripts/test_browser.py
 python scripts/test_swaths.py
 python scripts/test_inventory.py
+python scripts/test_layers.py
 ```
 
 The browser test starts its own local server, checks map/table brushing, details, filters, pins, CSV export, keyboard interactions, mobile layout and offline first load, and saves screenshots under `tmp/qa/`.

@@ -8,6 +8,10 @@
 
 ## Interaction guide
 
+The **Satellite legend** stays across the top while you scroll and in fullscreen. Orbit colors use plain-language labels; the sensor legend pairs each shape with its sensing family. **Active**, **Retired** and **Other statuses** switch those lifecycle layers on or off. **Layers** exposes individual lifecycle states and multiple mission-family switches: for example, show Sentinel and Landsat together while displaying only retired missions. Other filters and research questions still apply. The Status shortcut controls the same lifecycle switches. **Reset filters** restores all layers, while **Show all layers** changes only the layers.
+
+Family layers are exclusive browsing groups so a record is not duplicated when several are enabled. Hosted Sentinel-4/5 missions follow the Sentinel layer. The NOAA-and-partners focus can span several browsing layers. Counts refer to catalog records and cited lifecycle snapshots. Pins persist when their layers are hidden, supporting comparisons across subsets.
+
 Use **Full screen** beside the constellation or in the top navigation to open a linked workspace. The default **All matching records** overview displays the complete filtered inventory, with 13 table rows visible at a time. Hover/focus a mark to reveal its table page and highlight both views. **Mission family** starts a fresh Sentinel, Landsat or NOAA/partner view; **Locate a mission** opens a named record. Choose **Table page** for 13 larger, labeled symbols synchronized with the current table page. The atlas remains at the overview when selecting a row in fullscreen. See the [family rosters and source crosswalk](mission-coverage.md).
 
 The workspace's **Filters**, **Details** and **Compare** controls expose the full filters, selected mission metadata and pinned comparison. Hover over a shortened table cell for its complete text. **Exit full screen** or **Escape** returns to the page while preserving filters and pins. If browser fullscreen is unavailable, the same workspace fits the current window. Narrow or short screens keep scrolling within the table pane so the constellation remains visible.

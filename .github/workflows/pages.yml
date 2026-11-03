@@ -26,6 +26,7 @@ jobs:
       - run: python scripts/test_browser.py
       - run: python scripts/test_swaths.py
       - run: python scripts/test_inventory.py
+      - run: python scripts/test_layers.py
       - uses: actions/upload-artifact@v4
         if: always()
         with:

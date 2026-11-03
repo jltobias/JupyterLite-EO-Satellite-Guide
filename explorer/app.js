@@ -15,6 +15,9 @@
   const workspace = {active:false,native:false,scrollY:0,focus:null};
   const fullscreenButtons = [$("fullscreen"),$("atlas-fullscreen")];
   const filters = ["search","agency","type","orbit","status","property","application"];
+  const layerModel=window.EOLayers;
+  const layerState={statuses:new Set(layerModel.statuses.map(s=>s.id)),families:new Set(layerModel.families.map(f=>f.id))};
+  const otherStatuses=layerModel.statuses.filter(s=>!["operational","retired"].includes(s.id));
   const compact=value=>String(value).toLowerCase().normalize("NFKD").replace(/[^a-z0-9]/g,"");
   const searchIndex=new Map(catalog.satellites.map(s=>[s.id,compact(JSON.stringify({id:s.id,name:s.name,aliases:s.aliases,agency:s.agency,region:s.region,purpose:s.purpose,orbit:s.orbit.class,sensors:s.sensors.map(i=>({name:i.name,method:i.method,observes:i.observes,spatial:i.spatial,spectral:i.spectral,products:i.products.map(p=>[p.name,p.level])})),registry:s.registry_records?.map(r=>[r.name,r.full_name])}))]));
   const svgNS = "http://www.w3.org/2000/svg";
@@ -27,11 +30,12 @@
   optionList("orbit",catalog.satellites.map(s=>s.orbit.class));
   $("orbit").insertAdjacentHTML("beforeend",'<option value="all-leo">All LEO (including SSO)</option><option value="other-leo">Other LEO (excluding SSO)</option>');
   optionList("status",catalog.satellites.map(s=>s.status));
+  $("status").insertAdjacentHTML("beforeend",'<option value="__layers" disabled>Custom lifecycle layers</option>');
   optionList("property",catalog.satellites.flatMap(s=>s.sensors.flatMap(i=>i.observes)));
   $("application").insertAdjacentHTML("beforeend",catalog.applications.map(a=>`<option value="${a.id}">${esc(a.name)}</option>`).join(""));
   function visible() {
     const q=compact($("search").value);
-    const matches=catalog.satellites.filter(s=>(!$("question").value.trim()||!$("research-only").checked||state.research.platforms.has(s.id))&&(!q||searchIndex.get(s.id).includes(q))&&(!$("mission-family").value||s.mission_families?.includes($("mission-family").value))&&(!$("agency").value||s.agency===$("agency").value)&&(!$("type").value||s.type===$("type").value)&&orbitModel.matches(s,$("orbit").value)&&(!$("status").value||s.status===$("status").value)&&(!$("property").value||s.sensors.some(i=>i.observes.includes($("property").value)))&&(!$("application").value||catalog.applications.find(a=>a.id===$("application").value).satellites.includes(s.id)));
+    const matches=catalog.satellites.filter(s=>layerState.statuses.has(s.status)&&layerState.families.has(layerModel.familyOf(s))&&(!$("question").value.trim()||!$("research-only").checked||state.research.platforms.has(s.id))&&(!q||searchIndex.get(s.id).includes(q))&&(!$("mission-family").value||s.mission_families?.includes($("mission-family").value))&&(!$("agency").value||s.agency===$("agency").value)&&(!$("type").value||s.type===$("type").value)&&orbitModel.matches(s,$("orbit").value)&&(!$("property").value||s.sensors.some(i=>i.observes.includes($("property").value)))&&(!$("application").value||catalog.applications.find(a=>a.id===$("application").value).satellites.includes(s.id)));
     return state.sorted?matches.sort((a,b)=>state.ascending?a.name.localeCompare(b.name):b.name.localeCompare(a.name)):matches;
   }
   function pathForLand() {
@@ -58,14 +62,17 @@
   document.querySelectorAll(".sat-label").forEach(label=>{if(label.textContent.length>24)label.textContent=label.textContent.slice(0,22)+"…";});
   $("legend").innerHTML=Object.entries(families).map(([id,f])=>`<button data-family="${id}" aria-pressed="false" style="--family:${f.color}"><svg viewBox="-12 -12 24 24" aria-hidden="true">${shape(id)}</svg>${f.label}</button>`).join("")+'<span class="legend-note">Lifecycle is reported in the table; marks include historical and future missions. Solid halo: operational source snapshot · dashed: retired · dotted: unverified · gold dot: pinned</span>';
   $("legend").addEventListener("click",e=>{const b=e.target.closest("button");if(b){$("type").value=$("type").value===b.dataset.family?"":b.dataset.family;state.page=0;render();}});
-  $("orbit-key").innerHTML=orbitModel.types.map(t=>`<button data-orbit="${esc(t.filter)}" aria-pressed="false" style="--orbit-color:${t.color}" title="${esc(t.description)}"><i aria-hidden="true"></i>${esc(t.label)}</button>`).join("")+'<a href="../book/orbit-guide.html" target="_blank" rel="noopener">Orbit guide ↗</a>';
+  const orbitLegendNames={sso:"Sun-synchronous (LEO)",leo:"Other low Earth orbit",geo:"Geostationary",heo:"Highly elliptical",l1:"Sun–Earth L1",unknown:"Orbit uncurated"};
+  $("orbit-key").innerHTML=orbitModel.types.map(t=>`<button data-orbit="${esc(t.filter)}" aria-pressed="false" style="--orbit-color:${t.color}" title="${esc(t.description)}"><i aria-hidden="true"></i>${esc(orbitLegendNames[t.id]||t.label)}</button>`).join("")+'<a href="../book/orbit-guide.html" target="_blank" rel="noopener">Orbit guide ↗</a>';
   $("orbit-key").addEventListener("click",e=>{const b=e.target.closest("[data-orbit]");if(b){$("orbit").value=$("orbit").value===b.dataset.orbit?"":b.dataset.orbit;state.page=0;render();}});
   function applyEncoding(){
     const mode=$("color-mode").value;document.body.dataset.colorMode=mode;
     catalog.satellites.forEach(s=>{const color=mode==="orbit"?orbitModel.color(s):families[s.type].color;
       for(const e of [$(`node-${s.id}`),$(`row-${s.id}`)])if(e){e.style.setProperty("--encoding",color);e.style.setProperty("--orbit-color",orbitModel.color(s));}
     });
-    $("encoding-note").textContent=mode==="orbit"?"Color = orbit type · central shape = sensing family · outer gold highlight = research match.":"Color + central shape = sensing family · orbit labels and table swatches retain orbit information.";
+    $("encoding-note").textContent=mode==="orbit"?"Color: orbit · Shape: sensing family · Gold outline: research match":"Color + shape: sensing family · Orbit colors remain in the table";
+    $("orbit-legend-label").textContent=mode==="orbit"?"Orbit colors":"Table orbit colors";
+    $("sensor-legend-label").textContent=mode==="orbit"?"Sensor shapes":"Sensor colors + shapes";
   }
   $("color-mode").addEventListener("change",applyEncoding);
   function brush(id) {
@@ -88,12 +95,14 @@
     inventoryTooltip(active);
   }
   function workspacePanel(name,open) {
+    updateLegendMetrics();
     document.body.classList.toggle(`workspace-${name}-open`,open);
     $(`workspace-${name}`).setAttribute("aria-expanded",String(open));
   }
   function endWorkspace() {
     if(!workspace.active)return;
     workspace.active=false;workspace.native=false;
+    closeLayers(false);
     document.body.classList.remove("workspace-mode","workspace-filters-open","workspace-details-open","workspace-compare-open","workspace-research-open");
     ["filters","details","compare","research"].forEach(name=>$(`workspace-${name}`).setAttribute("aria-expanded","false"));
     fullscreenButtons.forEach(button=>button.setAttribute("aria-pressed","false"));
@@ -110,6 +119,7 @@
     if(workspace.active)return;
     workspace.scrollY=window.scrollY;workspace.focus=document.activeElement;workspace.active=true;
     document.body.classList.add("workspace-mode");
+    updateLegendMetrics();
     fullscreenButtons.forEach(button=>button.setAttribute("aria-pressed","true"));
     $("exit-workspace").textContent="Exit workspace";
     setView([0,0,1200,650]);
@@ -216,6 +226,7 @@
   $("comparison-content").addEventListener("click",e=>{const b=e.target.closest("[data-remove]");if(b)pin(b.dataset.remove);});
   $("clear-pins").addEventListener("click",()=>{state.pins.clear();renderRows();renderComparison();if(state.selected)renderInspector();syncHighlights();});
   function render() {
+    syncLayerControls();
     const matches=visible();state.page=Math.min(state.page,Math.max(0,Math.ceil(matches.length/pageSize)-1));
     const page=pageList(),mapList=$("map-mode").value==="overview"?matches:page,ids=new Set(mapList.map(s=>s.id));state.brush=null;
     const dense=$("map-mode").value==="overview"&&mapList.length>pageSize;document.body.classList.toggle("inventory-overview",dense);
@@ -236,17 +247,17 @@
     if($("start")){$("start").disabled=!matches.length;$("start").textContent=matches.length?`Explore ${matches[0].name} →`:"No matching missions";}
     renderRows();$("rows").querySelectorAll("tr").forEach(row=>row.classList.toggle("research-match",state.research.platforms.has(row.dataset.id)));
   }
-  filters.forEach(id=>$(id).addEventListener(id==="search"?"input":"change",()=>{state.page=0;render();}));
+  filters.forEach(id=>$(id).addEventListener(id==="search"?"input":"change",()=>{if(id==="status")layerState.statuses=new Set($(id).value?[$(id).value]:layerModel.statuses.map(s=>s.id));state.page=0;render();}));
   $("mission-family").addEventListener("change",()=>{filters.forEach(id=>$(id).value="");$("question").value="";closeDetail();runResearch();});
   $("map-mode").addEventListener("change",()=>{closeDetail();render();});
   $("jump-mission").addEventListener("change",()=>{const id=$("jump-mission").value;if(id)select(id);});
-  $("reset").addEventListener("click",()=>{filters.forEach(id=>$(id).value="");$("mission-family").value="";state.page=0;closeDetail();render();});
+  $("reset").addEventListener("click",()=>{filters.forEach(id=>$(id).value="");$("mission-family").value="";allLayers();state.page=0;closeDetail();render();});
   $("page-prev").addEventListener("click",()=>{state.page--;closeDetail();render();});
   $("page-next").addEventListener("click",()=>{state.page++;closeDetail();render();});
   $("overview").addEventListener("click",()=>setView([0,0,1200,650]));
   function zoom(factor){const [x,y,w,h]=state.view,nw=Math.max(420,Math.min(1200,w*factor)),nh=nw*650/1200;setView([Math.max(0,Math.min(1200-nw,x+(w-nw)/2)),Math.max(0,Math.min(650-nh,y+(h-nh)/2)),nw,nh]);}
   $("zoom-in").addEventListener("click",()=>zoom(.8));$("zoom-out").addEventListener("click",()=>zoom(1.25));
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(workspace.active){e.preventDefault();void exitWorkspace();return;}const id=state.selected;closeDetail();if(id)document.getElementById(`node-${id}`)?.focus();}});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(!$("layer-panel").hidden){e.preventDefault();closeLayers();return;}if(workspace.active){e.preventDefault();void exitWorkspace();return;}const id=state.selected;closeDetail();if(id)document.getElementById(`node-${id}`)?.focus();}});
   $("sort-name").addEventListener("click",()=>{state.sorted=true;state.ascending=!state.ascending;state.page=0;$("sort-name").parentElement.setAttribute("aria-sort",state.ascending?"ascending":"descending");render();});
   $("print").addEventListener("click",()=>{setView([0,0,1200,650]);window.print();});
   window.addEventListener("beforeprint",()=>setView([0,0,1200,650]));
@@ -286,6 +297,31 @@
     $("handoff-status").innerHTML='Notebook saved. <a href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/lab/index.html" target="_blank" rel="noopener">Open this Guide’s Lab ↗</a>, upload the notebook, edit area/dates, then Run All.';
   });
   $("sources").innerHTML=Object.entries(catalog.sources).map(([id,s])=>`<p class="source-entry" id="source-${esc(id)}"><b>[${esc(id)}]</b> ${esc(s.publisher)}. <a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a>. ${s.published?`Published ${esc(s.published)}. `:""}Accessed ${esc(s.accessed)}. ${s.locators?esc(s.locators):""}${s.license?` ${esc(s.license)}.`:""}</p>`).join("");
+  function allLayers(){layerState.statuses=new Set(layerModel.statuses.map(s=>s.id));layerState.families=new Set(layerModel.families.map(f=>f.id));}
+  function syncLayerControls(){
+    document.querySelectorAll("[data-layer-status]").forEach(e=>e.checked=layerState.statuses.has(e.dataset.layerStatus));
+    document.querySelectorAll("[data-layer-family]").forEach(e=>e.checked=layerState.families.has(e.dataset.layerFamily));
+    const other=otherStatuses.filter(s=>layerState.statuses.has(s.id)).length;
+    $("toggle-other-status").checked=other===otherStatuses.length;$("toggle-other-status").indeterminate=other>0&&other<otherStatuses.length;
+    const off=layerModel.statuses.length-layerState.statuses.size+layerModel.families.length-layerState.families.size;
+    $("layers-button").textContent=off?`Layers · ${off} off`:"Layers · all on";
+    $("layer-selection-summary").textContent=`${layerState.statuses.size} lifecycle layers · ${layerState.families.size} family layers on`;
+    $("status").value=layerState.statuses.size===layerModel.statuses.length?"":layerState.statuses.size===1?[...layerState.statuses][0]:"__layers";
+  }
+  function closeLayers(restore=true){$("layer-panel").hidden=true;$("layers-button").setAttribute("aria-expanded","false");if(restore)$("layers-button").focus({preventScroll:true});}
+  function updateLegendMetrics(){const bottom=$("satellite-legend").getBoundingClientRect().bottom-$("poster").getBoundingClientRect().top+10;$("poster").style.setProperty("--workspace-panel-top",Math.ceil(bottom)+"px");}
+  function fitLayerPanel(){if(!$("layer-panel").hidden)$("layer-panel").style.maxHeight=Math.max(100,innerHeight-$("layer-panel").getBoundingClientRect().top-12)+"px";}
+  window.addEventListener("resize",()=>{updateLegendMetrics();fitLayerPanel();});
+  if(typeof ResizeObserver!=="undefined")new ResizeObserver(()=>{updateLegendMetrics();fitLayerPanel();}).observe($("satellite-legend"));
+  $("layers-button").addEventListener("click",()=>{const open=$("layer-panel").hidden;$("layer-panel").hidden=!open;$("layers-button").setAttribute("aria-expanded",String(open));if(open){fitLayerPanel();$("close-layers").focus({preventScroll:true});}});
+  $("close-layers").addEventListener("click",()=>closeLayers());
+  document.addEventListener("pointerdown",e=>{if(!$("layer-panel").hidden&&!$("layer-panel").contains(e.target)&&!$("layers-button").contains(e.target))closeLayers(false);});
+  $("status-layers").innerHTML=layerModel.statuses.map(s=>`<label class="layer-option"><input id="layer-status-${s.id}" type="checkbox" data-layer-status="${s.id}" checked><span>${esc(s.label)}</span><small>${s.count}</small></label>`).join("");
+  $("family-layers").innerHTML=layerModel.families.map(f=>`<label class="layer-option"><input id="layer-family-${f.id}" type="checkbox" data-layer-family="${f.id}" checked><span>${esc(f.label)}</span><small>${f.count}</small></label>`).join("");
+  document.querySelectorAll("[data-status-count]").forEach(e=>e.textContent=String(layerModel.statuses.find(s=>s.id===e.dataset.statusCount).count));
+  $("other-status-count").textContent=String(otherStatuses.reduce((sum,s)=>sum+s.count,0));
+  $("satellite-legend").addEventListener("change",e=>{const input=e.target;if(input.matches("[data-layer-status]")){input.checked?layerState.statuses.add(input.dataset.layerStatus):layerState.statuses.delete(input.dataset.layerStatus);}else if(input.matches("[data-layer-family]")){input.checked?layerState.families.add(input.dataset.layerFamily):layerState.families.delete(input.dataset.layerFamily);}else if(input.id==="toggle-other-status"){otherStatuses.forEach(s=>input.checked?layerState.statuses.add(s.id):layerState.statuses.delete(s.id));}else return;state.page=0;render();});
+  $("layer-panel").addEventListener("click",e=>{const status=e.target.closest("[data-status-preset]"),family=e.target.closest("[data-family-preset]");if(status){const preset=status.dataset.statusPreset;layerState.statuses=new Set(preset==="all"?layerModel.statuses.map(s=>s.id):preset==="none"?[]:[preset]);}else if(family){layerState.families=new Set(family.dataset.familyPreset==="all"?layerModel.families.map(f=>f.id):[]);}else if(e.target.closest("#show-all-layers")){allLayers();}else return;state.page=0;render();});
   const initialParams=new URLSearchParams(location.search);$("question").value=(initialParams.get("q")||window.EO_INITIAL_QUESTION||"").slice(0,500);
   if(["sentinel","landsat","noaa"].includes(initialParams.get("family")))$("mission-family").value=initialParams.get("family");
   if(initialParams.get("map")==="page")$("map-mode").value="page";
