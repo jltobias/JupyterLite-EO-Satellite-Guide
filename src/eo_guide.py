@@ -26,6 +26,7 @@ def iframe_document(document, title, height=780):
     return HTML(
         '<div class="eo-guide-output">'
         f'<iframe title="{html.escape(title, quote=True)}" '
+        'allowfullscreen '
         f'sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox allow-downloads allow-modals" '
         f'style="width:100%;height:{int(height)}px;border:1px solid #345;border-radius:8px" '
         f'srcdoc="{html.escape(document, quote=True)}"></iframe></div>'

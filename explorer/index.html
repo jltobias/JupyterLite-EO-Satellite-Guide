@@ -6,21 +6,27 @@
   <meta name="description" content="Explore a curated global Earth observation satellite constellation, compare sensors and follow the evidence. An offline-capable educational poster.">
   <title>Global EO | Satellite constellation explorer</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="workspace.css">
 </head>
 <body>
 <a class="skip" href="#catalog">Skip to satellite table</a>
 <header class="masthead">
   <a class="brand" href="#"><span class="brand-mark" aria-hidden="true">◎</span> GLOBAL <b>EO</b><span class="brand-divider">/</span><span class="brand-sub">THE SATELLITE GUIDE</span></a>
-  <nav aria-label="Project"><a aria-current="page" href="#atlas">Explorer</a><a href="../book/intro.html">Field guide ↗</a><a href="../lab/index.html?path=01_constellation_poster.ipynb">JupyterLite Lab ↗</a></nav>
+  <nav aria-label="Project"><a aria-current="page" href="#atlas">Explorer</a><a href="../book/intro.html">Field guide ↗</a><a href="../lab/index.html?path=01_constellation_poster.ipynb">JupyterLite Lab ↗</a><button id="fullscreen" class="primary" aria-pressed="false" aria-controls="poster">⛶ Full screen</button></nav>
 </header>
 <main id="poster">
+  <div class="workspace-bar" aria-label="Full-screen workspace controls">
+    <div class="workspace-brand">GLOBAL <b>EO</b><span>LINKED WORKSPACE</span></div>
+    <p id="brush-readout" role="status" aria-live="polite">Hover or focus a satellite or row to link the views.</p>
+    <div class="workspace-actions"><button id="workspace-filters" aria-expanded="false" aria-controls="filters">Filters</button><button id="workspace-details" aria-expanded="false" aria-controls="inspector">Details</button><button id="workspace-compare" aria-expanded="false" aria-controls="comparison">Compare <span id="workspace-pin-count">(0)</span></button><button id="exit-workspace">Exit full screen</button></div>
+  </div>
   <section class="intro" aria-labelledby="title">
     <div><p class="eyebrow">AN ATLAS OF OUR OBSERVING PLANET <span class="rule"></span> 01 / EXPLORE</p>
     <h1 id="title">A world of <em>perspectives.</em></h1>
     <p class="lede">One planet. Many ways to see it. Explore the satellites, sensors and measurements that help us understand Earth.</p></div>
     <div class="snapshot"><span class="live-dot" aria-hidden="true"></span> CURATED SNAPSHOT<br><strong>02 NOV 2026</strong><small>13 platforms · 5 sensing families<br>Representative catalog · no live tracking</small></div>
   </section>
-  <section class="toolbar" aria-label="Filter constellation">
+  <section class="toolbar" id="filters" aria-label="Filter constellation">
     <label class="search-label"><span>Find a satellite or capability</span><input id="search" type="search" placeholder="Search missions, sensors, products…" autocomplete="off"></label>
     <label>Agency<select id="agency"><option value="">All agencies</option></select></label>
     <label>Sensing family<select id="type"><option value="">All families</option></select></label>
@@ -60,7 +66,7 @@
     <div class="table-scroll"><table id="mission-table"><caption class="sr-only">Filtered satellite attributes with linked selection and comparison controls</caption><thead><tr><th scope="col">Compare</th><th scope="col"><button id="sort-name">Satellite ↕</button></th><th scope="col">Operator / region</th><th scope="col">Sensing family</th><th scope="col">Orbit / altitude</th><th scope="col">Spatial detail</th><th scope="col">Temporal context</th><th scope="col">Status / evidence</th></tr></thead><tbody id="rows"></tbody></table></div>
     <p id="no-results" hidden>No missions match these filters. Reset filters to restore the constellation.</p>
   </section>
-  <section id="comparison" aria-labelledby="comparison-heading"><div class="section-bar"><h2 id="comparison-heading"><span>03</span> Compare perspectives <small id="pin-count">0 pinned</small></h2><button id="clear-pins">Clear pins</button></div><div id="comparison-content"><p class="section-note">Pin at least two missions using the index or a satellite detail panel. Pins remain when filters change.</p></div></section>
+  <section id="comparison" aria-labelledby="comparison-heading"><div class="section-bar"><h2 id="comparison-heading"><span>03</span> Compare perspectives <small id="pin-count">0 pinned</small></h2><div><button id="clear-pins">Clear pins</button><button id="workspace-close-comparison" aria-label="Close comparison">× Close</button></div></div><div id="comparison-content"><p class="section-note">Pin at least two missions using the index or a satellite detail panel. Pins remain when filters change.</p></div></section>
   <section class="learning-strip" aria-label="How to interpret measurements"><article><span class="eyebrow">SPATIAL</span><h3>A pixel is not a promise.</h3><p>Band, mode, processing and viewing angle determine what a resolution number means. A finer output grid does not create finer observations.</p></article><article><span class="eyebrow">TEMPORAL</span><h3>Repeat ≠ usable revisit.</h3><p>Orbit repeat, constellation coverage, scan cadence, cloud-free observations and product latency answer different questions.</p></article><article><span class="eyebrow">EVIDENCE</span><h3>Follow the whole chain.</h3><p>Platform → sensor → measured property → product → analysis → application. An observation alone does not establish an outcome.</p></article></section>
   <details class="sources-section"><summary>Sources, scope and attribution</summary><p id="scope"></p><p>Unknown values are intentional. Status labels describe cited source snapshots, not current service availability. Payload lists are selective. The original reference poster is not reproduced: its authorship and reuse terms were not established. All satellite symbols are original schematic vectors.</p><div id="sources"></div></details>
   <footer><div class="brand">GLOBAL <b>EO</b> <span class="brand-sub">LEARN TO SEE THE DIFFERENCE.</span></div><p>Original code and graphics: MIT · Made with Natural Earth (public domain) · Source-backed teaching catalog, 2026<br>NASA ARSET concepts adapted with attribution; third-party source material retains its own terms.</p></footer>

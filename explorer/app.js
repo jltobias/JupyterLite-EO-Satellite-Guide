@@ -7,6 +7,7 @@
   const esc = value => String(value ?? "Unknown / not curated").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   const families = {multispectral:{label:"Multispectral",color:"#60dfc4",symbol:"square"},radar:{label:"Radar",color:"#bb9cf5",symbol:"diamond"},hyperspectral:{label:"Hyperspectral",color:"#f29d81",symbol:"hexagon"},weather:{label:"Weather radiometry",color:"#84b7f6",symbol:"circle"},ocean:{label:"Ocean colour",color:"#f2d879",symbol:"triangle"}};
   const state = {selected:null,pins:new Set(),brush:null,ascending:true,view:[0,0,1200,650]};
+  const workspace = {active:false,native:false,scrollY:0,focus:null};
   const filters = ["search","agency","type","orbit","status","property","application"];
   const svgNS = "http://www.w3.org/2000/svg";
   const byId = id => catalog.satellites.find(s => s.id === id);
@@ -44,11 +45,73 @@
   });
   $("legend").innerHTML=Object.entries(families).map(([id,f])=>`<button data-family="${id}" aria-pressed="false" style="--family:${f.color}"><i aria-hidden="true"></i>${f.label} · ${f.symbol}</button>`).join("")+'<span class="legend-note">Solid ring: operational source snapshot · dashed: retired · dotted: unverified status · gold dot: pinned</span>';
   $("legend").addEventListener("click",e=>{const b=e.target.closest("button");if(b){$("type").value=$("type").value===b.dataset.family?"":b.dataset.family;render();}});
-  function brush(id) { state.brush=id; syncHighlights(); }
+  function brush(id) {
+    state.brush=id; syncHighlights();
+    if(workspace.active&&id){
+      // Scroll only the table pane when a short viewport cannot show every row.
+      const row=$(`row-${id}`), pane=$("catalog").querySelector(".table-scroll");
+      if(row){
+        const r=row.getBoundingClientRect(),p=pane.getBoundingClientRect(),head=$("mission-table").tHead.getBoundingClientRect().height;
+        if(r.top<p.top+head)pane.scrollTop-=p.top+head-r.top;
+        else if(r.bottom>p.bottom)pane.scrollTop+=r.bottom-p.bottom;
+      }
+    }
+  }
   function syncHighlights() {
     document.querySelectorAll(".sat-node,.mission-row").forEach(e=>{const id=e.dataset.id;e.classList.toggle("is-brushed",id===state.brush);e.classList.toggle("is-selected",id===state.selected);e.classList.toggle("pinned",state.pins.has(id));if(e.classList.contains("sat-node"))e.setAttribute("aria-pressed",String(id===state.selected));});
     document.querySelectorAll("[data-select]").forEach(e=>e.setAttribute("aria-expanded",String(e.dataset.select===state.selected)));
+    const active=byId(state.brush||state.selected);
+    $("brush-readout").textContent=active?`${active.name} · ${active.agency} · ${families[active.type].label}`:"Hover or focus a satellite or row to link the views.";
   }
+  function workspacePanel(name,open) {
+    document.body.classList.toggle(`workspace-${name}-open`,open);
+    $(`workspace-${name}`).setAttribute("aria-expanded",String(open));
+  }
+  function endWorkspace() {
+    if(!workspace.active)return;
+    workspace.active=false;workspace.native=false;
+    document.body.classList.remove("workspace-mode","workspace-filters-open","workspace-details-open","workspace-compare-open");
+    ["filters","details","compare"].forEach(name=>$(`workspace-${name}`).setAttribute("aria-expanded","false"));
+    $("fullscreen").setAttribute("aria-pressed","false");
+    workspace.focus?.focus({preventScroll:true});
+    window.scrollTo(0,workspace.scrollY);
+  }
+  async function exitWorkspace() {
+    if(document.fullscreenElement===$("poster")){
+      try{await document.exitFullscreen();}catch{/* Window-fit layout can still be exited. */}
+    }
+    endWorkspace();
+  }
+  $("fullscreen").addEventListener("click",async()=>{
+    if(workspace.active)return;
+    workspace.scrollY=window.scrollY;workspace.focus=document.activeElement;workspace.active=true;
+    document.body.classList.add("workspace-mode");
+    $("fullscreen").setAttribute("aria-pressed","true");
+    $("exit-workspace").textContent="Exit workspace";
+    setView([0,0,1200,650]);
+    if(document.fullscreenEnabled&&$("poster").requestFullscreen){
+      try{await $("poster").requestFullscreen();}catch{/* Retain the same fit-to-window workspace when fullscreen is unavailable. */}
+    }
+    if(workspace.active){
+      $("exit-workspace").focus({preventScroll:true});
+      $("announcement").textContent="Linked workspace open. The constellation and mission table share this view. Escape exits.";
+    }
+  });
+  $("exit-workspace").addEventListener("click",exitWorkspace);
+  document.addEventListener("fullscreenchange",()=>{
+    if(document.fullscreenElement===$("poster")){
+      if(!workspace.active){void document.exitFullscreen();return;}
+      workspace.native=true;$("exit-workspace").textContent="Exit full screen";
+    }else if(workspace.native){endWorkspace();}
+  });
+  ["filters","details","compare"].forEach(name=>{
+    $(`workspace-${name}`).addEventListener("click",()=>{
+      const open=$(`workspace-${name}`).getAttribute("aria-expanded")!=="true";
+      workspacePanel(name,open);
+      if(name==="details"&&open)$("inspector").querySelector("button")?.focus({preventScroll:true});
+    });
+  });
+  $("workspace-close-comparison").addEventListener("click",()=>{workspacePanel("compare",false);$("workspace-compare").focus({preventScroll:true});});
   function pin(id) {
     const active=document.activeElement, fromRows=!!active?.closest("#rows"), fromInspector=!!active?.closest("#inspector");
     state.pins.has(id)?state.pins.delete(id):state.pins.add(id);renderRows();renderComparison();if(state.selected)renderInspector();syncHighlights();
@@ -60,11 +123,11 @@
   function select(id) {
     if(state.selected===id){closeDetail();return;}
     state.selected=id;renderInspector();syncHighlights();
-    const s=byId(id);setView([Math.max(0,Math.min(320,s.display.x-440)),Math.max(0,Math.min(170,s.display.y-240)),880,480]);
-    $("announcement").textContent=`${s.name} selected. Details and sources are open. Use Overview to restore the atlas.`;
+    const s=byId(id);if(!workspace.active)setView([Math.max(0,Math.min(320,s.display.x-440)),Math.max(0,Math.min(170,s.display.y-240)),880,480]);
+    $("announcement").textContent=workspace.active?`${s.name} selected in both views. Use Details for sensor metadata.`:`${s.name} selected. Details and sources are open. Use Overview to restore the atlas.`;
   }
   const initialInspector=$("inspector").innerHTML;
-  function closeDetail() {state.selected=null;$("inspector").innerHTML=initialInspector;setView([0,0,1200,650]);syncHighlights();}
+  function closeDetail() {state.selected=null;$("inspector").innerHTML=initialInspector;workspacePanel("details",false);setView([0,0,1200,650]);syncHighlights();}
   function renderInspector() {
     const s=byId(state.selected);if(!s)return;
     const sensorHTML=s.sensors.map(i=>`<details class="sensor"><summary>${esc(i.name)} · unfold sensor</summary><div class="sensor-content"><p>${esc(i.method)}</p><h4>Observed properties</h4><p>${esc(i.observes.join(" · "))}</p><h4>Spatial resolution / sampling</h4><p>${esc(i.spatial)}</p><h4>Spectral characteristics</h4><p>${esc(i.spectral)}</p><h4>Coverage</h4><p>${esc(i.coverage)}</p>${sources(i.sources)}<h4>Data products</h4>${i.products.map(p=>`<details class="product"><summary>${esc(p.name)}</summary><p><b>${esc(p.level)}</b></p><p>${esc(p.note)}</p><p><a target="_blank" rel="noopener noreferrer" href="${esc(p.access)}">Open data access ↗</a></p>${sources(p.sources)}</details>`).join("")}</div></details>`).join("");
@@ -74,7 +137,22 @@
   $("inspector").addEventListener("click",e=>{if(e.target.closest("[data-close]")){const id=state.selected;closeDetail();document.getElementById(`node-${id}`)?.focus();}if(e.target.closest("[data-pin]"))pin(e.target.closest("[data-pin]").dataset.pin);if(e.target.closest("#start"))select("landsat-8");});
   function renderRows() {
     const list=visible();
-    $("rows").innerHTML=list.map(s=>`<tr class="mission-row" data-id="${s.id}" id="row-${s.id}"><td><button class="pin-button" data-pin="${s.id}" aria-label="${state.pins.has(s.id)?"Unpin":"Pin"} ${esc(s.name)}" aria-pressed="${state.pins.has(s.id)}">${state.pins.has(s.id)?"✓":"+ Pin"}</button></td><td><button class="row-select" data-select="${s.id}" aria-expanded="${s.id===state.selected}" aria-controls="inspector">${esc(s.name)}</button><small>${esc(s.sensors.map(i=>i.name).join(" / "))}</small></td><td>${esc(s.agency)}<small>${esc(s.region)}</small></td><td style="--family:${families[s.type].color}"><i class="family-dot" aria-hidden="true"></i>${families[s.type].label}</td><td>${esc(s.orbit.class)}<small>${altitude(s)}</small></td><td>${esc(s.sensors.map(i=>i.spatial).join("; "))}</td><td>${esc(s.orbit.temporal_note)}</td><td><span class="badge ${s.status}">${esc(s.status)}</span><small>Verified ${s.verified}</small>${sources(s.evidence.mission)}</td></tr>`).join("");
+    $("rows").innerHTML=list.map(s=>{
+      const orbitType=s.orbit.class==="Geostationary"?"GEO":"LEO";
+      const orbitHeight=s.orbit.altitude_km==null?"not curated":`${s.orbit.altitude_km.toLocaleString()} km`;
+      return `<tr class="mission-row" data-id="${s.id}" id="row-${s.id}">
+        <td><button class="pin-button" data-pin="${s.id}" aria-label="${state.pins.has(s.id)?"Unpin":"Pin"} ${esc(s.name)}" aria-pressed="${state.pins.has(s.id)}">${state.pins.has(s.id)?"✓":"+ Pin"}</button></td>
+        <td><button class="row-select" data-select="${s.id}" aria-expanded="${s.id===state.selected}" aria-controls="inspector">${esc(s.name)}</button><small>${esc(s.sensors.map(i=>i.name).join(" / "))}</small></td>
+        <td>${esc(s.agency)}<small>${esc(s.region)}</small></td>
+        <td style="--family:${families[s.type].color}"><i class="family-dot" aria-hidden="true"></i>${families[s.type].label}</td>
+        <td title="${esc(s.orbit.class)}; ${esc(altitude(s))}"><span class="orbit-long">${esc(s.orbit.class)}</span><span class="orbit-short">${orbitType} · ${orbitHeight}</span><small>${altitude(s)}</small></td>
+        <td><span class="attribute-text">${esc(s.sensors.map(i=>i.spatial).join("; "))}</span></td>
+        <td><span class="attribute-text">${esc(s.orbit.temporal_note)}</span></td>
+        <td><span class="badge ${s.status}">${esc(s.status)}</span><small>Verified ${s.verified}</small>${sources(s.evidence.mission)}</td>
+      </tr>`;
+    }).join("");
+    // Preserve complete qualifiers in tooltips while compact workspace cells use one line.
+    $("rows").querySelectorAll("td:not([title])").forEach(cell=>cell.title=cell.textContent.trim());
     $("no-results").hidden=list.length>0;
     syncHighlights();
   }
@@ -84,7 +162,7 @@
   $("rows").addEventListener("focusin",e=>{const r=e.target.closest("tr");if(r)brush(r.dataset.id);});
   $("rows").addEventListener("focusout",e=>{if(!$("rows").contains(e.relatedTarget))brush(null);});
   function renderComparison() {
-    const ss=[...state.pins].map(byId);$("pin-count").textContent=`${ss.length} pinned`;$("clear-pins").disabled=!ss.length;
+    const ss=[...state.pins].map(byId);$("pin-count").textContent=`${ss.length} pinned`;$("workspace-pin-count").textContent=`(${ss.length})`;$("clear-pins").disabled=!ss.length;
     if(ss.length<2){$("comparison-content").innerHTML='<p class="section-note">Pin at least two missions using the index or a satellite detail panel. Pins remain when filters change.</p>';return;}
     const fields=[["Status",s=>esc(s.status)+`<small>${esc(s.status_note)}</small>`],["Operator",s=>esc(s.agency)],["Orbit / altitude",s=>`${esc(s.orbit.class)} · ${altitude(s)}`],["What is measured?",s=>esc(s.sensors.map(i=>`${i.name}: ${i.observes.join(", ")}`).join("; "))],["Spatial context",s=>esc(s.sensors.map(i=>`${i.name}: ${i.spatial}`).join("; "))],["Temporal context",s=>esc(s.orbit.temporal_note)],["Spectral / method",s=>esc(s.sensors.map(i=>`${i.method}; ${i.spectral}`).join("; "))],["Coverage",s=>esc(s.sensors.map(i=>i.coverage).join("; "))],["Products",s=>esc(s.sensors.flatMap(i=>i.products.map(p=>`${p.name} (${p.level})`)).join("; "))],["Evidence",s=>sources(s.sources)]];
     $("comparison-content").innerHTML=`<p class="comparison-tip">Compare measurement meanings before numbers. Optical reflectance, thermal radiance and radar backscatter are different quantities. These fields are aligned for interpretation; there is no universal "best satellite" ranking. Missing values mean not curated.</p><div class="table-scroll"><table class="comparison-table"><caption class="sr-only">Comparison of pinned satellites, including hidden filtered selections</caption><thead><tr><th scope="col">Attribute</th>${ss.map(s=>`<th scope="col">${esc(s.name)} <button data-remove="${s.id}" aria-label="Unpin ${esc(s.name)}">×</button></th>`).join("")}</tr></thead><tbody>${fields.map(([label,fn])=>`<tr><th scope="row">${label}</th>${ss.map(s=>`<td>${fn(s)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
@@ -103,7 +181,7 @@
   $("overview").addEventListener("click",()=>setView([0,0,1200,650]));
   function zoom(factor){const [x,y,w,h]=state.view,nw=Math.max(420,Math.min(1200,w*factor)),nh=nw*650/1200;setView([Math.max(0,Math.min(1200-nw,x+(w-nw)/2)),Math.max(0,Math.min(650-nh,y+(h-nh)/2)),nw,nh]);}
   $("zoom-in").addEventListener("click",()=>zoom(.8));$("zoom-out").addEventListener("click",()=>zoom(1.25));
-  document.addEventListener("keydown",e=>{if(e.key==="Escape"){const id=state.selected;closeDetail();if(id)document.getElementById(`node-${id}`)?.focus();}});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape"){if(workspace.active){e.preventDefault();void exitWorkspace();return;}const id=state.selected;closeDetail();if(id)document.getElementById(`node-${id}`)?.focus();}});
   $("sort-name").addEventListener("click",()=>{state.ascending=!state.ascending;$("sort-name").parentElement.setAttribute("aria-sort",state.ascending?"ascending":"descending");renderRows();});
   $("print").addEventListener("click",()=>{setView([0,0,1200,650]);window.print();});
   window.addEventListener("beforeprint",()=>setView([0,0,1200,650]));

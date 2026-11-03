@@ -14,6 +14,8 @@ The upper poster combines a global map with a selectable, schematic constellatio
 
 The lower poster provides a linked mission index and a comparison matrix. Pin multiple platforms, search capabilities, filter by agency, sensor family, orbit, status, observed property or application, export a contextual CSV, and print with an A1 landscape stylesheet. Legends use colour, central icon shapes and text. Keyboard controls include Tab, Enter/Space and Escape.
 
+Choose **Full screen** for a viewport-filling workspace with the constellation and compact mission table side by side. Larger satellite labels and synchronized highlights make linked brushing visible without scrolling the page. Filters, metadata and comparisons remain available from the workspace controls; Escape returns to the page. On smaller screens only the table pane scrolls while the constellation stays visible.
+
 The initial catalog contains **13 representative platforms**: Landsat 8/9, Sentinel-2B/2C, Sentinel-1C, ALOS-2, EnMAP, EO-1/Hyperion, Fengyun-3D, EOS-06/Oceansat-3, GOES-19, Meteosat-12 and Himawari-9. It is a teaching snapshot verified **2026-11-02**, not an exhaustive constellation or live operations feed. Payload lists are selective; missing values stay explicit. Positions, orbit rings and relative distances are illustrative, not ephemerides or a scale model.
 
 ## Learn in the browser

@@ -28,6 +28,93 @@ class QuietHandler(SimpleHTTPRequestHandler):
         return super().translate_path(path)
 
 
+def check_workspace(page,base):
+    """Both linked views and every mission row must fit typical desktop viewports."""
+    dimensions=[]
+    for width,height in [(1280,720),(1366,768),(1920,1080)]:
+        page.set_viewport_size({'width':width,'height':height})
+        page.goto(base+'/explorer/')
+        page.get_by_role('button',name='Full screen',exact=False).click()
+        page.wait_for_function("document.fullscreenElement?.id === 'poster'")
+        expect(page.locator('#exit-workspace')).to_have_text('Exit full screen')
+        geometry=page.evaluate('''() => {
+          const pane=document.querySelector('#catalog .table-scroll'),
+                map=document.getElementById('constellation').getBoundingClientRect(),
+                table=pane.getBoundingClientRect(),
+                last=document.querySelector('#rows tr:last-child').getBoundingClientRect();
+          return {width:innerWidth,height:innerHeight,pageHeight:document.documentElement.scrollHeight,
+                  tableScroll:pane.scrollHeight-pane.clientHeight,tableWidth:pane.scrollWidth-pane.clientWidth,
+                  mapRight:map.right,tableLeft:table.left,lastBottom:last.bottom,tableBottom:table.bottom};
+        }''')
+        assert geometry['pageHeight']<=geometry['height']+1,geometry
+        assert geometry['tableScroll']<=1 and geometry['tableWidth']<=1,geometry
+        assert geometry['mapRight']<=geometry['tableLeft'] and geometry['lastBottom']<=geometry['tableBottom']+1,geometry
+        page.locator('#row-sentinel-2c .row-select').hover()
+        expect(page.locator('#node-sentinel-2c')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
+        expect(page.locator('#brush-readout')).to_contain_text('Sentinel-2C')
+        page.locator('#node-enmap').hover()
+        expect(page.locator('#row-enmap')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
+        assert page.evaluate('window.scrollY')==0
+        page.locator('#row-enmap .row-select').click()
+        expect(page.locator('#constellation')).to_have_attribute('viewBox','0 0 1200 650')
+        page.screenshot(path=str(QA/f'workspace-{width}x{height}.png'),full_page=True)
+        dimensions.append(geometry)
+        page.locator('#exit-workspace').click()
+        page.wait_for_function('document.fullscreenElement === null')
+        expect(page.locator('body')).not_to_have_class(re.compile(r'.*\bworkspace-mode\b.*'))
+        expect(page.locator('#fullscreen')).to_be_focused()
+    page.set_viewport_size({'width':1366,'height':768})
+    page.goto(base+'/explorer/')
+    page.locator('#row-enmap [data-pin]').click()
+    page.locator('#row-eo-1 [data-pin]').click()
+    page.locator('#fullscreen').click()
+    page.wait_for_function("document.fullscreenElement?.id === 'poster'")
+    expect(page.locator('#workspace-pin-count')).to_have_text('(2)')
+    page.locator('#workspace-filters').click()
+    page.locator('#search').fill('EnMAP')
+    expect(page.locator('#rows tr')).to_have_count(1)
+    page.locator('#rows .row-select').click()
+    page.locator('#workspace-details').click()
+    expect(page.locator('#inspector .detail-name')).to_have_text('EnMAP')
+    page.locator('#inspector .sensor summary').first.click()
+    expect(page.locator('#inspector .sensor-content')).to_be_visible()
+    page.locator('#workspace-details').click()
+    page.locator('#workspace-compare').click()
+    expect(page.locator('.comparison-table')).to_be_visible()
+    page.locator('#workspace-close-comparison').click()
+    expect(page.locator('#comparison')).not_to_be_visible()
+    page.keyboard.press('Escape')
+    page.wait_for_function('document.fullscreenElement === null')
+    expect(page.locator('#search')).to_have_value('EnMAP')
+    expect(page.locator('#pin-count')).to_have_text('2 pinned')
+    # Iframes and browsers can deny the native API; the viewport layout still works.
+    page.goto(base+'/explorer/')
+    page.evaluate("Object.defineProperty(document,'fullscreenEnabled',{value:false,configurable:true})")
+    page.locator('#fullscreen').click()
+    expect(page.locator('#exit-workspace')).to_have_text('Exit workspace')
+    assert page.evaluate('document.fullscreenElement === null')
+    page.locator('#node-himawari-9').hover()
+    expect(page.locator('#row-himawari-9')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
+    page.keyboard.press('Escape')
+    expect(page.locator('#fullscreen')).to_have_attribute('aria-pressed','false')
+    # A short window may need table scrolling; brushing must reveal the row
+    # without moving the constellation or the surrounding document.
+    page.set_viewport_size({'width':1280,'height':480})
+    page.locator('#fullscreen').click()
+    page.locator('#node-sentinel-2c').hover()
+    expect(page.locator('#row-sentinel-2c')).to_have_class(re.compile(r'.*\bis-brushed\b.*'))
+    short=page.evaluate('''() => {
+      const pane=document.querySelector('#catalog .table-scroll'),
+            row=document.getElementById('row-sentinel-2c').getBoundingClientRect(),
+            bounds=pane.getBoundingClientRect();
+      return {scrollY,tableScroll:pane.scrollTop,rowBottom:row.bottom,paneBottom:bounds.bottom};
+    }''')
+    assert short['scrollY']==0 and short['tableScroll']>0 and short['rowBottom']<=short['paneBottom']+1,short
+    page.locator('#exit-workspace').click()
+    page.set_viewport_size({'width':1600,'height':1100})
+    (QA/'workspace-layouts.json').write_text(json.dumps(dimensions,indent=2),encoding='utf-8')
+
+
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--lite",action="store_true")
@@ -131,6 +218,11 @@ def main():
             expect(op.locator("#inspector")).to_contain_text("220 channels")
             op.locator(".sources-section summary").click()
             expect(op.locator("#source-arset")).to_be_visible()
+            op.locator('#fullscreen').click()
+            op.wait_for_function("document.fullscreenElement?.id === 'poster'")
+            expect(op.locator('#rows tr')).to_have_count(1)
+            op.locator('#exit-workspace').click()
+            op.wait_for_function('document.fullscreenElement === null')
             assert not [u for u in requests if u.startswith(("https:","http:"))],requests
             offline.close()
             results.append("Fresh offline file load, search, drill-down, comparison, citations and keyboard access passed; zero HTTP(S) asset requests.")
@@ -145,7 +237,15 @@ def main():
             page.goto(base+"/book/poster.html")
             expect(page.frame_locator('iframe[title="Global EO interactive satellite constellation poster"]').locator("#rows tr")).to_have_count(13)
             page.screenshot(path=str(QA / "book.png"),full_page=True)
+            book_frame=page.frame_locator('iframe[title="Global EO interactive satellite constellation poster"]')
+            book_frame.locator('#fullscreen').click()
+            page.wait_for_function("document.fullscreenElement?.tagName === 'IFRAME'")
+            expect(book_frame.locator('#exit-workspace')).to_have_text('Exit full screen')
+            book_frame.locator('#exit-workspace').click()
+            page.wait_for_function('document.fullscreenElement === null')
             results.append("Book iframe, Lab entry point and bundled notebook/data/support paths passed.")
+            check_workspace(page,base)
+            results.append('Native fullscreen fits both views and all 13 rows at 1280x720, 1366x768 and 1920x1080; bidirectional brushing, panels, state preservation, Escape and window-fit fallback passed.')
             if args.lite:
                 lab=context.new_page();lab.goto(base+"/lab/index.html?path=01_constellation_poster.ipynb")
                 lab.screenshot(path=str(QA / "jupyterlite-launch.png"),full_page=True)

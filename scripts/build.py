@@ -43,6 +43,8 @@ def prepare():
     css = (ROOT / "explorer/style.css").read_text(encoding="utf-8")
     js = (ROOT / "explorer/app.js").read_text(encoding="utf-8")
     document = template.replace('<link rel="stylesheet" href="style.css">', f"<style>{css}</style>")
+    workspace_css=(ROOT / "explorer/workspace.css").read_text(encoding="utf-8")
+    document = document.replace('<link rel="stylesheet" href="workspace.css">', f"<style>{workspace_css}</style>")
     document = document.replace('<script src="catalog.js"></script>', f"<script>{payload}</script>")
     document = document.replace('<script src="app.js"></script>', f"<script>{js}</script>")
     document = document.replace('href="../book/', 'href="https://jltobias.github.io/JupyterLite-EO-Satellite-Guide/book/')

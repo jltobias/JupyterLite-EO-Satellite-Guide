@@ -3,10 +3,14 @@
 <a href="../explorer/index.html">Open the full-width poster</a> for the most comfortable map and table view. <a href="../lab/index.html?path=01_constellation_poster.ipynb">Open the executable notebook</a> to embed it in your own investigation.
 
 ```{raw} html
-<iframe src="../explorer/index.html" title="Global EO interactive satellite constellation poster" height="1250" loading="lazy"></iframe>
+<iframe src="../explorer/index.html" title="Global EO interactive satellite constellation poster" height="1250" loading="lazy" allowfullscreen></iframe>
 ```
 
 ## Interaction guide
+
+Use **Full screen** in the explorer's top navigation to open a linked workspace. On desktop screens the constellation and a compact mission table sit side by side, with all 13 mission rows visible at common laptop and monitor sizes. Hovering or focusing either view highlights the matching platform in both views. The atlas stays at the overview when selecting a row, and larger satellite labels make the matching platform easier to find.
+
+The workspace's **Filters**, **Details** and **Compare** controls expose the full filters, selected mission metadata and pinned comparison. Hover over a shortened table cell for its complete text. **Exit full screen** or **Escape** returns to the page while preserving filters and pins. If browser fullscreen is unavailable, the same workspace fits the current window. Narrow or short screens keep scrolling within the table pane so the constellation remains visible.
 
 Select a satellite or table name to expand its metadata. Select it again, use Close or press Escape to contract the panel. Open a sensor to inspect spatial and spectral characteristics, coverage, observed properties, products and citations. Open a product to inspect its processing level and data access route. The Overview button restores the full atlas after zooming.
 
